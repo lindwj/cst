@@ -1,0 +1,118 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<!-- 使用namespace的话sql搜索定位会比较方便 -->
+<mapper namespace="com.cst.service.dao.ContractNoMapper">
+
+	<resultMap id="ContractNoMap" type="com.cst.service.model.ContractNo">
+        <result property="contractNoId" column="contract_no_id"/>
+        <result property="provincestr" column="province"/>
+        <result property="citystr" column="city"/>
+        <result property="districtstr" column="district"/>
+        <result property="street" column="street"/>
+        <result property="shopIdstr" column="shop_id"/>
+        <result property="status" column="status"/>
+        <result property="createByAdm" column="create_by_adm"/>
+        <result property="createDate" column="create_date"/>
+        <result property="updateByAdm" column="update_by_adm"/>
+        <result property="updateDate" column="update_date"/>
+        <result property="contractNoAmt" column="contract_no_amt"/>
+	</resultMap>
+	<!-- 分页查询接口 -->
+	<select id="getContractNoListPage" parameterType="ContractNo"
+		resultMap="ContractNoMap">
+		select s.name AS shop_id,cn.contract_no_id AS contract_no_id ,
+		cn.status AS STATUS,
+		n.province AS province,
+		na.city AS city,
+		nat.district AS district,
+		cn.contract_no_amt as contract_no_amt
+		
+		 from contract_no cn , shop s, nation n , nation na, nation nat 
+		
+		WHERE cn.create_by_adm=#{createByAdm} and cn.shop_id=s.shop_id AND cn.province=n.id AND cn.city=na.id
+		AND cn.district=nat.id
+		
+		<if test="shopId!=null and shopId!=''">
+		AND cn.shop_id=#{shopId}
+		</if>
+		
+		
+		<!-- <trim prefix="WHERE" prefixOverrides="AND | OR"> -->
+	</select>
+	<!-- 按编号查询 -->
+	<select id="getContractNoById" parameterType="int" resultMap="ContractNoMap">
+	
+	
+	select s.name AS shop_id,cn.contract_no_id AS contract_no_id ,
+		cn.status AS STATUS,
+		n.province AS province,
+		na.city AS city,
+		nat.district AS district,
+		cn.contract_no_amt as contract_no_amt
+		
+		 from contract_no cn , shop s, nation n , nation na, nation nat 
+		
+		WHERE  cn.shop_id=s.shop_id AND cn.province=n.id AND cn.city=na.id
+		AND cn.district=nat.id and cn.contract_no_id = #{contractNoId}
+		
+	</select>
+	
+	
+	<select id="getContractNoByShop" parameterType="int" resultMap="ContractNoMap">
+	
+	
+	select 
+		cn.contract_no_amt as contract_no_amt
+		
+		 from contract_no cn 
+		
+		WHERE  cn.shop_id=#{shopId} 
+		
+	</select>
+	
+	
+	<!-- 添加 -->
+	<insert id="insertContractNo" parameterType="ContractNo" >
+        INSERT INTO contract_no (
+        	province ,
+        	city ,
+        	district ,
+        	street ,
+        	shop_id ,
+        	status ,
+        	create_by_adm ,
+        	contract_no_amt 
+        ) VALUES (
+        	#{province} ,
+        	#{city} ,
+        	#{district} ,
+        	#{street} ,
+        	#{shopId} ,
+        	#{status} ,
+        	#{createByAdm} ,
+        	#{contractNoAmt} 
+        )
+	</insert>
+	<!-- 修改 -->
+	<update id="updateContractNo" >
+        UPDATE contract_no 
+        <trim prefix="SET" suffixOverrides=",">
+	        <if test="contractNoAmt!=null and contractNoAmt!=''">
+	        contract_no_amt = #{contractNoAmt},
+	        </if>
+	      </trim>  
+        WHERE 
+	        contract_no_id = #{contractNoId} 
+	</update>
+	<!-- 删除 -->
+	<delete id="deleteContractNo" parameterType="int">
+        delete from contract_no WHERE
+        contract_no_id = #{contractNoId} 
+    </delete>
+	
+</mapper>
+

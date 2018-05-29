@@ -1,0 +1,645 @@
+
+
+/*通用样式*/
+.content {
+    width: 950px;
+    margin: 40px auto 0;
+}
+
+.clearfix {
+    clear: both;
+}
+.clearfloat{
+    clear: both;
+}
+
+h3 {
+    font-size: 14px;
+    font-weight: 700;
+}
+
+
+/*商品订单标题*/
+.buy-th-line {
+    width: 100%;
+    margin-top: 20px;
+    font-size: 0;
+}
+
+    .buy-th-line .buy-th-title {
+        width: 368px;
+        margin-left: 0;
+    }
+
+    .buy-th-line .buy-th-type {
+        width: 138px;
+    }
+
+
+    .buy-th-line .buy-th-price {
+        width: 148px;
+    }
+
+    .buy-th-line .buy-th-quantity {
+        width: 118px;
+    }
+
+    .buy-th-line .buy-th-total{
+        width: 168px;
+    }
+
+
+    .buy-th-line span {
+        display: inline-block;
+        height: 24px;
+        line-height: 24px;
+        text-align: center;
+        border-bottom: 3px solid #b2d1ff;
+        font-size: 12px;
+        margin-left: 2px;
+        float: left;
+
+    }
+
+
+/*订单样式*/
+.orderInfo {
+    height: 30px;
+    line-height: 30px;
+    margin-top: 25px;
+
+}
+.blue-line {
+    border-bottom: 1px dotted #80b2ff;
+}
+
+/*订单列样式*/
+.item {
+    background-color: #fafcff;
+}
+.order .item .item-title {
+    text-align: left;
+    padding-left: 10px;
+    height: 70px;
+}
+.item .item-title {
+    width: 360px;
+    /*color: #36c;*/
+}
+
+.item .item-pic {
+    border: 1px solid #ccc;
+    float: left;
+    /*margin-left: -60px;*/
+    margin-top: 5px;
+}
+    .item .item-pic span {
+        display: table-cell;
+        height: 50px;
+        text-align: center;
+        vertical-align: middle;
+        width: 50px;
+    }
+    .item .item-title .itemInfo-pic {
+        vertical-align: middle;
+        height: 50px;
+        width: 50px;
+    }
+    .item .item-title .itemInfo-title {
+        display: block;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        /*white-space: nowrap;*/
+        /*width: 280px;*/
+        cursor: pointer;
+        word-break: break-all;
+        margin-left: 60px;
+    }
+
+.item .item-type {
+    width: 140px;
+}
+
+
+.item .item-price {
+    width: 150px;
+}
+
+.item .item-quantity {
+    width: 120px;
+}
+
+.item .item-total{
+    width: 170px;
+}
+
+.item .item-title, .item .item-type,.item .item-price, .item .item-quantity, .item .item-promo, .item .item-total, .item .item-extra {
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+    overflow: hidden;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+
+/*结算样式*/
+.order-extra {
+    background-color: #f2f7ff;
+    font-size: 0;
+    /*width: 950px;*/
+    /*margin: 0 auto;*/
+}
+    .order-extra .order-user-info {
+        display: inline-block;
+        width: 950px;
+        font-size: 12px;
+        vertical-align: top;
+        float: left;
+        background-color: #f2f7ff;
+    }
+
+.memo {
+    margin-left: 10px;
+    border-right: 1px solid #fff;
+    text-align: left;
+    margin-top: 10px;
+    margin-bottom: 5px;
+    line-height: 24px;
+}
+
+
+.memo label, .memo textarea {
+    vertical-align: top;
+}
+label {
+    cursor: default;
+}
+.memo .memo-close {
+    height: 20px;
+    color: #aaa;
+}
+.memo .memo-input {
+    width: 494px;
+    resize: none;
+    margin-bottom: 5px;
+}
+.memo textarea {
+    overflow: auto;
+}
+
+.c2c-text-default {
+    border: 1px solid #8AB6DD;
+}
+
+
+.orderPay {
+    background-color: #f2f7ff;
+    text-align: right;
+    border-top: 1px solid #fff;
+}
+.orderPay p {
+    text-align: right;
+    padding: 5px 0;
+    height: 45px;
+    line-height: 45px;
+}
+
+
+.orderPay .price {
+    margin-right: 15px;
+}
+
+.price span {
+    font-size: 26px;
+    margin-right: 4px;
+    color: #999;
+}
+
+
+.price .style-middle-bold-red {
+    color: #F50;
+    font: 700 18px tahoma;
+}
+
+/*底部金额*/
+.price .style-large-bold-red {
+    color: #ff4200;
+    font: 700 26px tahoma;
+}
+.realPay .t {
+    color: #404040;
+    font-weight: 700;
+}
+
+
+.order-go {
+    clear: both;
+    text-align: right;
+    position: relative;
+}
+
+.order-go .address-confirm {
+    position: relative;
+    margin-top: 10px;
+    margin-bottom: 40px;
+    float: right;
+    z-index: 100;
+    padding: 3px;
+    border: 1px solid #f50;
+    font-size: 12px;
+    display: inline-block;
+    right: 0;
+    /*background-color: #fff0e8;*/
+
+}
+
+.order-go .buy-footer-address {
+    padding: 0;
+
+}
+
+.order-go .address-confirm .box {
+    background: #fff;
+    font-size: 12px;
+    margin-bottom: 0px;
+    position: static;
+    padding: 1px 10px 10px 20px;
+    line-height: 20px;
+    color: #404040;
+    min-width: 230px;
+}
+
+.order-go .buy-footer-address .buy-line-title {
+    color: #404040;
+    font-weight: 700;
+}
+
+.realPay{
+    line-height: 16px;
+    margin: 0 0 15px;
+    position: relative;
+}
+
+.order-go .address {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.submitOrder {
+    position: relative;
+}
+
+.submitOrder .go-btn-wrap {
+    height: 36px;
+    position: absolute;
+    right: -4px;
+    top: 4px;
+}
+
+.submitOrder .btn-go {
+    display: block;
+    padding: 0 26px;
+    height: 36px;
+    line-height: 36px;
+    font-size: 18px;
+    background-color: #f50;
+    color: #fff;
+    text-align: center;
+    cursor: pointer;
+    outline: 0;
+    text-decoration: none;
+}
+
+.submitOrder .btn-go:hover{
+    background-color: #F30A00;
+}
+
+.address {
+    margin-bottom: 40px;
+    margin-top: 20px;
+}
+.form {
+    margin: 0;
+    padding: 0;
+}
+
+
+.address h3 {
+    border-bottom: 2px solid #f1f1f1;
+    margin-bottom: 20px;
+}
+
+ul, li {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+
+}
+.address .address-list li.selected {
+    line-height: 32px;
+}
+
+.address .address-list li {
+    padding-left: 92px;
+    line-height: 25px;
+}
+.address li.selected {
+    margin-top: 5px;
+    margin-bottom: 7px;
+    box-shadow: 5px 5px 0 #f3f3f3;
+    line-height: 32px;
+}
+.address li.selected {
+    background-color: #fff0e8;
+    border: 1px solid #f50;
+}
+.address .address-list li {
+    /*border: 1px solid #fff;*/
+    /*line-height: 24px;*/
+    /*padding-left: 75px;*/
+    position: relative;
+}
+
+.address .marker {
+    position: absolute;
+    top: 1px;
+    left: 6px;
+    width: 15px;
+    height: 25px;
+    color: #f50;
+    font-size: 22px;
+}
+
+.address .marker-tip {
+    position: absolute;
+    top: 0;
+    left: 30px;
+    display: none;
+    color: #F50;
+    font-weight: 700;
+}
+
+.address-list .selected .address-info {
+    padding-right: 100px;
+}
+
+.address-list .address-info {
+    padding-left: 10px;
+}
+
+.address-list .transfer, .address-list .address-info {
+    display: inline-block;
+    word-wrap: break-word;
+    word-break: break-all;
+}
+
+
+
+
+.address .modify {
+    position: absolute;
+    right: 10px;
+    display: none;
+}
+
+.address li.selected .modify {
+    margin-left: 10px;
+    color: #36c;
+    /*text-decoration: none;*/
+}
+
+.address li.selected .marker, .address li.selected .marker-tip, .address li.selected .modify {
+    display: block;
+}
+.address .selected input {
+    top: 10px;
+}
+.address li input, .address li label, .address-list .tip {
+    vertical-align: baseline;
+}
+
+.address li input {
+    position: absolute;
+    left: 75px;
+    top: 5px;
+}
+
+.address-list .selected label, .address-list .selected label em {
+    font-weight: 700;
+    font-size: 14px;
+}
+.address-list .user-address {
+    word-wrap: break-word;
+    word-break: break-all;
+}
+.address-list label em {
+    color: gray;
+}
+address, caption, cite, code, dfn, em, strong, th, var {
+    font-style: normal;
+    font-weight: 400;
+}
+
+.address .address-bar {
+    margin-top: 5px;
+}
+
+.address .edit {
+    margin-left: 103px;
+    display: inline-block;
+}
+
+.address .address-bar a {
+    color: #36c;
+    /*text-decoration: none;*/
+}
+
+/*管理收货地址*/
+.address .manage-address {
+    float: right;
+    font-size: 12px;
+    font-weight: 400;
+}
+
+.address .manage-address a {
+    color: #36c;
+    /*text-decoration: none;*/
+}
+
+.hidden {
+    display: none!important;
+}
+
+.address-list li:hover {
+    background-color: #FFEEE2;
+}
+
+.address .set-default{
+    margin-left: 15px;
+    color: #36c;
+    /*text-decoration: none;*/
+}
+.address-list .tip {
+    color: gray;
+    margin-left: 20px;
+
+}
+
+
+/*底部收货人收货地址格式*/
+.order-go .address span {
+    word-break: break-all;
+}
+
+
+#newAddressBtn {
+    margin-left: 103px;
+    width: 100px;
+    height: 25px;
+    display: inline-block;
+    font-size: 14px;
+    font-weight: 700;
+    color: #F50;
+    /*border: 1px solid #f50;*/
+}
+
+/*默认地址设置成功*/
+.naked {
+
+    background-color: transparent;
+    font-style: normal;
+    font-size: 12px;
+    padding: 2px 10px 2px 6px;
+    height: 18px;
+    line-height: 18px;
+    color: #F50;
+    display: inline-block;
+}
+
+
+
+.dialog-mask {
+    opacity: .5;
+    background: #333;
+}
+
+.display-none {
+    display: none;
+}
+
+.dialog{
+    position: absolute;
+    border:1px solid rgba(0,0,0,.1);
+    background: #fff;
+    width: 746px;
+    height: 400px;
+    z-index: 20000;
+    left: 260px;
+    top: 90px;
+}
+
+.dialog-content{
+    margin: 10px auto;
+}
+
+.dialog-title {
+    margin: 0 0 20px 20px;
+
+}
+
+.form-item {
+    position: relative;
+    padding-bottom: 5px;
+    zoom: 1;
+    text-align: left;
+    line-height: 36px;
+    z-index: 101;
+}
+
+.form-item  i{
+    color: #c81623;
+    font-style: normal;
+}
+
+
+.address-detail {
+    display: block;
+    margin: 0;
+    padding: 3px;
+    width: 382px;
+    height: 62px;
+    border: 1px solid #afafaf;
+    font-size: 12px;
+}
+
+
+.item-label {
+    display: inline;
+    float: left;
+    width: 80px;
+    margin-right: 5px;
+    text-align: right;
+    /*line-height: 26px;*/
+    line-height: 36px;
+}
+
+#add-province {
+    width: 80px;
+
+}
+#add-city {
+    width: 100px;
+}
+#add-district {
+    width: 120px;
+}
+.inpput-address {
+    height: 20px;
+    margin-right: 5px;
+}
+
+.i-text {
+    border: 1px solid #afafaf;
+    padding: 3px;
+    width: 200px;
+    height: 18px;
+    line-height: 18px;
+    vertical-align: middle;
+}
+
+
+.def-address {
+    margin-left: 85px;
+    margin-top: 5px;
+}
+
+.submit-btn {
+    display: inline-block;
+    zoom: 1;
+    height: 28px;
+    line-height: 28px;
+    padding: 0 20px;
+    color: #FFF;
+    font-weight: 700;
+    font-size: 14px;
+    text-align: center;
+    background: #c81623;
+    border: 0;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+
+.dialog-close-x {
+    position: absolute;
+    top: 13px;
+    right: 13px;
+    text-indent: -9999px;
+    background:url(../images/index/dialog-close.png) no-repeat; /*替换实际的图片路径*/
+
+    height: 13px;
+    width: 13px;
+    cursor: pointer;
+    display: inline-block;
+}

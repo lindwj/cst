@@ -1,0 +1,179 @@
+.content {
+    margin: 20px auto;
+    overflow: hidden;
+    padding-top: 10px;
+    width: 730px;
+}
+
+    .content .content-title {
+        font-size: 14px;
+        color: #014d7f;
+        background-color: #f3f8fe;
+        height: 30px;
+        line-height: 30px;
+    }
+
+    .content .content-box {
+        position: relative;
+        margin-top: 10px;
+        width: 730px;
+    }
+
+        .content .content-box .item-title {
+            position: relative;
+            /*padding-left: 105px;*/
+            padding-bottom: 10px;
+            zoom: 1;
+            text-align: left;
+            line-height: 26px;
+            z-index: 100;
+        }
+
+            .content .content-box .content-form .form-item {
+                position: relative;
+                padding-bottom: 5px;
+                zoom: 1;
+                text-align: left;
+                line-height: 26px;
+                z-index: 101;
+            }
+
+            .content .content-box .content-form .form-item  i{
+                color: #c81623;
+                font-style: normal;
+
+            }
+
+            .item-label {
+                display: inline;
+                float: left;
+                width: 100px;
+                margin-right: 5px;
+                text-align: right;
+                height: 26px;
+                line-height: 26px;
+            }
+
+/*.div-inline {*/
+    /*display: inline-block;*/
+/*}*/
+
+
+
+#selprovince {
+    width: 80px;
+
+}
+#selcity {
+    width: 100px;
+}
+#seldistrict {
+    width: 120px;
+}
+.inpput-address {
+    height: 20px;
+    margin-right: 5px;
+}
+
+
+.address-detail {
+    display: block;
+    margin: 0;
+    padding: 3px;
+    width: 382px;
+    height: 62px;
+    border: 1px solid #afafaf;
+    font-size: 12px;
+}
+
+.i-text {
+    border: 1px solid #afafaf;
+    padding: 3px;
+    width: 200px;
+    height: 18px;
+    line-height: 18px;
+    vertical-align: middle;
+}
+
+
+.def-address {
+    margin-left: 105px;
+    margin-top: 5px;
+}
+
+
+.deliver-address {
+    margin-top: 20px;
+    margin-bottom: 50px;
+}
+
+/*收货地址列表*/
+.address-table {
+    table-layout: fixed;
+    border: 1px solid #e7e7e7;
+    border-collapse: collapse;
+}
+.col-man {
+    width: 65px;
+}
+.col-area {
+    width: 140px;
+}
+.col-address {
+    width: 220px;
+}
+.col-phone {
+    width: 110px;
+}
+
+.thead-tbl-grade tr {
+    border-bottom: 1px solid #e7e7e7;
+}
+.thead-tbl-grade th {
+    height: 40px;
+    padding: 0 5px;
+    border-top: 1px solid #e7e7e7;
+    border-bottom: 1px solid #e7e7e7;
+    background: #f2f2f2;
+    text-align: left;
+
+}
+
+.thead-tbl-address tr {
+    border-bottom: 1px solid #e7e7e7;
+}
+
+.thead-tbl-address td {
+    padding: 5px;
+    white-space: normal;
+    word-wrap: break-word;
+    position: relative;
+}
+.thead-tbl-address a {
+    color: #36c;
+}
+.note {
+    padding: 2px 5px;
+    /*border-color: #ff3800;*/
+    border-radius: 3px;
+    background: #ffd6cc;
+    color: #f30;
+    border: 1px solid #f60;
+    text-decoration: none;
+}
+
+.submit-btn {
+    display: inline-block;
+    zoom: 1;
+    height: 28px;
+    line-height: 28px;
+    padding: 0 20px;
+    color: #FFF;
+    font-weight: 700;
+    font-size: 14px;
+    text-align: center;
+    background: #c81623;
+    border: 0;
+    border-radius: 3px;
+    cursor: pointer;
+}

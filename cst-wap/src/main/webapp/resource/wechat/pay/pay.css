@@ -1,0 +1,42 @@
+
+body{
+    background-color: #f7f7f7;
+    margin: 0!important;
+}
+.pay_box{
+     width: 100%;
+}
+.logo{
+    width: 80px;
+    height: 80px;
+    margin:30px auto 0 auto;
+}
+.price{
+    text-align: center;
+    font-size: 3em;
+    margin: 15px 0 0 0;
+}
+.receive{
+    padding: 15px 4%;
+    border-top: 1px solid #cccccc;
+    border-bottom: 1px solid #cccccc;
+    background-color: #ffffff;
+    margin-top: 20px;
+}
+.p1{
+    float: left;
+    color: #999999;
+}
+.p2{
+    float: right;
+    color: #333333;
+}
+.impay{
+    padding:20px 0;
+    width: 92%;
+    background-color: #00833f;
+    color: #ffffff;
+    border-radius: 3px;
+    text-align: center;
+    margin:30px auto 0 auto;
+}

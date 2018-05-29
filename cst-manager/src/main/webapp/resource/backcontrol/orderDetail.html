@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <!--<link rel="icon" href="/static/images/favicon.ico?v=1" type="image/x-icon"/>-->
+    <title>订单详情</title>
+    <link rel="icon" href="images/logo.png" />
+    <link href="common/reset.css" rel="stylesheet" type="text/css"/>
+    <link href="orderDetail/orderDetail.css" rel="stylesheet" type="text/css"/>
+    <link type="text/css" rel="stylesheet" href="common/iconfont.css"/>
+
+
+</head>
+<body>
+
+
+<div class="container">
+
+        <div class="nav-global" style="">
+                <div class="global-logo">
+                    <img class="global-logo-img" src="images/logo3.png">
+                    <h1 class="global-logo-title">北大荒生态食品</h1>
+                </div>
+
+                <div class="items-inner">
+                      <ul class="global-items">
+                        <li class="nav-item">
+                            <a class="nav-item-inner" href="#" id="controluser">
+                                <div class="user-name">
+                                    <i class="iconfont userfont">&#xe60c;</i>
+                                    <i style="font-style: normal" class="username">sa</i>
+                                    <p id="logout">退出</p>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+        </div>
+
+
+        <div class="nav-zone" style="">
+            <div class="nav-zone-inner">
+
+                <div class="zone-items">
+                    <ul>
+
+                        <li class="control">
+                            <a id="proc">
+                                <span class="text" ><i class="iconfont menuicon">&#xe607;</i>订单管理</span>
+                            </a>
+                        </li>
+                       <!--  <li >
+                            <a id="orderc">
+                                <div>
+                                    <span class="text"><i class="iconfont menuicon">&#xe60b;</i>预定订单管理</span>
+                                </div>
+                            </a>
+                        </li> -->
+                        <li >
+                            <a id="stocklistc">
+                                <div>
+                                    <span class="text"><i class="iconfont menuicon">&#xe60a;</i>商品库存管理</span>
+                                </div>
+                            </a>
+                        </li>
+                       	<li>
+                            <a id="orderapplyc" style="background-color: #57b383;color: #ffffff;">
+                                <div>
+                                    <span class="text"><i class="iconfont menuicon">&#xe6a9;</i>订货申请</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a id="salesdaily">
+                                <div>
+                                    <span class="text"><i class="iconfont menuicon">&#xe652;</i>销售日报</span>
+                                </div>
+                            </a>
+                        </li>
+
+
+                    </ul>
+
+                </div>
+
+            </div>
+        </div>
+
+        <div class="content">
+            <div class="content-title">订单详情</div>
+            <div class="productorder">
+                <table class="table">
+                </table>
+
+
+                <table class="table1">
+                    <tr>
+                        <th class="col12">商品名称</th>
+                        <th class="col13">单价（元）</th>
+                        <th class="col14">单位</th>
+                        <th class="col15">发货数量</th>
+                        <th class="col17">总金额</th>
+                        <th class="col18">订单状态</th>
+                    </tr>
+                </table>
+				<div class="detail"></div>
+
+                <table class="table3">
+                    <tr>
+
+                        <td colspan="7">
+
+                            <div class="pull-right page-box">
+
+                                <div class="pagination-goto">
+                                    <button type="button" class="btn btn-default" id="goBtn" onclick="javascript:history.back()">返回上一级</button>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+
+
+            </div>
+
+
+
+        </div>
+
+</div>
+
+<script src="common/jquery-3.0.0.min.js"></script>
+<script src="orderDetail/orderDetail.js"></script>
+<script src="common/link.js"></script>
+
+</body>
+</html>

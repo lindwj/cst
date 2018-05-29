@@ -1,0 +1,58 @@
+
+.word{
+    width: 85%;
+    margin: 0 auto;
+}
+.title1{
+    font-size:24px;
+    text-align: center;
+    line-height: 1.5em;
+    font-weight:600;
+    margin: 30px 0;
+}
+.title2, .s, .s1{
+    float: left;
+    font-size: 12px;
+    line-height: 1.5em;
+}
+.title3, .x{
+    float: right;
+    font-size: 12px;
+    line-height: 1.5em;
+    margin-bottom: 20px;
+}
+.pic{
+    margin: 0 auto 20px auto;
+    width: 85%;
+}
+.p1{
+    font-size: 14px;
+    line-height: 1.5em;
+    height: 1.5em;
+    display: inline-table;
+    text-indent: 2em;
+    margin-bottom: 20px;
+}
+.p2{
+    font-size: 14px;
+    text-align: center;
+    line-height: 1.5em;
+    height: 1.5em;
+    margin-bottom: 20px;
+}
+.y{
+    color: rgb(214, 168, 65);
+    font-size: 24px;
+    text-align: center;
+}
+.y1{
+    color: rgb(214, 168, 65);
+    font-size:16px;
+    text-align: center;
+}
+.x, .s1{
+    color: #000;
+}
+.x:hover, .s1:hover{
+    text-decoration: underline;
+}

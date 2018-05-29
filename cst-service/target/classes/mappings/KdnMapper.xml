@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<!-- 使用namespace的话sql搜索定位会比较方便 -->
+<mapper namespace="com.cst.service.dao.KdnMapper">
+
+	<resultMap id="KdnMap" type="com.cst.service.model.Kdn">
+        <result property="kdnId" column="kdn_id"/>
+        <result property="business" column="business"/>
+        <result property="code" column="code"/>
+	</resultMap>
+	<!-- 分页查询接口 -->
+	<select id="getKdnListPage" parameterType="Kdn"
+		resultMap="KdnMap">
+		select * from kdn
+		<!-- <trim prefix="WHERE" prefixOverrides="AND | OR"> -->
+	</select>
+	<!-- 按编号查询 -->
+	<select id="getKdnById" parameterType="int" resultMap="KdnMap">
+		select *
+		from kdn where kdn_id = #{kdnId}
+	</select>
+	<!-- 按快递code查询 -->
+	<select id="getKdnByCode" parameterType="Kdn" resultMap="KdnMap">
+		select *
+		from kdn where code = #{code}
+	</select>
+	<!-- 添加 -->
+	<insert id="insertKdn" parameterType="Kdn" useGeneratedKeys="true" keyProperty="kdnId">
+        INSERT INTO kdn (
+        	kdn_id ,
+        	business ,
+        	code 
+        ) VALUES (
+        	#{kdnId} ,
+        	#{business} ,
+        	#{code} 
+        )
+	</insert>
+	<!-- 修改 -->
+	<update id="updateKdn" >
+        UPDATE kdn 
+        <trim prefix="SET" suffixOverrides=",">
+	        <if test="business!=null and business!=''">
+	        business = #{business},
+	        </if>
+	        <if test="code!=null and code!=''">
+	        code = #{code},
+	        </if>
+	      </trim>  
+        WHERE 
+	        kdn_id = #{kdnId} 
+	</update>
+	<!-- 删除 -->
+	<delete id="deleteKdn" parameterType="int">
+        UPDATE kdn set state='X' WHERE
+        kdn_id = #{kdnId} 
+    </delete>
+	
+</mapper>
+

@@ -1,0 +1,95 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<!-- 使用namespace的话sql搜索定位会比较方便 -->
+<mapper namespace="com.cst.service.dao.LogisticsProductMapper">
+
+	<resultMap id="LogisticsProductMap" type="com.cst.service.model.LogisticsProduct">
+        <result property="logisticsProductId" column="logistics_product_id"/>
+        <result property="logisticsId" column="logistics_id"/>
+        <result property="productUuid" column="product_uuid"/>
+        <result property="logisticsNum" column="logistics_num"/>
+        <result property="ordergoodsCode" column="ordergoods_code"/>
+        <result property="totalNum" column="total_num"/>
+        <result property="unit" column="unit"/>
+        <result property="productName" column="product_name"/>
+	</resultMap>
+	<!-- 分页查询接口 -->
+	<select id="getLogisticsProductListPage" parameterType="LogisticsProduct"
+		resultMap="LogisticsProductMap">
+		select * from logistics_product
+		<!-- <trim prefix="WHERE" prefixOverrides="AND | OR"> -->
+	</select>
+	<!-- 聚合分组查询发货数量接口 -->
+	<select id="getNum" parameterType="String"
+		resultMap="LogisticsProductMap">
+		select 
+		product_uuid as product_uuid,
+		sum(logistics_num) as total_num 
+		from logistics_product
+		where ordergoods_code=#{ordergoodsCode}
+		group by product_uuid
+		<!-- <trim prefix="WHERE" prefixOverrides="AND | OR"> -->
+	</select>
+	<!-- 按编号查询 -->
+	<select id="getLogisticsProductById" parameterType="int" resultMap="LogisticsProductMap">
+		select *
+		from logistics_product where logistics_product_id = #{logisticsProductId}
+	</select>
+	<!-- 添加 -->
+	<insert id="insertLogisticsProduct" parameterType="LogisticsProduct">
+        INSERT INTO logistics_product (
+        	logistics_product_id ,
+        	logistics_id ,
+        	product_uuid ,
+        	logistics_num ,
+        	ordergoods_code ,
+        	unit
+        ) VALUES 
+        <foreach collection="list" item="item" separator="," >
+        ( 
+        	#{item.logisticsProductId} ,
+        	#{item.logisticsId} ,
+        	#{item.productUuid} ,
+        	#{item.logisticsNum} ,
+        	#{item.ordergoodsCode},
+        	#{item.unit}
+        )
+        </foreach> 
+	</insert>
+	<!-- 修改 -->
+	<update id="updateLogisticsProduct" >
+        UPDATE logistics_product 
+        <trim prefix="SET" suffixOverrides=",">
+	        <if test="logisticsId!=null and logisticsId!=''">
+	        logistics_id = #{logisticsId},
+	        </if>
+	        <if test="productUuid!=null and productUuid!=''">
+	        product_uuid = #{productUuid},
+	        </if>
+	        <if test="logisticsNum!=null and logisticsNum!=''">
+	        logistics_num = #{logisticsNum},
+	        </if>
+	        <if test="ordergoodsCode!=null and ordergoodsCode!=''">
+	        ordergoods_code = #{ordergoodsCode},
+	        </if>
+	      </trim>  
+        WHERE 
+	        logistics_product_id = #{logisticsProductId} 
+	</update>
+	<!-- 根据物流id删除 -->
+	<delete id="deleteLogisticsIds" parameterType="int">
+        delete from logistics_product WHERE
+        logistics_id = #{logisticsId} 
+    </delete>
+	<!-- 删除 -->
+	<delete id="deleteLogisticsProduct" parameterType="int">
+        UPDATE logistics_product set state='X' WHERE
+        logistics_product_id = #{logisticsProductId} 
+    </delete>
+	
+</mapper>
+

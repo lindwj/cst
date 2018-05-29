@@ -1,0 +1,100 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<!-- 使用namespace的话sql搜索定位会比较方便 -->
+<mapper namespace="com.cst.service.dao.OrdergoodsProductMapper">
+
+	<resultMap id="OrdergoodsProductMap" type="com.cst.service.model.OrdergoodsProduct">
+        <result property="ordergoodsProductId" column="ordergoods_product_id"/>
+        <result property="ordergoodsCode" column="ordergoods_code"/>
+        <result property="productUuid" column="product_uuid"/>
+        <result property="unit" column="unit"/>
+        <result property="applyNum" column="apply_num"/>
+        <result property="updateNum" column="update_num"/>
+        <result property="productName" column="product_name"/>
+        <result property="productPrice" column="product_price"/>
+	</resultMap>
+	<!-- 分页查询接口 -->
+	<select id="getOrdergoodsProductListPage" parameterType="OrdergoodsProduct"
+		resultMap="OrdergoodsProductMap">
+		select * from ordergoods_product
+		<!-- <trim prefix="WHERE" prefixOverrides="AND | OR"> -->
+	</select>
+	<!-- 按订单编号查询 -->
+	<select id="getOrderProduct" parameterType="String"
+		resultMap="OrdergoodsProductMap">
+		select 
+		o.apply_num as apply_num,
+		o.update_num as update_num,
+		o.ordergoods_code as ordergoods_code,
+		p.name as product_name,
+		p.cost_price as product_price,
+		o.ordergoods_product_id as ordergoods_product_id
+		from ordergoods_product o,product p 
+		where o.product_uuid=p.product_uuid
+		<if test="ordergoodsCode!=null and ordergoodsCode!=''">
+		and o.ordergoods_code=#{ordergoodsCode}
+		</if>
+		order by ordergoods_product_id desc
+		<!-- <trim prefix="WHERE" prefixOverrides="AND | OR"> -->
+	</select>
+	<!-- 按编号查询 -->
+	<select id="getOrdergoodsProductById" parameterType="int" resultMap="OrdergoodsProductMap">
+		select *
+		from ordergoods_product where ordergoods_product_id = #{ordergoodsProductId}
+	</select>
+	<!-- 添加 -->
+	<insert id="insertOrdergoodsProduct" parameterType="OrdergoodsProduct">
+        INSERT INTO ordergoods_product (
+        	ordergoods_product_id ,
+        	ordergoods_code ,
+        	product_uuid ,
+        	unit ,
+        	apply_num ,
+        	update_num 
+        ) VALUES 
+        <foreach collection="list" item="item"  separator="," > 
+        (
+        	#{item.ordergoodsProductId} ,
+        	#{item.ordergoodsCode} ,
+        	#{item.productUuid} ,
+        	#{item.unit} ,
+        	#{item.applyNum} ,
+        	#{item.updateNum}
+        )
+        </foreach>
+	</insert>
+	<!-- 修改 -->
+	<update id="updateOrdergoodsProduct" >
+        UPDATE ordergoods_product 
+        <trim prefix="SET" suffixOverrides=",">
+	        <if test="ordergoodsCode!=null and ordergoodsCode!=''">
+	        ordergoods_code = #{ordergoodsCode},
+	        </if>
+	        <if test="productUuid!=null and productUuid!=''">
+	        product_uuid = #{productUuid},
+	        </if>
+	        <if test="unit!=null and unit!=''">
+	        unit = #{unit},
+	        </if>
+	        <if test="applyNum!=null and applyNum!=''">
+	        apply_num = #{applyNum},
+	        </if>
+	        <if test="updateNum!=null and updateNum!=''">
+	        update_num = #{updateNum},
+	        </if>
+	      </trim>  
+        WHERE 
+	        ordergoods_product_id = #{ordergoodsProductId} 
+	</update>
+	<!-- 删除 -->
+	<delete id="deleteOrdergoodsProduct" parameterType="int">
+        UPDATE ordergoods_product set state='X' WHERE
+        ordergoods_product_id = #{ordergoodsProductId} 
+    </delete>
+	
+</mapper>
+

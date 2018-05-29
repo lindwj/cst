@@ -1,0 +1,173 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<!-- 使用namespace的话sql搜索定位会比较方便 -->
+<mapper namespace="com.cst.service.dao.ShopAgentFinancialMapper">
+
+	<resultMap id="ShopAgentFinancialMap" type="com.cst.service.model.ShopAgentFinancial">
+        <result property="shopAgentFinancialId" column="shop_agent_financial_id"/>
+        <result property="province" column="province"/>
+        <result property="city" column="city"/>
+        <result property="district" column="district"/>
+        <result property="street" column="street"/>
+        <result property="shopId" column="shop_id"/>
+        <result property="agentId" column="agent_id"/>
+        <result property="day" column="day"/>
+        <result property="createDate" column="create_date"/>
+        <result property="status" column="status"/>
+        <result property="shopName" column="shop_name"/>
+        <result property="amount" column="amount"/>
+        <result property="code" column="code"/>
+        <result property="transferDate" column="transfer_date"/>
+        <result property="transferUser" column="transfer_user"/>
+	</resultMap>
+	<!-- 分页查询接口 -->
+	<select id="getShopAgentFinancialListPage" parameterType="ShopAgentFinancial"
+		resultMap="ShopAgentFinancialMap">
+		select * from shop_agent_financial
+		<!-- <trim prefix="WHERE" prefixOverrides="AND | OR"> -->
+	</select>
+	
+	<select id="getShopAgentFinancial" parameterType="ShopAgentFinancial"
+		resultMap="ShopAgentFinancialMap">
+		select * from shop_agent_financial
+		
+		where
+		
+		shop_id=#{shopId}
+		 
+		<if test="dayStr!=null and dayStr!=''">
+		and day=#{dayStr}
+		</if>
+		 
+		order by shop_agent_financial_id desc
+	</select>
+	
+	<select id="getShopAgentFinancialListPageDD" parameterType="ShopAgentFinancial"
+		resultMap="ShopAgentFinancialMap">
+		select * from shop_agent_financial
+		
+		where
+		
+		agent_id=#{agentId}
+		 
+		  <if test="status!=null and status!='' and status!=100">
+		 and status = #{status}
+		 </if>
+		 
+		 <if test="status!=null and status!='' and status==100">
+		 and status = 0
+		 </if>
+		 
+		 <if test="beginTime!=null and beginTime!=''">
+		 and create_date >= #{beginTime}
+		 </if>
+		 
+		 <if test="endTime!=null and endTime!=''">
+		 and create_date &lt;= #{endTime}
+		 </if>
+		 
+		 order by shop_agent_financial_id desc
+	</select>
+	<!-- 按编号查询 -->
+	<select id="getShopAgentFinancialById" parameterType="int" resultMap="ShopAgentFinancialMap">
+		select *
+		from shop_agent_financial where shop_agent_financial_id = #{shopAgentFinancialId}
+	</select>
+	<!-- 添加 -->
+	<insert id="insertShopAgentFinancial" parameterType="ShopAgentFinancial" useGeneratedKeys="true" keyProperty="shopAgentFinancialId">
+        INSERT INTO shop_agent_financial (
+        	shop_agent_financial_id ,
+        	province ,
+        	city ,
+        	district ,
+        	street ,
+        	shop_id ,
+        	agent_id ,
+        	day ,
+        	create_date ,
+        	status ,
+        	shop_name ,
+        	amount ,
+        	code ,
+        	transfer_date ,
+        	transfer_user 
+        ) VALUES (
+        	#{shopAgentFinancialId} ,
+        	#{province} ,
+        	#{city} ,
+        	#{district} ,
+        	#{street} ,
+        	#{shopId} ,
+        	#{agentId} ,
+        	#{day} ,
+        	#{createDate} ,
+        	#{status} ,
+        	#{shopName} ,
+        	#{amount} ,
+        	#{code} ,
+        	#{transferDate} ,
+        	#{transferUser} 
+        )
+	</insert>
+	<!-- 修改 -->
+	<update id="updateShopAgentFinancial" >
+        UPDATE shop_agent_financial 
+        <trim prefix="SET" suffixOverrides=",">
+	        <if test="province!=null and province!=''">
+	        province = #{province},
+	        </if>
+	        <if test="city!=null and city!=''">
+	        city = #{city},
+	        </if>
+	        <if test="district!=null and district!=''">
+	        district = #{district},
+	        </if>
+	        <if test="street!=null and street!=''">
+	        street = #{street},
+	        </if>
+	        <if test="shopId!=null and shopId!=''">
+	        shop_id = #{shopId},
+	        </if>
+	        <if test="agentId!=null and agentId!=''">
+	        agent_id = #{agentId},
+	        </if>
+	        <if test="day!=null and day!=''">
+	        day = #{day},
+	        </if>
+	        <if test="createDate!=null and createDate!=''">
+	        create_date = #{createDate},
+	        </if>
+	        <if test="status!=null and status!=''">
+	        status = #{status},
+	        </if>
+	        <if test="shopName!=null and shopName!=''">
+	        shop_name = #{shopName},
+	        </if>
+	        <if test="amount!=null and amount!=''">
+	        amount = #{amount},
+	        </if>
+	        <if test="code!=null and code!=''">
+	        code = #{code},
+	        </if>
+	        <if test="transferDate!=null and transferDate!=''">
+	        transfer_date = #{transferDate},
+	        </if>
+	        <if test="transferUser!=null and transferUser!=''">
+	        transfer_user = #{transferUser},
+	        </if>
+	      </trim>  
+        WHERE 
+	        shop_agent_financial_id = #{shopAgentFinancialId} 
+	</update>
+	<!-- 删除 -->
+	<delete id="deleteShopAgentFinancial" parameterType="int">
+        UPDATE shop_agent_financial set state='X' WHERE
+        shop_agent_financial_id = #{shopAgentFinancialId} 
+    </delete>
+	
+</mapper>
+

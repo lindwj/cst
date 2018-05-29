@@ -1,0 +1,82 @@
+body{
+    background-color:#40392b ;
+    position: relative;
+}
+
+
+.index_box{
+    width: 100%;
+}
+.brand_header{
+    width: 100%;
+    background-color: #b4a078;
+    height: 45px;
+    line-height: 45px;
+    position: relative;
+}
+.brand_title{
+    font-size: 1.1em;
+    text-align: center;
+    color: #FFFFFF;
+}
+.arrow{
+    position: absolute;
+    top:0;
+    left: 4%;
+}
+.arrow{
+    font-size: 1em;
+    color: #FFFFFF;
+}
+.arrowicon{
+    font-size: 1.3em!important;
+    vertical-align: -2px;
+}
+
+.brand_box{
+    width: 80%;
+    margin: 65% auto 0 auto;
+    padding: 20px 0;
+    position: relative;
+    transform: translateY(-50%);
+}
+.corner1, .corner2, .corner3, .corner4{
+    color: #FFFFFF;
+    position: absolute;
+}
+.corner1{
+    top: 0;
+    left: 0;
+}
+.corner2{
+    top: 0;
+    right: 0;
+}
+.corner3{
+    bottom: 0;
+    left: 0;
+}
+.corner4{
+    bottom: 0;
+    right: 0;
+}
+.cornericon{
+    font-size: 1.8em!important;
+}
+.brand_box img{
+    width:80%;
+    margin-left: 10%;
+    background-color: #FFFFFF;
+    border: 1px solid #FFFFFF;
+    /*background-color: #FFFFFF;*/
+}
+
+.rule{
+    font-size: 0.9em;
+    color: #FFFFFF;
+    position: fixed;
+    bottom: 15px;
+    left: 0;
+    right: 0;
+    text-align: center;
+}

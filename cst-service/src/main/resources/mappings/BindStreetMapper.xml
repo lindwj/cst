@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<!-- 使用namespace的话sql搜索定位会比较方便 -->
+<mapper namespace="com.cst.service.dao.BindStreetMapper">
+
+	<resultMap id="BindStreetMap" type="com.cst.service.model.BindStreet">
+        <result property="bindStreetId" column="bind_street_id"/>
+        <result property="street" column="street"/>
+        <result property="shopId" column="shop_id"/>
+	</resultMap>
+	<!-- 分页查询接口 -->
+	<select id="getBindStreetListPage" parameterType="BindStreet"
+		resultMap="BindStreetMap">
+		select * from bind_street
+		<!-- <trim prefix="WHERE" prefixOverrides="AND | OR"> -->
+	</select>
+	<!-- 按编号查询 -->
+	<select id="getBindStreetById" parameterType="int" resultMap="BindStreetMap">
+		select *
+		from bind_street where bind_street_id = #{bindStreetId}
+	</select>
+	<!-- 添加 -->
+	<insert id="insertBindStreet" parameterType="BindStreet">
+        INSERT INTO bind_street (
+        	street ,
+        	shop_id ,
+        	district
+        ) VALUES 
+        <foreach collection="list"  item="item" index="index" separator="," > 
+        (
+        	#{item.street} ,
+        	#{item.shopId},
+        	#{item.district}
+        )
+        </foreach> 
+        
+	</insert>
+	<!-- 修改 -->
+	<update id="updateBindStreet" >
+        UPDATE bind_street 
+        <trim prefix="SET" suffixOverrides=",">
+	        <if test="street!=null and street!=''">
+	        street = #{street},
+	        </if>
+	        <if test="shopId!=null and shopId!=''">
+	        shop_id = #{shopId},
+	        </if>
+	      </trim>  
+        WHERE 
+	        bind_street_id = #{bindStreetId} 
+	</update>
+	<!-- 删除 -->
+	<delete id="deleteBindStreet" parameterType="BindStreet">
+        delete from bind_street WHERE
+        shop_id = #{shopId} and district = #{district}
+    </delete>
+	
+</mapper>
+

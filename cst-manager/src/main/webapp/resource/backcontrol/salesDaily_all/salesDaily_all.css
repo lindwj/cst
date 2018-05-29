@@ -1,0 +1,173 @@
+
+
+/*右侧分类栏*/
+table{
+    width: 99%;
+    text-align: left;padding: 10px 10px;
+}
+table th,td{
+    padding: 8px 8px;
+    text-align: center;
+}
+
+.table1 th{
+    color: #58666e;
+    background: #e4eaec;
+    font-weight: normal;
+}
+
+table tr{
+    /*border-bottom:1px solid #d2d7d9 ;*/
+}
+/*详细订单展示*/
+.table2{
+    text-align: left;
+    border: 1px solid #d2d7d9;
+    border-top: 0;
+}
+
+
+#trans{
+    float: right;
+    margin-right: 1%;
+    width: 80px;
+}
+
+/*修改等按钮*/
+.changebtn{
+    color: #656565;
+    border: none;
+    padding: 0 12px;
+    background-color:#ececec;
+    font-size: 12px;
+    height: 28px;
+    line-height: 14px;
+    border-bottom: 2px solid #d4d4d4;
+    border-radius: 2px 2px 2px 2px;
+    outline: none;
+    cursor: pointer;
+    font-weight: 300;
+    margin: 5px 5px 0;
+}
+.changebtn:hover{
+    background-color: #f2f2f2;
+}
+
+/*对应的数据栏*/
+.col1{
+    width: 11.1%;
+    border-bottom:1px solid #d2d7d9 ;
+}
+.col2{
+    width: 11.1%;
+    border-bottom:1px solid #d2d7d9 ;
+    cursor: pointer;
+}
+.col3{
+     width: 11.1%;
+     border-bottom:1px solid #d2d7d9 ;
+ }
+.col4{
+    width: 11.1%;
+    border-bottom:1px solid #d2d7d9 ;
+}
+.col5{
+     width:  11.1%;
+     border-bottom:1px solid #d2d7d9 ;
+ }
+.col6{
+     width:  11.1%;
+     border-bottom:1px solid #d2d7d9 ;
+ }
+.col7{
+     width:  11.1%;
+     border-bottom:1px solid #d2d7d9 ;
+ }
+.col8{
+     width:  11.1%;
+     border-bottom:1px solid #d2d7d9 ;
+ }
+.col9{
+     width:  11.1%;
+     border-bottom:1px solid #d2d7d9 ;
+    cursor: pointer;
+ }
+.col9:hover{
+    color: #00833f;
+}
+
+/*标题栏*/
+.col12{
+    width:11.1%;
+}
+.col13{
+    width: 11.1%;
+
+}
+.col14{
+     width:11.1%;
+ }
+.col15{
+    width:11.1%;
+}
+.col16{
+     width:11.1%;
+ }
+.col17{
+     width:11.1%;
+ }
+.col18{
+     width:11.1%;
+ }
+.col19{
+     width:11.1%;
+ }
+.col20{
+     width:11.1%;
+ }
+
+
+
+
+
+/*分页栏*/
+/*table3*/
+.table3{
+    background-color: #e4eaec;
+    border-bottom: 2px solid #d2d7d9;
+    margin-bottom: 20px;
+}
+
+
+
+/*搜索错误提示*/
+#errorm{
+    font-size: 15px;
+    color: white;
+    position: absolute;
+    padding: 10px 10px;
+    background-color: rgba(77,77,77,0.6);
+    border-radius: 10px 10px 10px 10px;
+    text-align: center;
+    top: 7.5%;
+    left: 30%;
+    display: none;
+
+}
+#errorm1{
+    font-size: 15px;
+    color: white;
+    position: absolute;
+    padding: 10px 15px;
+    background-color: rgba(77,77,77,0.6);
+    border-radius: 10px 10px 10px 10px;
+    text-align: center;
+    top:57%;
+    left: 45%;
+    display: none;
+    z-index: 998;
+
+}
+
+
+

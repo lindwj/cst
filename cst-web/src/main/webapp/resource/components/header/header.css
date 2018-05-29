@@ -1,0 +1,229 @@
+*{margin: 0;padding: 0;list-style: none;}
+/*
+KISSY CSS Reset
+理念：1. reset 的目的不是清除浏览器的默认样式，这仅是部分工作。清除和重置是紧密不可分的。
+2. reset 的目的不是让默认样式在所有浏览器下一致，而是减少默认样式有可能带来的问题。
+3. reset 期望提供一套普适通用的基础样式。但没有银弹，推荐根据具体需求，裁剪和修改后再使用。
+特色：1. 适应中文；2. 基于最新主流浏览器。
+ */
+
+/** 清除内外边距 **/
+body, h1, h2, h3, h4, h5, h6, hr, p, blockquote, /* structural elements 结构元素 */
+dl, dt, dd, ul, ol, li, /* list elements 列表元素 */
+pre, /* text formatting elements 文本格式元素 */
+form, fieldset, legend, button, input, textarea, /* form elements 表单元素 */
+th, td /* table elements 表格元素 */ {
+    margin: 0;
+    padding: 0;
+}
+
+/** 设置默认字体 **/
+body,
+button, input, select, textarea /* for ie */ {
+    font: 12px/1.5 tahoma, arial, \5b8b\4f53, sans-serif;
+}
+h1, h2, h3, h4, h5, h6 { font-size: 100%; }
+address, cite, dfn, em, var { font-style: normal; } /* 将斜体扶正 */
+code, kbd, pre, samp { font-family: courier new, courier, monospace; } /* 统一等宽字体 */
+small { font-size: 12px; } /* 小于 12px 的中文很难阅读，让 small 正常化 */
+
+/** 重置列表元素 **/
+ul, ol { list-style: none; }
+
+/** 重置文本格式元素 **/
+a { text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+
+/** 重置表单元素 **/
+legend { color: #000; } /* for ie6 */
+fieldset, img { border: 0; } /* img 搭车：让链接里的 img 无边框 */
+button, input, select, textarea { font-size: 100%; } /* 使得表单元素在 ie 下能继承字体大小 */
+/* 注：optgroup 无法扶正 */
+
+/** 重置表格元素 **/
+table { border-collapse: collapse; border-spacing: 0; }
+
+ul{  list-style-type: none;  }
+a {
+    color: #4c4c4c;
+    text-decoration: none;
+}
+a:visited {
+    color: #4c4c4c;
+}
+
+
+
+/*/!*HTML5新标签兼容低版本的IE*!/*/
+/*article,aside,footer,header,section,footer,nav,figure,main{display:block;}*/
+/*/!*页面样式初始化*!/*/
+/*body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,legend,button,form,fieldset,input,textarea,p,blockquote,th,td{*/
+    /*padding: 0;*/
+    /*margin: 0;*/
+/*}*/
+/*body{*/
+    /*background: none repeat scroll 0 0 #fff;*/
+    /*color: #4c4c4c;*/
+    /*font-size: 14px;*/
+    /*font-family: "Microsoft YaHei",SimSun,arial,sans-serif;*/
+/*}*/
+/*ol, ul { list-style:none; }*/
+/*h1, h2, h3, h4, h5, h6{ font-size:100%; }*/
+/*em { font-style:normal; }*/
+/*input, button, select, textarea { outline:none; }*/
+/*textarea { resize:none; }*/
+/*p{ text-align:justify; text-justify:distribute;}*/
+
+/*ul{  list-style-type: none;  }*/
+/*a {*/
+    /*color: #4c4c4c;*/
+    /*text-decoration: none;*/
+/*}*/
+/*a:visited {*/
+    /*color: #4c4c4c;*/
+/*}*/
+
+
+
+
+/*top模块*/
+.top {
+    background: none repeat scroll 0 0 #f2f2f2;
+    font-size: 12px;
+    /*height: 48px;*/
+    height: 70px;
+}
+.top p {
+    float: left;
+    line-height: 70px;
+    margin-left: 10px;
+}
+
+.logo img {
+    height: 68px;
+    width: 68px;
+    float: left;
+}
+
+.top-nav-left {
+    float: left;
+    width: 350px
+}
+/*.top-logout {*/
+    /*margin-top: 17px;*/
+/*}*/
+.top-logout a{
+    padding-left: 10px;
+}
+.top .top_ul {
+    float: right;
+}
+.top .top_ul li {
+    float: left;
+    height: 12px;
+    line-height: 70px;
+    /*margin-top: 18px;*/
+    position: relative;
+
+}
+.top .top_ul .line {
+    color: #c6c6c6;
+    margin: 0px 25px;
+
+}
+.top-nav {
+    margin: 0 auto;
+    width: 960px;
+}
+
+.top-nav #top-logout{
+    margin-left: 20px;
+    display: block;
+    cursor: pointer;
+}
+
+/*导航栏*/
+.nav{
+    height: 136px;
+    width: 100%;
+    /*text-align: center;*/
+    position: relative;
+    border-bottom: 1px solid #dfd1bb;
+    line-height: 136px;
+}
+
+.nav .info{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 136px;
+}
+
+.nav .info_wrap{
+    background:url(../images/logo/logo.jpg);
+    background-size:80px 80px;
+    background-repeat:no-repeat;
+    background-position: left;
+    height: 136px;
+    width: 420px;
+    margin: 0 auto;
+    padding-left: 80px;
+}
+
+.nav a {
+    font-size: 14px;
+    padding: 10px 25px;
+    border-right: 1px solid #e9e6e3;
+}
+.nav a.nobd {
+    border-right: 0 none;
+}
+
+
+/*购物车*/
+.cart-toolbar{
+    bottom: 50px;
+    position: fixed;
+    right: 20px;
+    z-index: 999;
+}
+
+.shopCart {
+    display: inline-block;
+    background-color: #c81623;
+    color: #ffffff;
+    position: relative;
+    margin-top: 10px;
+    opacity: 0.7;
+    box-sizing: border-box;
+    width: 48px;
+    height: 48px;
+    font-size: 24px;
+    line-height: 48px;
+    border-radius: 50%;
+    text-align: center;
+
+}
+.shopCart b {
+    bottom: 35px;
+    right: 0;
+    position: absolute;
+    border-radius: 1000px;
+    background-color: #f37b1d;
+    display: inline-block;
+    min-width: 10px;
+    padding: .25em .625em;
+    font-size: 14px;
+    font-weight: 700;
+    color: #fff;
+    line-height: 1;
+    vertical-align: baseline;
+    white-space: nowrap;
+    text-align: center;
+}
+.shopCart i {
+    font-size: 25px;
+    line-height: 50px;
+}

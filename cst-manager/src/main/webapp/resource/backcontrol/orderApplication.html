@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <!--<link rel="icon" href="/static/images/favicon.ico?v=1" type="image/x-icon"/>-->
+    <title>订货申请</title>
+    <link rel="icon" href="images/logo.png" />
+    <link href="common/reset.css" rel="stylesheet" type="text/css"/>
+    <link href="orderApplication/orderApplication.css" rel="stylesheet" type="text/css"/>
+    <link type="text/css" rel="stylesheet" href="common/iconfont.css"/>
+
+</head>
+<body>
+
+<div class="black" id="black1">
+
+    <div class="fadebox1">
+        <div class="ordertitle1">
+            <h1>确认删除？</h1>
+        </div>
+
+        <div class="orderbtn1">
+            <input id="surebtn" class="btn-default" type="button" value="确定">
+            <input id="canclebtn" class="btn-default" type="button" value="取消">
+        </div>
+    </div>
+</div>
+
+<div class="container">
+
+        <div class="nav-global" style="">
+                <div class="global-logo">
+                    <img class="global-logo-img" src="images/logo3.png">
+                    <h1 class="global-logo-title">北大荒生态食品</h1>
+                </div>
+
+                <div class="items-inner">
+                      <ul class="global-items">
+                        <li class="nav-item">
+                            <a class="nav-item-inner" href="#" id="controluser">
+                                <div class="user-name">
+                                    <i class="iconfont userfont">&#xe60c;</i>
+                                    <i style="font-style: normal" class="username">sa</i>
+                                    <p id="logout">退出</p>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+        </div>
+
+
+        <div class="nav-zone" style="">
+            <div class="nav-zone-inner">
+
+                <div class="zone-items">
+                    <ul>
+
+                        <li class="control">
+                            <a id="proc">
+                                <span class="text" ><i class="iconfont menuicon">&#xe607;</i>订单管理</span>
+                            </a>
+                        </li>
+                        <!--<li >-->
+                            <!--<a id="orderc">-->
+                                <!--<div>-->
+                                    <!--<span class="text"><i class="iconfont menuicon">&#xe60b;</i>预定订单管理</span>-->
+                                <!--</div>-->
+                            <!--</a>-->
+                        <!--</li>-->
+
+                        <li >
+                            <a id="stocklistc">
+                                <div>
+                                    <span class="text"><i class="iconfont menuicon">&#xe60a;</i>商品库存管理</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a id="orderapplyc" style="background-color: #57b383;color: #ffffff;">
+                                <div>
+                                    <span class="text"><i class="iconfont menuicon">&#xe6a9;</i>订货申请</span>
+                                </div>
+                            </a> 
+                        </li>
+                        <li>
+                            <a id="salesdaily">
+                                <div>
+                                    <span class="text"><i class="iconfont menuicon">&#xe652;</i>日汇总</span>
+                                </div>
+                            </a>
+                        </li>
+
+
+                    </ul>
+
+                </div>
+
+            </div>
+        </div>
+
+        <div class="content">
+            <div class="content-title">订单申请</div>
+
+            <div class="search">
+
+                <label class="search-label">订货日期：</label>
+                <input id="date1" name="item-name" onclick="WdatePicker({readOnly:true})" type="text" class="input-default">
+                <label>至</label>
+                <input id="date2" name="item-name" onclick="WdatePicker({readOnly:true})" type="text" class="input-default">
+
+                <label class="search-label1">状态：</label>
+                <select id="item-status" name="item-status" class="select-default">
+                    <option value="100">全部</option>
+                    <option value="0">草稿</option>
+                    <option value="1">已提交</option>
+                    <option value="2">审核中</option>
+                    <option value="-1">拒绝</option>
+                    <option value="3">已发货</option>
+                    <option value="4">订单完成</option>
+                </select>
+                <button type="button" class="btn-default" id="searchbtn">搜索</button>
+                <button type="button" class="btn-default" id="applybtn" onclick="javascript:location='applyDetail.html'">订单申请</button>
+                <span id="errorm">请输入手机号、订单号或者订单状态,进行搜索!</span>
+
+
+            </div>
+
+            <div class="productorder">
+
+
+                <table class="table1">
+                    <tr>
+                        <th class="col12">商品名称</th>
+                        <th class="col13">订货价（元）</th>
+                        <th class="col14">单位</th>
+                        <th class="col15">申请数量</th>
+                        <th class="col17">总金额</th>
+                        <th class="col18">订单状态</th>
+                        <th class="col19">操作</th>
+                    </tr>
+                </table>
+                </table>
+				<div class="order"></div>
+                <table class="table3">
+                <tr>
+
+                    <td colspan="7">
+                        <div id="errorm3">已经是最后一页了！</div>
+                        <div class="pull-right page-box">
+                            <div class="pagination-info">共有<span id="allpage">1</span>页，每页显示：15条</div>
+                            <div class="pagination">
+                                <span><a>«</a></span><span><a id="prevmove">‹</a></span><span><a id="curpage">1</a></span><span><a id="nextmove">›</a></span><span><a>»</a></span>
+                            </div>
+                            <div class="pagination-goto">
+                                <input type="text" class="input-default" id="gotoPageNo">
+                                <button type="button" class="btn btn-default" id="goBtn">GO</button>
+                                <input type="hidden" id="totalCount" name="totalCount" value="4">
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                </table>
+
+
+            </div>
+
+
+
+        </div>
+
+</div>
+
+<script src="common/jquery-3.0.0.min.js"></script>
+<script src="orderApplication/orderApplication.js"></script>
+<script src="common/link.js"></script>
+<script src="common/DatePicker/WdatePicker.js"></script>
+
+</body>
+</html>

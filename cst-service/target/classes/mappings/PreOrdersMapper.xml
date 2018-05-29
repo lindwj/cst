@@ -1,0 +1,358 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<!-- 使用namespace的话sql搜索定位会比较方便 -->
+<mapper namespace="com.cst.service.dao.PreOrdersMapper">
+
+	<resultMap id="PreOrdersMap" type="com.cst.service.model.PreOrders">
+        <result property="preOrdersId" column="pre_orders_id"/>
+        <result property="code" column="code"/>
+        <result property="productUuid" column="product_uuid"/>
+        <result property="shopId" column="shop_id"/>
+        <result property="applyName" column="apply_name"/>
+        <result property="applyPhone" column="apply_phone"/>
+        <result property="userPhone" column="user_phone"/>
+        <result property="userId" column="user_id"/>
+        <result property="createDate" column="create_date"/>
+        <result property="status" column="status"/>
+        <result property="totalFee" column="total_fee"/>
+        <result property="receiveName" column="receive_name"/>
+        <result property="receiveAccount" column="receive_account"/>
+        <result property="receiveAddress" column="receive_address"/>
+        <result property="receivePeriod" column="receive_period"/>
+        <result property="receiveMobile" column="receive_mobile"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="shopName" column="shop_name"/>
+        <result property="pic" column="pic"/>
+        <result property="productName" column="product_name"/>
+        <result property="saleManager" column="sale_manager"/>
+        <result property="managerName" column="manager_name"/>
+        <result property="contractNo" column="contract_no"/>
+        <result property="updateManagerId" column="update_manager_id"/>
+	</resultMap>
+	
+	
+	
+	<select id="getPreOrdersUserListPage" parameterType="PreOrders"
+		resultMap="PreOrdersMap">
+		
+		select po.update_time as update_time,po.pre_orders_id as pre_orders_id,p.pic as pic,p.name as product_name ,po.contract_no as contract_no
+		,po.apply_name as apply_name
+		,po.apply_phone as apply_phone
+		,po.receive_name as receive_name,
+		po.receive_mobile as receive_mobile,
+		m.name as manager_name,
+		po.status as status
+		 from pre_orders po ,product p , manager m where po.product_uuid=p.product_uuid 
+		and po.sale_manager=m.manager_id
+		
+		and po.user_phone = #{userPhone}
+		
+		
+		<!-- <trim prefix="WHERE" prefixOverrides="AND | OR"> -->
+	</select>
+	
+	<select id="getPreOrdersUserById" parameterType="int"
+		resultMap="PreOrdersMap">
+		
+		select po.update_time as update_time,po.pre_orders_id as pre_orders_id,p.pic as pic,p.name as product_name ,po.contract_no as contract_no
+		,po.apply_name as apply_name
+		,po.apply_phone as apply_phone
+		,po.receive_name as receive_name
+		,s.name as shop_name
+		,po.receive_address as receive_address,
+		po.receive_mobile as receive_mobile,
+		m.name as manager_name,
+		po.status as status
+		 from pre_orders po ,product p , manager m , shop s where po.product_uuid=p.product_uuid 
+		and po.sale_manager=m.manager_id and po.shop_id = s.shop_id
+		
+		and po.pre_orders_id = #{preOrdersId}
+		
+		
+		<!-- <trim prefix="WHERE" prefixOverrides="AND | OR"> -->
+	</select>
+	
+	
+	<!-- 分页查询接口 -->
+	<select id="getPreOrdersSelListPage" parameterType="PreOrders"
+		resultMap="PreOrdersMap">
+		
+		
+		
+		
+		select po.pre_orders_id as pre_orders_id,null as product_name,po.contract_no as contract_no
+		,po.apply_name as apply_name
+		,po.apply_phone as apply_phone
+		,po.receive_name as receive_name,
+		po.receive_mobile as receive_mobile,
+		null as manager_name,
+		po.status as status
+		 from pre_orders po where po.status=0 
+		 
+		 <if test="beginTime!=null and beginTime!=''">
+		 and po.create_date >= #{beginTime}
+		 </if>
+		 
+		 <if test="endTime!=null and endTime!=''">
+		 and po.create_date &lt;= #{endTime}
+		 </if>
+		 
+		 <if test="shopId!=null and shopId!=''">
+		 and po.shop_id = #{shopId}
+		 </if>
+		 
+		 union all
+		 
+		select po.pre_orders_id as pre_orders_id,p.name as product_name ,po.contract_no as contract_no
+		,po.apply_name as apply_name
+		,po.apply_phone as apply_phone
+		,po.receive_name as receive_name,
+		po.receive_mobile as receive_mobile,
+		m.name as manager_name,
+		po.status as status
+		 from pre_orders po ,product p , manager m where po.product_uuid=p.product_uuid 
+		and po.sale_manager=m.manager_id
+		
+		<if test="beginTime!=null and beginTime!=''">
+		 and po.update_time >= #{beginTime}
+		 </if>
+		 
+		 <if test="endTime!=null and endTime!=''">
+		 and po.update_time &lt;= #{endTime}
+		 </if>
+		 
+		  <if test="shopId!=null and shopId!=''">
+		 and po.shop_id = #{shopId}
+		 </if>
+		
+		
+		<!-- <trim prefix="WHERE" prefixOverrides="AND | OR"> -->
+	</select>
+	
+	
+	
+	<!-- 分页查询接口 -->
+	<select id="getPreOrdersListPage" parameterType="PreOrders"
+		resultMap="PreOrdersMap">
+		
+		
+		
+		
+		select po.pre_orders_id as pre_orders_id, null as product_name,po.contract_no as contract_no
+		,po.apply_name as apply_name
+		
+		,null as product_uuid
+		,null as sale_manager
+		,null as user_phone
+		,null as receive_account
+		,null as receive_address
+		,null as receive_period
+		
+		,po.apply_phone as apply_phone
+		,po.receive_name as receive_name,
+		po.receive_mobile as receive_mobile,
+		null as manager_name,
+		po.status as status
+		 from pre_orders po where po.shop_id = #{shopId} and po.status=0 
+		 
+		 <if test="beginTime!=null and beginTime!=''">
+		 and po.create_date >= #{beginTime}
+		 </if>
+		 
+		 <if test="endTime!=null and endTime!=''">
+		 and po.create_date &lt;= #{endTime}
+		 </if>
+		 
+		 <if test="status!=null and status!=''">
+		 and po.status = #{status}
+		 </if>
+		 
+		 <if test="applyPhone!=null and applyPhone!=''">
+		 and po.apply_phone = #{applyPhone}
+		 </if>
+		 
+		 <if test="receiveMobile!=null and receiveMobile!=''">
+		 and po.receive_mobile = #{receiveMobile}
+		 </if>
+		 
+		 
+		 
+		 
+		 union all
+		 
+		select po.pre_orders_id as pre_orders_id,p.name as product_name ,po.contract_no as contract_no
+		,po.apply_name as apply_name
+		
+		,po.product_uuid as product_uuid
+		,po.sale_manager as sale_manager
+		,po.user_phone as user_phone
+		,po.receive_account as receive_account
+		,po.receive_address as receive_address
+		,po.receive_period as receive_period
+		
+		,po.apply_phone as apply_phone
+		,po.receive_name as receive_name,
+		po.receive_mobile as receive_mobile,
+		m.name as manager_name,
+		po.status as status
+		 from pre_orders po ,product p , manager m where po.shop_id = #{shopId} and po.product_uuid=p.product_uuid 
+		and po.sale_manager=m.manager_id and po.status=1
+		
+		<if test="beginTime!=null and beginTime!=''">
+		 and po.update_time >= #{beginTime}
+		 </if>
+		 
+		 <if test="endTime!=null and endTime!=''">
+		 and po.update_time &lt;= #{endTime}
+		 </if>
+		 
+		  <if test="status!=null and status==0">
+		 and po.status = #{status}
+		 </if>
+		 
+		 <if test="applyPhone!=null and applyPhone!=''">
+		 and po.apply_phone = #{applyPhone}
+		 </if>
+		 
+		 <if test="receiveMobile!=null and receiveMobile!=''">
+		 and po.receive_mobile = #{receiveMobile}
+		 </if>
+		
+		
+		<!-- <trim prefix="WHERE" prefixOverrides="AND | OR"> -->
+	</select>
+	<!-- 按编号查询 -->
+	<select id="getPreOrdersById" parameterType="int" resultMap="PreOrdersMap">
+		select *
+		from pre_orders where pre_orders_id = #{preOrdersId}
+	</select>
+	<!-- 添加 -->
+	<insert id="insertPreOrders" parameterType="PreOrders" >
+        INSERT INTO pre_orders (
+        	code ,
+        	product_uuid ,
+        	shop_id ,
+        	apply_name ,
+        	apply_phone ,
+        	user_phone ,
+        	user_id ,
+        	status ,
+        	total_fee ,
+        	receive_name ,
+        	receive_account ,
+        	receive_address ,
+        	receive_period ,
+        	receive_mobile ,
+        	update_time ,
+        	shop_name ,
+        	pic ,
+        	product_name ,
+        	sale_manager ,
+        	contract_no ,
+        	update_manager_id 
+        ) VALUES (
+        	#{code} ,
+        	#{productUuid} ,
+        	#{shopId} ,
+        	#{applyName} ,
+        	#{applyPhone} ,
+        	#{userPhone} ,
+        	#{userId} ,
+        	#{status} ,
+        	#{totalFee} ,
+        	#{receiveName} ,
+        	#{receiveAccount} ,
+        	#{receiveAddress} ,
+        	#{receivePeriod} ,
+        	#{receiveMobile} ,
+        	now(),
+        	#{shopName} ,
+        	#{pic} ,
+        	#{productName} ,
+        	#{saleManager} ,
+        	#{contractNo} ,
+        	#{updateManagerId} 
+        )
+	</insert>
+	<!-- 修改 -->
+	<update id="updatePreOrders" >
+        UPDATE pre_orders 
+        <trim prefix="SET" suffixOverrides=",">
+	        <if test="code!=null and code!=''">
+	        code = #{code},
+	        </if>
+	        <if test="productUuid!=null and productUuid!=''">
+	        product_uuid = #{productUuid},
+	        </if>
+	        <if test="shopId!=null and shopId!=''">
+	        shop_id = #{shopId},
+	        </if>
+	        <if test="applyName!=null and applyName!=''">
+	        apply_name = #{applyName},
+	        </if>
+	        <if test="applyPhone!=null and applyPhone!=''">
+	        apply_phone = #{applyPhone},
+	        </if>
+	        <if test="userPhone!=null and userPhone!=''">
+	        user_phone = #{userPhone},
+	        </if>
+	        <if test="userId!=null and userId!=''">
+	        user_id = #{userId},
+	        </if>
+	        <if test="status!=null and status!=''">
+	        status = #{status},
+	        </if>
+	        <if test="totalFee!=null and totalFee!=''">
+	        total_fee = #{totalFee},
+	        </if>
+	        <if test="receiveName!=null and receiveName!=''">
+	        receive_name = #{receiveName},
+	        </if>
+	        <if test="receiveAccount!=null and receiveAccount!=''">
+	        receive_account = #{receiveAccount},
+	        </if>
+	        <if test="receiveAddress!=null and receiveAddress!=''">
+	        receive_address = #{receiveAddress},
+	        </if>
+	        <if test="receivePeriod!=null and receivePeriod!=''">
+	        receive_period = #{receivePeriod},
+	        </if>
+	        <if test="receiveMobile!=null and receiveMobile!=''">
+	        receive_mobile = #{receiveMobile},
+	        update_time = now(),
+	        </if>
+	        
+	        <if test="shopName!=null and shopName!=''">
+	        shop_name = #{shopName},
+	        </if>
+	        <if test="pic!=null and pic!=''">
+	        pic = #{pic},
+	        </if>
+	        <if test="productName!=null and productName!=''">
+	        product_name = #{productName},
+	        </if>
+	        <if test="saleManager!=null and saleManager!=''">
+	        sale_manager = #{saleManager},
+	        </if>
+	        <if test="contractNo!=null and contractNo!=''">
+	        contract_no = #{contractNo},
+	        </if>
+	        <if test="updateManagerId!=null and updateManagerId!=''">
+	        update_manager_id = #{updateManagerId},
+	        </if>
+	      </trim>  
+        WHERE 
+	        pre_orders_id = #{preOrdersId} 
+	</update>
+	<!-- 删除 -->
+	<delete id="deletePreOrders" parameterType="int">
+        UPDATE pre_orders set state='X' WHERE
+        pre_orders_id = #{preOrdersId} 
+    </delete>
+	
+</mapper>
+

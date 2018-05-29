@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <link rel="stylesheet" href="js/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="js/layer/skin/layer.css">
+</head>
+
+<body >
+    <div class="mirco" id="mirco" style="background-color: #FFFFFF;">
+        <div class="">
+            <h4 class="text-left">
+                <span><br><small>送一份礼物给TA吧</small></span>
+            </h4>
+        </div>
+        <div class="detail_con">
+        
+            <div class="pro_infor">
+                <!-- <p>暂无记录！</p> -->
+                    
+            
+            </div>
+            
+        </div>
+        
+        <div class="mic_nav">
+            <dl>
+                <dd><a id="sy" href="index.html"><i class="iconfont icon-home"></i>首页</a></dd>
+                <dd><a id="jp" href=""><i class="iconfont icon-gifs"></i>奖品</a></dd>
+                <dd><a id="bd" href="Top_list.html"><i class="iconfont icon-tops"></i>榜单</a></dd>
+            </dl>
+        </div>
+    </div>
+    <script src="common/jquery-1.7.2.min.js"></script>
+    <script src="http://res.wx.qq.com/open/js/jweixin-1.1.0.js"></script>
+<script src="common/link.js"></script>
+<script src="liwu/liwu.js"></script>
+<script>
+    $(function(){
+        $(".pro_infor dl").on("click",function(){
+            $(this).addClass("checked").siblings().removeClass("checked");
+        })
+
+        
+    })
+</script>
+</body>
+</html>
+

@@ -1,0 +1,137 @@
+.index_box{
+    width: 100%;
+}
+body{
+    background-color: #f7f7f7;
+}
+
+
+.header{
+    background-color: #ffffff;
+    padding:13px 0 ;
+    border-bottom:  1px solid #d9d9d9;
+    position:fixed;
+    top:0;
+    left: 0;
+    right: 0;
+}
+.header p{
+    font-size: 1em;
+    color: #333333;
+    text-align: center;
+}
+.arrow{
+    position: absolute;
+    top:9px;
+    left: 4%;
+}
+.arrowicon{
+    font-size: 1.3em!important;
+    vertical-align: -5px;
+}
+
+
+
+.address_all{
+    margin-top: 49px;
+}
+.address_box{
+    background-color: #ffffff;
+    padding: 10px 0;
+    width: 100%;
+    border-bottom: 1px solid #f2f2f2;
+}
+.name, .tele, .address{
+    font-size: 0.8em;
+    color: #666666;
+}
+.name{
+    float: left;
+    margin-left: 4%;
+}
+.tele{
+    float: right;
+    margin-right: 4%;
+}
+.address{
+    float: left;
+    width: 92%;
+    margin:10px 0 0 4% ;
+}
+
+
+
+
+.address_footer{
+    background-color: #ffffff;
+    padding: 10px 0;
+    margin-bottom: 15px;
+}
+/*checkbox*/
+.add_default{
+    float: left;
+    margin:3px 0 0 4%;
+    }
+.defaulticon{
+	float: left;
+    width: 0.8em;
+    height:  0.8em;
+    border-radius: 50%;
+    border: 1px solid #666;
+}
+.checked{
+    background-color:#d7282d;
+    border: 1px solid #d7282d ;
+}
+.deficon{
+    font-size: 0.8em!important;
+    color:#ffffff;
+    vertical-align: 6px;
+    display: none;
+}
+.default {
+	float: left;
+    font-size: 0.8em;
+    color: #666666;
+    margin-left:5px;
+}
+.dele, .edit{
+    float: right;
+    font-size: 0.8em;
+    color: #666666;
+}
+.dele{
+    margin-right: 4%;
+}
+.edit{
+    margin-right: 10px;
+}
+.dicon, .eicon{
+    font-size: 1.5em!important;
+    vertical-align: -3px;
+    padding-right: 3px;
+}
+.eicon{
+    padding-right: 4px;
+}
+
+
+
+.white{
+    height: 80px;
+}
+
+/*添加新地址*/
+.addnew{
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+.addnew a{
+    color: #ffffff;
+    text-align: center;
+    padding: 13px 0;
+    font-size: 0.9em;
+    background-color:#d7282d;
+}

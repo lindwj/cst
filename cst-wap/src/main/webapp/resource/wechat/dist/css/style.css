@@ -1,0 +1,194 @@
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 100;
+}
+h1 {
+  font-size: 30px;
+}
+h2 {
+  font-size: 24px;
+}
+h3 {
+  font-size: 16px;
+}
+h4 {
+  font-size: 14px;
+}
+h5 {
+  font-size: 12px;
+}
+h6 {
+  font-size: 10px;
+}
+h3,
+h4,
+h5 {
+  margin-top: 5px;
+  font-weight: 600;
+}
+ul li {
+  list-style: none;
+}
+.clearfix:after,
+.content:after {
+  content: ".";
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden;
+}
+.clearfix,
+.content {
+  zoom: 1;
+}
+.mirco {
+  background: #f1f1f1;
+  max-width: 640px;
+  margin: 0 auto;
+  overflow: hidden;
+  position: relative;
+}
+.mirco .mic_top img {
+  width: 100%;
+}
+.mirco .vote_totle {
+  padding: 16px 0;
+  border-bottom: 1px solid #e1e1e1;
+}
+.mirco .vote_totle .col-sm-4 {
+  text-align: center;
+  border-right: 1px solid #ccc;
+}
+.mirco .vote_totle .col-sm-4:last-child {
+  border: none;
+}
+.mirco .vote_last_time {
+  padding: 16px 0;
+  text-align: center;
+}
+.mirco .vote_last_time p {
+  color: #999;
+}
+.mirco .vote_last_time .mic_time {
+  padding: 12px 0;
+}
+.mirco .vote_last_time .mic_time span {
+  background: #fff;
+  padding: 12px;
+  line-height: 20px;
+  display: inline;
+}
+.mirco .mic_search {
+  margin: 8px 16px;
+}
+.mirco .mic_search .col-sm-12 {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 8px;
+}
+.mirco .mic_search .col-sm-12 input {
+  width: 65%;
+  border: none;
+  background: none;
+}
+.mirco .mic_search .col-sm-12 button {
+  width: 30%;
+  float: right;
+  background: none;
+  border: none;
+  text-align: center;
+  border-left: 1px solid #ccc;
+}
+.mirco .vote_infor {
+  padding: 0;
+}
+.mirco .vote_infor .col-sm-6 {
+  margin: 4px 0;
+}
+.mirco .vote_infor .col-sm-6 img {
+  width: 100%;
+}
+.mirco .vote_infor .col-sm-6 .vote {
+  position: absolute;
+  left: 16px;
+  top: 0;
+  background: rgba(0, 0, 0, 0.6);
+  color: #fff;
+  padding: 4px;
+}
+.mirco .vote_infor .col-sm-6 p {
+  background: #fff;
+  padding: 8px;
+}
+.mirco .vote_infor .col-sm-6 a.vote_add {
+  position: absolute;
+  bottom: 16px;
+  right: 20px;
+  border: 1px solid #f50;
+  width: 48px;
+  height: 48px;
+  border-radius: 24px;
+  background: #fff;
+  text-align: center;
+  line-height: 48px;
+  text-decoration: none;
+  color: #f50;
+}
+.mirco .vote_infor a.vote_more {
+  text-align: center;
+  display: block;
+}
+.mirco .vote_con {
+  display: inline-block;
+  margin: 16px 0;
+  width: 100%;
+}
+.mirco .vote_con h3 {
+  font-size: 16px;
+  font-weight: 700;
+  text-align: center;
+  border-top: 1px dashed #ccc;
+  border-bottom: 1px dashed #ccc;
+  padding: 16px;
+}
+.mirco .vote_con h4 {
+  font-size: 18px;
+  font-weight: normal;
+  text-align: center;
+  padding: 12px 0;
+}
+.mirco .vote_con .pro_infor {
+  padding: 0 16px;
+  line-height: 26px;
+}
+.mirco .vote_con .pro_infor span.text-red {
+  color: #f50;
+}
+.mirco .vote_img {
+  padding: 16px;
+  margin: 0 0 32px 0;
+}
+.mirco .vote_img dl dd img {
+  width: 100%;
+}
+.mirco .mic_nav {
+  position: fixed;
+  bottom: 0;
+  margin: 0 auto;
+  max-width: 640px;
+  width: 100%;
+  background: #fff;
+  padding: 8px 0;
+}
+.mirco .mic_nav dl {
+  margin: 0;
+  display: flex;
+}
+.mirco .mic_nav dl dd {
+  width: 33%;
+  text-align: center;
+}

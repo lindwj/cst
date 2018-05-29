@@ -1,0 +1,400 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<!-- 使用namespace的话sql搜索定位会比较方便 -->
+<mapper namespace="com.cst.service.dao.GoodsAddressMapper">
+
+	<resultMap id="GoodsAddressMap" type="com.cst.service.model.GoodsAddress">
+        <result property="goodsAddressId" column="goods_address_id"/>
+        <result property="goodsAddressUuid" column="goods_address_uuid"/>
+        <result property="isDefault" column="is_default"/>
+        <result property="name" column="name"/>
+        <result property="province" column="province"/>
+        <result property="city" column="city"/>
+        <result property="district" column="district"/>
+        <result property="street" column="street"/>
+        <result property="provincestr" column="provincestr"/>
+        <result property="citystr" column="citystr"/>
+        <result property="districtstr" column="districtstr"/>
+        <result property="streetstr" column="streetstr"/>
+        <result property="address" column="address"/>
+        <result property="mobile" column="mobile"/>
+        <result property="telephone" column="telephone"/>
+        <result property="provinceVal" column="province_val"/>
+        <result property="cityVal" column="city_val"/>
+        <result property="districtVal" column="district_val"/>
+        <result property="createByUser" column="create_by_user"/>
+        <result property="createDate" column="create_date"/>
+        <result property="status" column="status"/>
+        <result property="openid" column="openid"/>
+	</resultMap>
+	<!-- 分页查询接口 -->
+	<select id="getGoodsAddressListPage" parameterType="GoodsAddress"
+		resultMap="GoodsAddressMap">
+		
+		SELECT g.is_default as is_default ,g.name as name ,g.goods_address_uuid as goods_address_uuid,
+		g.address as address,
+		g.mobile as mobile,
+		g.telephone as telephone,
+		g.status as status,
+		n.province as provincestr,
+		n.city as citystr,
+		n.district as districtstr,
+		n.street as streetstr 
+		FROM goods_address g , nation n 
+		WHERE g.create_by_user=#{createByUser} AND (g.province=n.id AND g.city=n.id
+		AND g.district=n.id OR g.street=n.id) and g.status=1
+		
+		UNION ALL
+		
+		SELECT g.is_default as is_default ,g.name as name ,g.goods_address_uuid as goods_address_uuid,
+		g.address as address,
+		g.mobile as mobile,
+		g.telephone as telephone,
+		g.status as status, 
+		n.province AS provincestr,
+		na.city AS citystr,
+		nat.district AS districtstr,
+		n.street AS streetstr 
+		FROM goods_address g  , nation n , nation na, nation nat
+		WHERE g.create_by_user=#{createByUser} AND g.street IS NULL AND g.province=n.id AND g.city=na.id
+		AND g.district=nat.id and g.status=1
+		
+		
+		<!-- <trim prefix="WHERE" prefixOverrides="AND | OR"> -->
+	</select>
+	<!-- 分页查询接口微信 -->
+	<select id="getGoodsAddressListPageWx" parameterType="GoodsAddress"
+		resultMap="GoodsAddressMap">
+		
+		SELECT g.is_default as is_default ,g.name as name ,g.goods_address_uuid as goods_address_uuid,
+		g.address as address,
+		g.province as province,
+		g.city as city,
+		g.district as district,
+		g.street as street,
+		g.mobile as mobile,
+		g.telephone as telephone,
+		g.status as status,
+		n.province as provincestr,
+		na.city as citystr,
+		nat.district as districtstr,
+		nati.street as streetstr 
+		FROM goods_address g , nation n , nation na, nation nat, nation nati
+		WHERE g.create_by_user=#{createByUser}  AND g.street=nati.id  AND g.province=n.id AND g.city=na.id
+		AND g.district=nat.id and g.status=2 and g.street>0
+		
+		UNION ALL
+		
+		SELECT g.is_default as is_default ,g.name as name ,g.goods_address_uuid as goods_address_uuid,
+		g.address as address,
+		g.province as province,
+		g.city as city,
+		g.district as district,
+		g.street as street,
+		g.mobile as mobile,
+		g.telephone as telephone,
+		g.status as status, 
+		n.province AS provincestr,
+		na.city AS citystr,
+		nat.district AS districtstr,
+		n.street as streetstr 
+		FROM goods_address g  , nation n , nation na, nation nat
+		WHERE g.create_by_user=#{createByUser} 
+		AND g.street = -1
+		AND g.province=n.id AND g.city=na.id
+		AND g.district=nat.id and g.status=2
+		
+		
+		<!-- <trim prefix="WHERE" prefixOverrides="AND | OR"> -->
+	</select>
+	
+	<!-- 分页查询接口微信 -->
+	<select id="getGoodsAddressListPageWxOpen" parameterType="GoodsAddress"
+		resultMap="GoodsAddressMap">
+		
+		SELECT g.is_default as is_default ,g.name as name ,g.goods_address_uuid as goods_address_uuid,
+		g.address as address,
+		g.province as province,
+		g.city as city,
+		g.district as district,
+		g.street as street,
+		g.mobile as mobile,
+		g.telephone as telephone,
+		g.status as status,
+		n.province as provincestr,
+		na.city as citystr,
+		nat.district as districtstr,
+		nati.street as streetstr 
+		FROM goods_address g , nation n , nation na, nation nat, nation nati
+		WHERE g.openid=#{openid}  AND g.street=nati.id  AND g.province=n.id AND g.city=na.id
+		AND g.district=nat.id and g.status=2 and g.street>0
+		
+		UNION ALL
+		
+		SELECT g.is_default as is_default ,g.name as name ,g.goods_address_uuid as goods_address_uuid,
+		g.address as address,
+		g.province as province,
+		g.city as city,
+		g.district as district,
+		g.street as street,
+		g.mobile as mobile,
+		g.telephone as telephone,
+		g.status as status, 
+		n.province AS provincestr,
+		na.city AS citystr,
+		nat.district AS districtstr,
+		n.street as streetstr 
+		FROM goods_address g  , nation n , nation na, nation nat
+		WHERE g.openid=#{openid} 
+		AND g.street = -1
+		AND g.province=n.id AND g.city=na.id
+		AND g.district=nat.id and g.status=2
+		
+		
+		<!-- <trim prefix="WHERE" prefixOverrides="AND | OR"> -->
+	</select>
+	
+	<!-- 查询默认地址 -->
+	<select id="getGoodsAddressByDefault" parameterType="GoodsAddress"
+		resultMap="GoodsAddressMap">
+		
+		SELECT g.is_default as is_default ,g.name as name ,g.goods_address_uuid as goods_address_uuid,
+		g.city as city,
+		g.district as district,
+		g.street as street, 
+		g.address as address,
+		g.mobile as mobile,
+		g.telephone as telephone,
+		g.status as status,
+		n.province as provincestr,
+		n.city as citystr,
+		n.district as districtstr,
+		n.street as streetstr 
+		FROM goods_address g , nation n 
+		WHERE g.create_by_user=#{createByUser} AND (g.province=n.id AND g.city=n.id
+		AND g.district=n.id OR g.street=n.id) and g.status=1 and g.is_default=1
+		
+		UNION ALL
+		
+		SELECT g.is_default as is_default ,g.name as name ,g.goods_address_uuid as goods_address_uuid,
+		g.city as city,
+		g.district as district,
+		g.street as street, 
+		g.address as address,
+		g.mobile as mobile,
+		g.telephone as telephone,
+		g.status as status, 
+		n.province AS provincestr,
+		na.city AS citystr,
+		nat.district AS districtstr,
+		n.street AS streetstr 
+		FROM goods_address g  , nation n , nation na, nation nat
+		WHERE g.create_by_user=#{createByUser} AND g.street IS NULL AND g.province=n.id AND g.city=na.id
+		AND g.district=nat.id and g.status=1 and g.is_default=1
+		
+		<!-- <trim prefix="WHERE" prefixOverrides="AND | OR"> -->
+	</select>
+	
+	<!-- 按编号查询 -->
+	<select id="getGoodsAddressById" parameterType="String" resultMap="GoodsAddressMap">
+	
+	SELECT g.is_default as is_default ,g.name as name ,g.goods_address_uuid as goods_address_uuid,
+		g.address as address,
+		g.mobile as mobile,
+		g.telephone as telephone,
+		g.status as status,
+		g.province as province,
+		g.city as city,
+		g.district as district,
+		g.province_val as province_val,
+		g.city_val as city_val,
+		g.district_val as district_val,
+		g.is_default as is_default,
+		IFNULL(g.street,0) as street 
+		FROM goods_address g
+		WHERE g.goods_address_uuid=#{goodsAddressUuid} and g.status=1 
+	
+	</select>
+	<!-- 按编号查询微信 -->
+	<select id="getGoodsAddressByIdWx" parameterType="String" resultMap="GoodsAddressMap">
+	
+	SELECT g.is_default as is_default ,g.name as name ,g.goods_address_uuid as goods_address_uuid,
+		g.address as address,
+		g.mobile as mobile,
+		g.telephone as telephone,
+		g.status as status,
+		g.province as province,
+		g.city as city,
+		g.district as district,
+		g.province_val as province_val,
+		g.city_val as city_val,
+		g.district_val as district_val,
+		g.is_default as is_default,
+		IFNULL(g.street,0) as street 
+		FROM goods_address g
+		WHERE g.goods_address_uuid=#{goodsAddressUuid} and g.status=2 
+	</select>
+	
+	
+	<!-- 地址list接口 -->
+	<select id="getGoodsAddressList" parameterType="GoodsAddress"
+		resultMap="GoodsAddressMap">
+		
+		SELECT g.is_default as is_default ,g.name as name ,g.goods_address_uuid as goods_address_uuid,
+		g.address as address,
+		g.mobile as mobile,
+		g.telephone as telephone,
+		g.status as status,
+		n.province as provincestr,
+		n.city as citystr,
+		n.district as districtstr,
+		n.street as streetstr 
+		FROM goods_address g , nation n 
+		WHERE g.create_by_user=#{createByUser} AND (g.province=n.id AND g.city=n.id
+		AND g.district=n.id OR g.street=n.id) and g.status=1 and g.is_default!=1
+		
+		UNION ALL
+		
+		SELECT g.is_default as is_default ,g.name as name ,g.goods_address_uuid as goods_address_uuid,
+		g.address as address,
+		g.mobile as mobile,
+		g.telephone as telephone,
+		g.status as status, 
+		n.province AS provincestr,
+		na.city AS citystr,
+		nat.district AS districtstr,
+		n.street AS streetstr 
+		FROM goods_address g  , nation n , nation na, nation nat
+		WHERE g.create_by_user=#{createByUser} AND g.street IS NULL AND g.province=n.id AND g.city=na.id
+		AND g.district=nat.id and g.status=1 and g.is_default!=1
+		
+		
+		<!-- <trim prefix="WHERE" prefixOverrides="AND | OR"> -->
+	</select>
+	
+	<!-- 添加 -->
+	<insert id="insertGoodsAddress" parameterType="GoodsAddress" useGeneratedKeys="true" keyProperty="goodsAddressId">
+        INSERT INTO goods_address (
+        	goods_address_id ,
+        	name ,
+        	province ,
+        	city ,
+        	district ,
+        	street ,
+        	address ,
+        	mobile ,
+        	telephone,
+        	create_by_user ,
+        	status ,
+        	goods_address_uuid,
+        	is_default,
+        	province_val,
+        	city_val,
+        	district_val,
+        	openid
+        ) VALUES (
+        	#{goodsAddressId} ,
+        	#{name} ,
+        	#{province} ,
+        	#{city} ,
+        	#{district} ,
+        	#{street} ,
+        	#{address} ,
+        	#{mobile} ,
+        	#{telephone} ,
+        	#{createByUser} ,
+        	#{status} ,
+        	#{goodsAddressUuid},
+        	#{isDefault},
+        	#{provinceVal},
+        	#{cityVal},
+        	#{districtVal},
+        	#{openid}
+        )
+	</insert>
+	<!-- 修改 -->
+	<update id="updateGoodsAddress" >
+        UPDATE goods_address 
+        <trim prefix="SET" suffixOverrides=",">
+	        <if test="name!=null and name!=''">
+	        name = #{name},
+	        </if>
+	        <if test="province!=null and province!=''">
+	        province = #{province},
+	        </if>
+	        <if test="city!=null and city!=''">
+	        city = #{city},
+	        </if>
+	        <if test="district!=null and district!=''">
+	        district = #{district},
+	        </if>
+	        <if test="street!=null and street!=''">
+	        street = #{street},
+	        </if>
+	        <if test="address!=null and address!=''">
+	        address = #{address},
+	        </if>
+	        <if test="mobile!=null and mobile!=''">
+	        mobile = #{mobile},
+	        </if>
+	        <if test="telephone!=null and telephone!=''">
+	        telephone = #{telephone},
+	        </if>
+	        <if test="createByUser!=null and createByUser!=''">
+	        create_by_user = #{createByUser},
+	        </if>
+	        <if test="createDate!=null and createDate!=''">
+	        create_date = #{createDate},
+	        </if>
+	        <if test="status!=null and status!=''">
+	        status = #{status},
+	        </if>
+	        <if test="isDefault!=null and isDefault!=''">
+	        is_default=#{isDefault},
+	        </if>
+	        <if test="provinceVal!=null and provinceVal!=''">
+	        province_val=#{provinceVal},
+	        </if>
+	        <if test="cityVal!=null and cityVal!=''">
+	        city_val=#{cityVal},
+	        </if>
+	        <if test="districtVal!=null and districtVal!=''">
+	        district_val=#{districtVal},
+	        </if>
+	        <if test="openid!=null and openid!=''">
+	        openid=#{openid},
+	        </if>
+	      </trim>  
+        WHERE 
+	        goods_address_uuid=#{goodsAddressUuid} 
+	</update>
+	
+	<update id="initGoodsAddress" >
+        UPDATE goods_address 
+        set
+	        is_default=0
+        WHERE 
+	        create_by_user = #{createByUser}
+	</update>
+	
+	
+	<update id="initGoodsAddressOpen" >
+        UPDATE goods_address 
+        set
+	        is_default=0
+        WHERE 
+	        openid = #{openid}
+	</update>
+	
+	<!-- 删除 -->
+	<delete id="deleteGoodsAddress" parameterType="String">
+        UPDATE goods_address set status=-1 WHERE
+        goods_address_uuid=#{goodsAddressUuid} 
+    </delete>
+	
+</mapper>
+

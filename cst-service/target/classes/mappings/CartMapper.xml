@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<!-- 使用namespace的话sql搜索定位会比较方便 -->
+<mapper namespace="com.cst.service.dao.CartMapper">
+
+	<resultMap id="CartMap" type="com.cst.service.model.Cart">
+        <result property="cartId" column="cart_id"/>
+        <result property="productUuid" column="product_uuid"/>
+        <result property="state" column="state"/>
+        <result property="num" column="num"/>
+        <result property="createByUser" column="create_by_user"/>
+        <result property="createDate" column="create_date"/>
+        <result property="updateDate" column="update_date"/>
+        <result property="wayType" column="wayType"/>
+	</resultMap>
+	<!-- 分页查询接口 -->
+	<select id="getCartListPage" parameterType="Cart"
+		resultMap="CartMap">
+		select * from cart
+		<!-- <trim prefix="WHERE" prefixOverrides="AND | OR"> -->
+	</select>
+	
+	<select id="getCartList" parameterType="Cart"
+		resultMap="CartMap">
+		select * from cart where create_by_user=#{createByUser} and state=0
+		<!-- <trim prefix="WHERE" prefixOverrides="AND | OR"> -->
+	</select>
+	
+	<!-- 按编号查询 -->
+	<select id="getCartById" parameterType="Cart" resultMap="CartMap">
+		select *
+		from cart where create_by_user=#{createByUser} and product_uuid = #{productUuid}
+	</select>
+	<!-- 添加 -->
+	<insert id="insertCart" parameterType="Cart">
+        INSERT INTO cart (
+        	product_uuid ,
+        	num ,
+        	create_by_user ,
+        	way_type
+        ) VALUES (
+        	#{productUuid} ,
+        	#{num} ,
+        	#{createByUser} ,
+        	#{wayType}
+        )
+	</insert>
+	
+	
+	
+	<!-- 修改 -->
+	<update id="updateCart" >
+        UPDATE cart 
+        <trim prefix="SET" suffixOverrides=",">
+	        <if test="state!=null and state!=''">
+	        state = #{state},
+	        </if>
+	        <if test="num!=null and num!=''">
+	        num = #{num},
+	        </if>
+	        <if test="wayType!=null and wayType!=''">
+	        way_type = #{wayType},
+	        </if>
+	      </trim>  
+        WHERE 
+	        create_by_user=#{createByUser} and product_uuid = #{productUuid}
+	</update>
+	<!-- 删除 -->
+	<delete id="deleteCart" parameterType="Cart">
+        delete from cart  WHERE
+        create_by_user=#{createByUser} and product_uuid = #{productUuid}
+    </delete>
+    
+    <delete id="deleteCartAll" parameterType="Cart">
+        delete from cart  WHERE
+        create_by_user=#{createByUser} and product_uuid in (${productUuid})
+    </delete>
+	
+</mapper>
+

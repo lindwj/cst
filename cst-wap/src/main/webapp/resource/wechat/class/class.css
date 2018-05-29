@@ -1,0 +1,128 @@
+.index_box{
+    width: 100%;
+}
+
+body{
+    background-color: #f4f4f4;
+}
+
+
+
+
+/*probanner*/
+.probanner{
+    width: 100%;
+    margin-top: 86px;
+}
+.probanner img{
+    width: 100%;
+}
+
+
+
+
+
+
+
+/*product*/
+.product_box{
+    width: 100%;
+}
+.product{
+    /*background-color: #ffffff;*/
+    /*margin-top: 15px;*/
+
+}
+.title{
+    font-size: 1em;
+    color: #333;
+    text-align: center;
+    padding: 15px 0 5px 0;
+}
+.desctitle{
+    font-size: 0.8em;
+    color: #999;
+    text-align: center;
+    padding-bottom: 15px;
+}
+/*.product ul*/
+.item{
+    float: left;
+    /*height: 220px;*/
+    width: 50%;
+    background-color: #ffffff;
+    height: 215px;
+    /*border-top: 1px solid #f0f0f0;*/
+}
+.list .item{
+    position: relative;
+}
+.list .item:before{
+    content: ' ';
+    position: absolute;
+    background-color: #ededed;
+    top:0;
+    width: 1px;
+    height: 100%;
+    transform-origin: 100% 50% 0;
+    right: 0;
+
+}
+.list .item:after{
+    content: ' ';
+    position: absolute;
+    background-color: #ededed;
+    left:0;
+    height: 1px;
+    width: 100%;
+    transform-origin: 50% 100% 0;
+    top: 0;
+
+}
+.propic{
+    width: 112px;
+    margin: 0 auto;
+    padding: 20px 0;
+}
+.propic img{
+    width: 100%;
+}
+.protitle{
+    text-align: center;
+    color: #333333;
+    font-size: 0.9em;
+    width: 80%;
+    margin: 0 auto;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.proprice{
+    font-size: 0.9em;
+    color:#d7282d ;
+    text-align: center;
+    margin-top: 8px;
+    padding-bottom: 15px;
+}
+
+.itemnore{
+    padding-top: 80px;
+ }
+.more{
+    font-size: 1em;
+    text-align: center;
+    color: #333333;
+}
+
+.morearrow{
+    color: #999999;
+    text-align: center;
+    margin-top: 10px;
+}
+.moreicon{
+    font-size: 2em!important;
+}
+
+.copyright{
+    height: 8px;
+}

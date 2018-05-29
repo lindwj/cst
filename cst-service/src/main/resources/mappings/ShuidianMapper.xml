@@ -1,0 +1,158 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<!-- 使用namespace的话sql搜索定位会比较方便 -->
+<mapper namespace="com.cst.service.dao.ShuidianMapper">
+
+	<resultMap id="ShuidianMap" type="com.cst.service.model.Shuidian">
+        <result property="shuidianId" column="shuidian_id"/>
+        <result property="fengsid" column="fengsid"/>
+        <result property="fengsname" column="fengsname"/>
+        <result property="xmid" column="xmid"/>
+        <result property="xmname" column="xmname"/>
+        <result property="nian" column="nian"/>
+        <result property="yue" column="yue"/>
+        <result property="shuifei" column="shuifei"/>
+        <result property="shuiliang" column="shuiliang"/>
+        <result property="dianfei" column="dianfei"/>
+        <result property="dianliang" column="dianliang"/>
+        <result property="shuidianfei" column="shuidianfei"/>
+        <result property="note" column="note"/>
+        <result property="createByAdm" column="create_by_adm"/>
+        <result property="createTime" column="create_time"/>
+	</resultMap>
+	<!-- 分页查询接口 -->
+	<select id="getShuidianListPage" parameterType="Shuidian"
+		resultMap="ShuidianMap">
+		select sd.shuidian_id as shuidian_id,
+		sd.nian as nian,
+		sd.yue as yue,
+		sd.shuifei as shuifei,
+		sd.shuiliang as shuiliang,
+		sd.dianfei as dianfei,
+		sd.dianliang as dianliang,
+		sd.note as note,
+a.province as fengsname,
+		b.city as xmname  from shuidian sd, nation a,nation b where sd.create_by_adm = #{createByAdm} 
+		and sd.fengsid=a.id and sd.xmid=b.id
+		<if test="xmid!=null and xmid!=''">
+	        and sd.xmid = #{xmid}
+	        </if>
+		<!-- <trim prefix="WHERE" prefixOverrides="AND | OR"> -->
+	</select>
+	
+	<select id="getShuidianbbList" parameterType="Shuidian"
+		resultMap="ShuidianMap">
+		SELECT sd.nian as nian,sd.fengsid as fengsid,sd.xmid as xmid,sd.shuifei AS shuifei ,sd.shuiliang AS shuiliang ,sd.dianfei AS dianfei ,sd.dianliang AS dianliang ,sd.shuidianfei AS shuidianfei, n.city AS xmname FROM
+
+ (SELECT nian,fengsid,xmid,SUM(shuifei) AS shuifei ,SUM(shuiliang) AS shuiliang ,SUM(dianfei) AS dianfei ,SUM(dianliang) AS dianliang ,SUM(shuidianfei) AS shuidianfei   
+
+FROM shuidian WHERE nian =#{nian}
+AND yue >= #{yue} AND yue &lt;=#{shuidianId} AND fengsid=#{fengsid}
+ GROUP BY xmid) sd,nation n 
+ WHERE sd.xmid=n.id order by sd.xmid
+	</select>
+	
+	
+	<!-- 按编号查询 -->
+	<select id="getShuidianById" parameterType="int" resultMap="ShuidianMap">
+		select *
+		from shuidian where shuidian_id = #{shuidianId}
+	</select>
+	<!-- 添加 -->
+	<insert id="insertShuidian" parameterType="Shuidian" useGeneratedKeys="true" keyProperty="shuidianId">
+        INSERT INTO shuidian (
+        	shuidian_id ,
+        	fengsid ,
+        	fengsname ,
+        	xmid ,
+        	xmname ,
+        	nian ,
+        	yue ,
+        	shuifei ,
+        	shuiliang ,
+        	dianfei ,
+        	dianliang ,
+        	shuidianfei ,
+        	note ,
+        	create_by_adm ,
+        	create_time 
+        ) VALUES (
+        	#{shuidianId} ,
+        	#{fengsid} ,
+        	#{fengsname} ,
+        	#{xmid} ,
+        	#{xmname} ,
+        	#{nian} ,
+        	#{yue} ,
+        	#{shuifei} ,
+        	#{shuiliang} ,
+        	#{dianfei} ,
+        	#{dianliang} ,
+        	#{shuidianfei} ,
+        	#{note} ,
+        	#{createByAdm} ,
+        	#{createTime} 
+        )
+	</insert>
+	<!-- 修改 -->
+	<update id="updateShuidian" >
+        UPDATE shuidian 
+        <trim prefix="SET" suffixOverrides=",">
+	        <if test="fengsid!=null and fengsid!=''">
+	        fengsid = #{fengsid},
+	        </if>
+	        <if test="fengsname!=null and fengsname!=''">
+	        fengsname = #{fengsname},
+	        </if>
+	        <if test="xmid!=null and xmid!=''">
+	        xmid = #{xmid},
+	        </if>
+	        <if test="xmname!=null and xmname!=''">
+	        xmname = #{xmname},
+	        </if>
+	        <if test="nian!=null and nian!=''">
+	        nian = #{nian},
+	        </if>
+	        <if test="yue!=null and yue!=''">
+	        yue = #{yue},
+	        </if>
+	        <if test="shuifei!=null and shuifei!=''">
+	        shuifei = #{shuifei},
+	        </if>
+	        <if test="shuiliang!=null and shuiliang!=''">
+	        shuiliang = #{shuiliang},
+	        </if>
+	        <if test="dianfei!=null and dianfei!=''">
+	        dianfei = #{dianfei},
+	        </if>
+	        <if test="dianliang!=null and dianliang!=''">
+	        dianliang = #{dianliang},
+	        </if>
+	        <if test="shuidianfei!=null and shuidianfei!=''">
+	        shuidianfei = #{shuidianfei},
+	        </if>
+	        <if test="note!=null and note!=''">
+	        note = #{note},
+	        </if>
+	        <if test="createByAdm!=null and createByAdm!=''">
+	        create_by_adm = #{createByAdm},
+	        </if>
+	        <if test="createTime!=null and createTime!=''">
+	        create_time = #{createTime},
+	        </if>
+	      </trim>  
+        WHERE 
+	        shuidian_id = #{shuidianId} 
+	</update>
+	<!-- 删除 -->
+	<delete id="deleteShuidian" parameterType="int">
+        delete from shuidian WHERE
+        shuidian_id = #{shuidianId} 
+    </delete>
+	
+</mapper>
+

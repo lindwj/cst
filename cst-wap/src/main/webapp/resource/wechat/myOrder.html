@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>我的订单</title>
+    <link rel="icon" type="images/png" href="images/logo.png" />
+	<meta name="format-detection" content="telephone=no" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+	<meta http-equiv="Pragma" content="no-cache" />
+	<meta http-equiv="Expires" content="0" />
+
+    <link rel="stylesheet" type="text/css" href="common/iconfont.css">
+    <link rel="stylesheet" type="text/css" href="common/common.css">
+    <link rel="stylesheet" type="text/css" href="myOrder/myOrder.css">
+</head>
+<body>
+<div class="black_box">
+    <div class="hide_box">
+        <p class="delet_title">是否取消此订单？</p>
+        <div>
+            <a id="cancle" href="javascript:;">否</a>
+            <a id="delbtn" href="javascript:;" data-code="">是</a>
+        </div>
+    </div>
+</div>
+
+<div class="index_box">
+
+    <div class="header">
+        <p class="arrow"><i class="iconfont arrowicon">&#xe64c;</i></p>
+        <p>我的订单</p>
+    </div>
+
+    <div class="class">
+        <ul>
+            <li><a class="all changestatus" href="#">全部</a></li>
+            <li><a class="payment" href="#">待付款</a></li>
+            <li><a class="receipt" href="#">待收货</a></li>
+            <li><a class="sign" href="#">已签收</a></li>
+        </ul>
+        <div class="clear"></div>
+    </div>
+
+    <div class="orderAll"></div>
+
+    <!--<div class="order_box">-->
+        <!--<div class="img_box"><img src="images/banner1.jpg"></div>-->
+        <!--<div class="middle">-->
+            <!--<p class="title escp">北大荒五常大米黑米白米黄米蓝米绿米常大米黑米白米黄米蓝米绿米</p>-->
+            <!--<p class="parameter">规格:10kg</p>-->
+        <!--</div>-->
+        <!--<div class="right">-->
+            <!--<p class="price">￥255.00</p>-->
+            <!--<p class="num">x1</p>-->
+        <!--</div>-->
+        <!--<div class="clear"></div>-->
+    <!--</div>-->
+    <!--<div class="settlement">-->
+        <!--<p>共计:1件商品&nbsp;&nbsp;合计:￥<span>18.00</span>（含运费￥0.00）</p>-->
+    <!--</div>-->
+    <!--<div class="btn_box">-->
+        <!--<input type="button" value="付款">-->
+        <!--<input type="button" value="取消订单">-->
+        <!--<div class="clear"></div>-->
+    <!--</div>-->
+
+
+    <!--<div class="order_box">-->
+        <!--<div class="img_box"><img src="images/banner1.jpg"></div>-->
+        <!--<div class="middle">-->
+            <!--<p class="title escp">北大荒五常大米黑米白<br>米黄米蓝米绿米常大米黑米白米黄米蓝米绿米</p>-->
+            <!--<p class="parameter">规格:10kg</p>-->
+        <!--</div>-->
+        <!--<div class="right">-->
+            <!--<p class="price">￥255.00</p>-->
+            <!--<p class="num">x1</p>-->
+        <!--</div>-->
+        <!--<div class="clear"></div>-->
+    <!--</div>-->
+    <!--<div class="order_box">-->
+        <!--<div class="img_box"><img src="images/banner1.jpg"></div>-->
+        <!--<div class="middle">-->
+            <!--<p class="title escp">北大荒五常大米黑米白<br>米黄米蓝米绿米常大米黑米白米黄米蓝米绿米</p>-->
+            <!--<p class="parameter">规格:10kg</p>-->
+        <!--</div>-->
+        <!--<div class="right">-->
+            <!--<p class="price">￥255.00</p>-->
+            <!--<p class="num">x1</p>-->
+        <!--</div>-->
+        <!--<div class="clear"></div>-->
+    <!--</div>-->
+    <!--<div class="settlement">-->
+        <!--<p>共计:1件商品&nbsp;&nbsp;合计:￥<span>18.00</span>（含运费￥0.00）</p>-->
+    <!--</div>-->
+    <!--<div class="btn_box">-->
+        <!--<input type="button" value="付款">-->
+        <!--<input type="button" value="取消订单">-->
+        <!--<div class="clear"></div>-->
+    <!--</div>-->
+
+    <!--<div class="order_box">-->
+        <!--<div class="img_box"><img src="images/banner1.jpg"></div>-->
+        <!--<div class="middle">-->
+            <!--<p class="title escp">北大荒五常大米黑米白<br>米黄米蓝米绿米常大米黑米白米黄米蓝米绿米</p>-->
+            <!--<p class="parameter">规格:10kg</p>-->
+        <!--</div>-->
+        <!--<div class="right">-->
+            <!--<p class="price">￥255.00</p>-->
+            <!--<p class="num">x1</p>-->
+        <!--</div>-->
+        <!--<div class="clear"></div>-->
+    <!--</div>-->
+    <!--<div class="order_box">-->
+        <!--<div class="img_box"><img src="images/banner1.jpg"></div>-->
+        <!--<div class="middle">-->
+            <!--<p class="title escp">北大荒五常大米黑米白<br>米黄米蓝米绿米常大米黑米白米黄米蓝米绿米</p>-->
+            <!--<p class="parameter">规格:10kg</p>-->
+        <!--</div>-->
+        <!--<div class="right">-->
+            <!--<p class="price">￥255.00</p>-->
+            <!--<p class="num">x1</p>-->
+        <!--</div>-->
+        <!--<div class="clear"></div>-->
+    <!--</div>-->
+    <!--<div class="settlement">-->
+        <!--<p>共计:1件商品&nbsp;&nbsp;合计:￥<span>18.00</span>（含运费￥0.00）</p>-->
+    <!--</div>-->
+    <!--<div class="btn_box">-->
+        <!--<input type="button" value="付款">-->
+        <!--<input type="button" value="取消订单">-->
+        <!--<div class="clear"></div>-->
+    <!--</div>-->
+
+    <div class="white"></div>
+
+</div>
+
+
+<div class="alert"></div>
+
+
+<script src="common/jquery-1.7.2.min.js"></script>
+<script src="common/link.js"></script>
+<script src="myOrder/myOrder.js"></script>
+</body>
+</html>

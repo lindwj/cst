@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <!--<link rel="icon" href="/static/images/favicon.ico?v=1" type="image/x-icon"/>-->
+    <title>订货申请</title>
+    <link rel="icon" href="images/logo.png" />
+    <link href="common/reset.css" rel="stylesheet" type="text/css"/>
+    <link href="applyDetail/applyDetail.css" rel="stylesheet" type="text/css"/>
+    <link type="text/css" rel="stylesheet" href="common/iconfont.css"/>
+
+
+</head>
+<body>
+
+
+<div class="black" id="hidebox">
+
+    <div class="fadebox">
+        <div class="ordertitle">
+            <h1>增加商品</h1>
+        </div>
+        <div class="prodetail" id="select3">
+            <p>类别:</p>
+            <select autocomplete="off" id="p1">
+            </select>
+        </div>
+        <div class="prodetail1">
+            <p>名称:</p>
+            <select autocomplete="off" id="p2">
+            </select>
+        </div>
+        <div class="prodetail">
+            <p>单位:</p>
+            <select id="p3">
+                <option value="1">袋</option>
+                <option value="2">盒</option>
+                <option value="3">箱</option>
+                <option value="4">饼</option>
+                <option value="5">瓶</option>
+            </select>
+        </div>
+        <div class="prodetail1">
+            <p>单价:</p>
+            <input type="text" id="unit_price" disabled="disabled">
+        </div>
+
+        <div class="prodetail">
+            <p>数量:</p>
+            <input type="text" id="num">
+        </div>
+        <div class="clear"></div>
+
+        <div class="orderbtn">
+            <input id="surebtn" class="btn-default" type="button" value="确定">
+            <input id="canclebtn" class="btn-default" type="button" value="取消">
+        </div>
+    </div>
+</div>
+
+
+<div class="container">
+
+        <div class="nav-global" style="">
+                <div class="global-logo">
+                    <img class="global-logo-img" src="images/logo3.png">
+                    <h1 class="global-logo-title">北大荒生态食品</h1>
+                </div>
+                <div class="items-inner">
+                    <ul class="global-items">
+                        <li class="nav-item">
+                            <a class="nav-item-inner" href="#" id="controluser">
+                                <div class="user-name">
+                                    <i class="iconfont userfont">&#xe60c;</i>
+                                    <i style="font-style: normal" class="username">sa</i>
+                                    <p id="logout">退出</p>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+        </div>
+
+
+        <div class="nav-zone" style="">
+            <div class="nav-zone-inner">
+
+                <div class="zone-items">
+                    <ul>
+
+                        <li class="control">
+                            <a id="proc">
+                                <span class="text" ><i class="iconfont menuicon">&#xe607;</i>订单管理</span>
+                            </a>
+                        </li>
+                       <!--  <li >
+                            <a id="orderc">
+                                <div>
+                                    <span class="text"><i class="iconfont menuicon">&#xe60b;</i>预定订单管理</span>
+                                </div>
+                            </a>
+                        </li> -->
+
+                        <li >
+                            <a id="stocklistc">
+                                <div>
+                                    <span class="text"><i class="iconfont menuicon">&#xe60a;</i>商品库存管理</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a id="orderapplyc" style="background-color: #57b383;color: #ffffff;">
+                                <div>
+                                    <span class="text"><i class="iconfont menuicon">&#xe6a9;</i>订货申请</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a id="salesdaily">
+                                <div>
+                                    <span class="text"><i class="iconfont menuicon">&#xe652;</i>销售日报</span>
+                                </div>
+                            </a>
+                        </li> 
+
+
+                    </ul>
+
+                </div>
+
+            </div>
+        </div>
+
+        <div class="content">
+            <div class="content-title">
+                订单申请
+                <button type="button" class="btn-default" id="applybtn">增加商品</button>
+            </div>
+
+            <div class="productorder">
+
+
+                <table class="table1" style="margin-top: 20px;">
+                    <tr>
+                        <th class="col12">商品名称</th>
+                        <th class="col13">单价（元）</th>
+                        <th class="col14">单位</th>
+                        <th class="col15">申请数量</th>
+                        <th class="col16">总金额</th>
+                        <th class="col17">操作</th>
+                    </tr>
+                    <tbody class="tbody">
+                    </tbody>
+                </table>
+
+
+                <table class="table3">
+                <tr>
+
+                    <td colspan="7">
+                        <div id="errorm3">数量为整数（不能有文字）</div>
+                        <div class="pull-right page-box">
+
+                            <div class="pagination-goto">
+                                <button type="button" class="btn btn-default" id="savebtn" >保存并提交</button>
+                                <button type="button" class="btn btn-default" id="draftbtn" >保存为草稿</button>
+                                <button type="button" class="btn btn-default" id="backbtn" onclick="javascript:location='orderApplication.html'">返回上一级</button>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                </table>
+
+
+            </div>
+        </div>
+
+</div>
+
+<script src="common/jquery-3.0.0.min.js"></script>
+<script src="applyDetail/applyDetail.js"></script>
+<script src="common/link.js"></script>
+
+</body>
+</html>

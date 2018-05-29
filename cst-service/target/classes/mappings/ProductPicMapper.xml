@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<!-- 使用namespace的话sql搜索定位会比较方便 -->
+<mapper namespace="com.cst.service.dao.ProductPicMapper">
+
+	<resultMap id="ProductPicMap" type="com.cst.service.model.ProductPic">
+        <result property="productPicId" column="product_pic_id"/>
+        <result property="productUuid" column="product_uuid"/>
+        <result property="picUrl" column="pic_url"/>
+        <result property="sort" column="sort"/>
+        <result property="status" column="status"/>
+	</resultMap>
+	<!-- 分页查询接口 -->
+	<select id="getProductPicListPage" parameterType="ProductPic"
+		resultMap="ProductPicMap">
+		select * from product_pic
+		<!-- <trim prefix="WHERE" prefixOverrides="AND | OR"> -->
+	</select>
+	<!-- 按编号查询 -->
+	<select id="getProductPicById" parameterType="String" resultMap="ProductPicMap">
+		select *
+		from product_pic where product_uuid = #{productUuid} and status > -1 order by sort
+	</select>
+	<!-- 添加 -->
+	<insert id="insertProductPic" parameterType="ProductPic" >
+	
+	INSERT INTO product_pic (
+        	product_uuid ,
+        	pic_url ,
+        	sort ,
+        	status 
+        ) VALUES 
+    <foreach collection="list" item="item" index="index" separator="," > 
+    (#{item.productUuid} ,
+        	#{item.picUrl} ,
+        	#{item.sort} ,
+        	#{item.status} 
+        )  
+    </foreach>  
+	</insert>
+	<!-- 修改 -->
+	<update id="updateProductPic" >
+        UPDATE product_pic 
+        <trim prefix="SET" suffixOverrides=",">
+	        <if test="picUrl!=null and picUrl!=''">
+	        pic_url = #{picUrl},
+	        </if>
+	        <if test="sort!=null and sort!=''">
+	        sort = #{sort},
+	        </if>
+	        <if test="status!=null and status!=''">
+	        status = #{status},
+	        </if>
+	      </trim>  
+        WHERE 
+	        product_pic_id = #{productPicId} 
+	</update>
+	<!-- 删除 -->
+	<delete id="deleteProductPic" parameterType="int">
+        UPDATE product_pic set status=-1 WHERE
+        product_pic_id = #{productPicId} 
+    </delete>
+	
+</mapper>
+

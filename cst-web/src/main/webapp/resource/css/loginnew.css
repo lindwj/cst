@@ -1,0 +1,83 @@
+.login_box {
+    margin: 0 auto;
+    overflow: hidden;
+    padding-top: 100px;
+    width: 730px;
+}
+
+/*.login_form {*/
+    /*border-right: 1px solid #c3c3c3;*/
+    /*float: left;*/
+    /*padding-right: 40px;*/
+    /*width: 340px;*/
+/*}*/
+
+.login_form {
+    /*border-right: 1px solid #c3c3c3;*/
+    /*float: left;*/
+    /*padding-right: 40px;*/
+    width: 340px;
+    margin: 0 auto;
+    /*padding-left: 200px;*/
+    /*padding: 0 auto;*/
+
+}
+
+.login_form h1 {
+    color: #c81623;
+    font-size: 36px;
+    font-weight: normal;
+    margin-bottom: 60px;
+    text-align: center;
+}
+.login_form p {
+    color: #999;
+    font-family: 'Microsoft YaHei';
+    font-size: 16px;
+    margin-top: 10px;
+}
+.telephone {
+    width: 340px;
+}
+.telephone a{
+    color: #c81623;
+    margin: 0 0 0 170px;
+    text-decoration: underline;
+}
+.password {
+    width: 340px;
+}
+.password a{
+    margin: 0 0 0 170px;
+    text-decoration: underline;
+}
+.loginBtn {
+    background: none repeat scroll 0 0 #c81623;
+    border: 0 none;
+    color: #fff;
+    font-size: 21px;
+    height: 50px;
+    width: 335px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+.tel-input,.paswd-input {
+    border: 1px solid #c3c3c3;
+    border-radius: 10px;
+    line-height: 32px;
+    padding: 10px;
+    width: 314px;
+    margin: 0;
+}
+.login_footer {
+    color: #999999;
+    margin-top: 50px;
+    text-align: center;
+}
+
+#mobile {
+    font-size: 12px;
+}
+#paswd {
+    font-size: 12px;
+}

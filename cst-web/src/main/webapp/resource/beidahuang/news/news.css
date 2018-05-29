@@ -1,0 +1,84 @@
+.background{
+    height: 743px;
+    overflow: hidden;
+}
+
+.pic{
+    width: 100%;
+    margin-top: 30px;
+}
+
+.titlebox{
+    width: 100%;
+}
+.title{
+    font-size: 14pt;
+    color: rgb(118, 146, 60);
+    padding: 30px 0 20px 0;
+}
+.line{
+    width: 100%;
+    background-color: #6aa84f;
+    height: 2px;
+}
+
+#content {
+    width:90%;
+    margin: 0 auto;
+    margin-top: 10px;
+}
+#content>li{
+    height: 30px;
+}
+#content>li>a{
+    float: left;
+    color: #666666;
+    font-size: 14px;
+    line-height: 30px;
+}
+#content>li>a:hover{
+    text-decoration: underline;
+}
+.square{
+    float: left;
+    color: #666666;
+    font-size: 16px!important;
+    line-height: 30px;
+    margin-right: 15px;
+}
+#content>li>span{
+    float: right;
+    color: #999999;
+    font-size: 14px;
+    line-height: 30px;
+}
+.pagination {
+    list-style:none;
+    margin:10px 47px 0 0;
+    padding:0;
+    float: right;
+}
+.pagination li{
+    float:left;
+    margin:3px;
+}
+.pagination li a{
+    display:block;
+    padding:0 8px;
+    color:#555;
+    border:1px solid rgba(0,0,0,0.1);
+    background-color: #F9F9F9;
+    text-decoration:none;
+    border-radius: 2px;
+    font-size: 11px;
+    line-height: 22px;
+    font-weight: 600;
+}
+.pagination li a.active {
+    border:1px solid #2489ce;
+}
+.pagination li a.inactive {
+    background-color:#eee;
+    color:#777;
+    border:1px solid #ccc;
+}

@@ -1,0 +1,86 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<!-- 使用namespace的话sql搜索定位会比较方便 -->
+<mapper namespace="com.cst.service.dao.ProductAttributeMapper">
+
+	<resultMap id="ProductAttributeMap" type="com.cst.service.model.ProductAttribute">
+        <result property="productAttributeId" column="product_attribute_id"/>
+        <result property="productUuid" column="product_uuid"/>
+        <result property="name" column="name"/>
+        <result property="value" column="value"/>
+        <result property="unit" column="unit"/>
+        <result property="sort" column="sort"/>
+        <result property="status" column="status"/>
+        <result property="updateByAdm" column="update_by_adm"/>
+        <result property="updateDate" column="update_date"/>
+	</resultMap>
+	<!-- 分页查询接口 -->
+	<select id="getProductAttributeListPage" parameterType="ProductAttribute"
+		resultMap="ProductAttributeMap">
+		select * from product_attribute
+		<!-- <trim prefix="WHERE" prefixOverrides="AND | OR"> -->
+	</select>
+	<!-- 按编号查询 -->
+	<select id="getProductAttributeById" parameterType="String" resultMap="ProductAttributeMap">
+		select *
+		from product_attribute where product_uuid = #{productUuid} and status >-1
+	</select>
+	<!-- 添加 -->
+	<insert id="insertProductAttribute" parameterType="ProductAttribute" >
+        INSERT INTO product_attribute (
+        	product_uuid ,
+        	name ,
+        	value ,
+        	unit ,
+        	sort ,
+        	status 
+        ) VALUES
+        
+        <foreach collection="list" item="item" index="index" separator="," > 
+    (#{item.productUuid} ,
+        	#{item.name} ,
+        	#{item.value} ,
+        	#{item.unit} ,
+        	#{item.sort} ,
+        	#{item.status} 
+        )  
+    </foreach>  
+	</insert>
+	<!-- 修改 -->
+	<update id="updateProductAttribute" >
+        UPDATE product_attribute 
+        <trim prefix="SET" suffixOverrides=",">
+	        <if test="name!=null and name!=''">
+	        name = #{name},
+	        </if>
+	        <if test="value!=null and value!=''">
+	        value = #{value},
+	        </if>
+	        <if test="unit!=null and unit!=''">
+	        unit = #{unit},
+	        </if>
+	        <if test="sort!=null and sort!=''">
+	        sort = #{sort},
+	        </if>
+	        <if test="status!=null and status!=''">
+	        status = #{status},
+	        </if>
+	        <if test="1==1">
+	        update_date = now(),
+	        </if>
+	      </trim>  
+        WHERE 
+	        product_attribute_id = #{productAttributeId} 
+	</update>
+	<!-- 删除 -->
+	<delete id="deleteProductAttribute" parameterType="int">
+        UPDATE product_attribute set status=-1 WHERE
+        product_attribute_id = #{productAttributeId} 
+    </delete>
+	
+</mapper>
+

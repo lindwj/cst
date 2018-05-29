@@ -1,0 +1,125 @@
+
+body{
+    background-color: #f7f7f7;
+    position: relative;
+    overflow-x: hidden;
+}
+
+
+
+.index_box{
+    width: 100%;
+}
+.header{
+    background-color: #ffffff;
+    /*box-shadow: 0 1px 3px #d8d8d8; */
+    padding:13px 0 ;
+    border-bottom:  1px solid #d9d9d9;
+}
+.header p{
+    font-size: 1em;
+    color: #333333;
+    text-align: center;
+}
+.arrow{
+    position: absolute;
+    top:9px;
+    left: 4%;
+}
+.arrowicon{
+    font-size: 1.3em!important;
+    vertical-align: -5px;
+}
+
+
+
+
+/*添加新地址*/
+.add_detail{
+    background-color: #ffffff;
+    border-bottom:1px solid #d9d9d9 ;
+}
+.add_name, .add_tel, .add_address, .add_city, .add_street{
+    outline: none;
+    border: 0;
+    background-color: #ffffff;
+}
+.add_street{
+	
+    appearance:none;
+    -moz-appearance:none;
+    -webkit-appearance:none;
+    -ms-appearance:none;
+	
+}
+.add_address{
+    width: 96%;
+    margin-left: 4%;
+    padding:1.5em 0;
+    font-size: 0.9em;
+    color: #333;
+}
+.add_style{
+    border-bottom:1px solid #d9d9d9 ;
+    width: 96%;
+    margin-left: 4%;
+    padding:1.5em 0;
+    font-size: 0.9em;
+    color: #333;
+}
+/*设为默认地址*/
+.default_box{
+    width: 100%;
+    background-color: #fafafa;
+    border-bottom:1px solid #d9d9d9 ;
+    position: relative;
+}
+.auto_box{
+    width: 110px;
+    margin: 0 auto;
+}
+.default{
+    float: left;
+    font-size: 0.9em;
+    line-height: 3em;
+    margin-left: 8px;
+    height: 2.8em;
+}
+.defaulticon{
+    float: left;
+    width: 0.8em;
+    height:  0.8em;
+    border-radius: 50%;
+    background-color:#d7282d;
+    border: 1px solid #d7282d ;
+    margin-top: 0.8em;
+}
+.checked{
+    background-color:#ffffff;
+    border: 1px solid #cccccc;
+}
+.deficon{
+    font-size: 0.8em!important;
+    color:#ffffff;
+    vertical-align: 6px;
+    display: block;
+}
+
+
+
+
+
+/*保存地址*/
+.save_address{
+    left: 0;
+    right: 0;
+    bottom: 0;
+    position: fixed;
+}
+.save_address a{
+    color: #ffffff;
+    text-align: center;
+    padding: 13px 0;
+    font-size: 0.9em;
+    background-color:#d7282d;
+}

@@ -1,0 +1,429 @@
+/*包含以下控件样式*/
+/*1、通用样式*/
+/*2、订单标题*/
+/*3、订单商品*/
+/*4、结算栏样式*/
+
+/*通用样式*/
+.content {
+    width: 990px;
+    margin: 40px auto 0;
+}
+
+/*订单标题*/
+/*订单标题左侧样式*/
+.cart-title .cart-title-left {
+    float: left;
+    height: 35px;
+}
+    /*标题文字样式*/
+    .title-content {
+        font-size: 16px;
+        font-weight: 700;
+        color: #c81623;
+    }
+/*订单标题右侧样式    */
+.cart-title .cart-sum {
+    float: right;
+    height: 25px;
+    line-height: 25px;
+    margin-right: 5px;
+}
+
+/*清楚标题浮动，并显示一条灰色横线*/
+.wrap-line {
+    clear: both;
+    background: #e6e6e6;
+    height: 2px;
+    position: relative;
+
+}
+
+/*上方结算信息样式*/
+.cart-sum .price {
+    font-weight: 700;
+    margin-right: 5px;
+    color: #f40;
+}
+
+.cart-sum .submit-btn {
+    display: inline-block;
+    width: 55px;
+    color: #fff;
+    background: #f40;
+    border-radius: 2px;
+    text-align: center;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+/*未选择状态下结算按钮样式*/
+.cart-sum .submit-btn-disabled {
+    background: #e5e5e5;
+    color: #9c9c9c;
+    cursor: not-allowed;
+}
+
+/*商品选中增加背景颜色*/
+.selected .order-content {
+    background: #fff8e1;
+}
+
+
+/*商品列格式*/
+.cart-table-th .th-chk .cart-checkbox, .cart-table-th .th-chk .s-checkbox {
+    margin: -1px 0 0 15px;
+    _margin-left: 7px;
+}
+
+.cart-table-th {
+    /*overflow: hidden;*/
+    height: 50px;
+    line-height: 50px;
+    color: #3c3c3c;
+    display: block;
+}
+
+.cart-table-th .th {
+    float: left;
+}
+
+.cart-table-th .th-chk {
+    font-size: 12px;
+    text-align: left;
+    position: relative;
+    height: 50px;
+}
+
+.th-chk, .td-chk {
+    width: 45px;
+}
+
+.cart-table-th .th-chk .select-all {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 80px;
+}
+
+.cart-checkbox input {
+    position: absolute;
+    z-index: 0;
+}
+
+
+.select-all .cart-checkbox {
+    vertical-align: middle;
+    margin-top: -2px;
+}
+
+.cart-checkbox {
+    position: relative;
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    overflow: hidden;
+}
+
+.select-all {
+    cursor: pointer;
+}
+
+.cart-table-th .th-item .td-inner {
+    padding-left: 91px;
+}
+.th-item, .td-item {
+    width: 302px;
+}
+
+.th-info, .td-info {
+    width: 172px;
+    padding-right: 20px;
+}
+
+.th-price, .td-price {
+    width: 120px;
+}
+.th-amount, .td-amount {
+    width: 120px;
+}
+.th-amount div {
+    margin-left: 10px;
+}
+
+.th-sum, .td-sum {
+    width: 105px;
+}
+
+.th-op, .td-op {
+    width: 84px;
+    padding: 0 0 0 15px;
+}
+
+.order-content {
+    border: 1px solid #ccc;
+    border-bottom: 0;
+    background: #fcfcfc;
+    position: relative;
+}
+
+/*订单下部横线*/
+.order-bottom {
+    margin: 0;
+    height: 1px;
+    border-bottom: 1px solid #ccc;
+}
+
+
+
+.item-content {
+    margin-top: 20px;
+}
+.item-content .td-chk{
+    position: relative;
+    overflow: hidden;
+}
+.item-content .td {
+    min-height: 98px;
+    float: left;
+}
+/*.td-inner {*/
+    /*padding-top: 20px;*/
+/*}*/
+.td-chk .cart-checkbox  {
+    margin: 0 10px 0 0;
+    float: right;
+    position: relative;
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    overflow: hidden;
+}
+
+.td-item .item-pic {
+    background: #fff;
+    width: 80px;
+    height: 80px;
+    border: 1px solid #eee;
+    float: left;
+    overflow: hidden;
+}
+
+
+
+.td-item .item-info {
+    margin: -3px 0 0 91px;
+    padding-right: 25px;
+
+}
+.td-item .item-basic-info {
+    height: 40px;
+    /*vertical-align: top;*/
+}
+.td-item .item-other-info {
+    height: 50px;
+    margin: 0;
+}
+
+.item-content .item-pic img {
+    height: 80px;
+    width: 80px;
+    vertical-align: middle;
+}
+
+.item-content .img-loaded {
+    background: #fff;
+}
+
+
+
+/*金额*/
+.item-content .item-amount {
+    height: 25px;
+    width: 77px;
+    /*overflow: hidden;*/
+    position: relative;
+    z-index: 1;
+
+}
+
+.item-content .item-amount span {
+    display: block;
+    height: 23px;
+    width: 17px;
+    border: 1px solid #e5e5e5;
+    background: #f0f0f0;
+    text-align: center;
+    line-height: 23px;
+    color: #444;
+    position: absolute;
+    top: 0;
+    cursor: pointer;
+
+}
+
+.item-content .item-amount span, .item-content .text-amount {
+    float: left;
+}
+
+.item-content .text-amount {
+    width: 39px;
+    line-height: 15px;
+    border: 1px solid #aaa;
+    color: #343434;
+    text-align: center;
+    padding: 4px 0;
+    position: absolute;
+    z-index: 2;
+    left: 18px;
+    top: 0px;
+}
+
+.item-content .item-amount .plus, .item-content .item-amount .no-plus {
+    border-left-color: transparent;
+    right: 0;
+}
+
+.item-content .item-amount .plus {
+    border-left-color: transparent;
+    right: 0;
+
+}
+
+
+
+.item-content .price-content {
+    padding: 8px 0 0 10px;
+    line-height: 1;
+    width: 74px;
+}
+    /*.item-content .price-line {*/
+        /*padding: 0 0 4px 0;*/
+    /*}*/
+        .item-content .price-now {
+            padding: 0 0 4px 0;
+            color: #3c3c3c;
+            font-weight: 700;
+        }
+
+.item-content .td-sum {
+    color: #f40;
+    font-weight: 700;
+}
+
+/*增加减少按钮样式*/
+.item-content .item-amount .minus:hover, .item-content .item-amount .plus:hover {
+    color: #f50;
+    border-color: #f60;
+    z-index: 3;
+}
+
+/*数量是1时，禁止使用减少按钮*/
+.item-content .item-amount .no-minus {
+    cursor: not-allowed;
+    border-color: #e5e5e5;
+    border-right-color: #aaa;
+    color: #e5e5e5;
+}
+
+/*结算栏*/
+.float-bar-holder{
+    position:relative;
+    height:50px;
+    background: #e5e5e5;
+    /*margin-bottom: 20px;*/
+
+    width: 990px;
+    margin: 20px auto 20px;
+
+}
+
+.float-bar .select-all{
+    float: left;
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
+    padding-left: 5px;
+}
+
+.select-all {
+    cursor: pointer;
+}
+
+.float-bar .operations {
+    float: left;
+    line-height: 50px;
+    height: 50px;
+    padding-left: 10px;
+}
+.float-bar-right{
+    float: right;
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: 4;
+    padding-left: 20px;
+    background: #e5e5e5;
+}
+
+.float-bar .price-sum {
+    float: left;
+    height: 48px;
+    color: #3c3c3c;
+}
+
+.float-bar .btn-area {
+    float: left;
+}
+
+.float-bar .txt {
+    line-height: 48px;
+
+}
+
+
+
+.float-bar .submit-btn {
+    display: inline-block;
+    width: 120px;
+    height: 50px;
+    line-height: 50px;
+    background: #f40;
+    text-align: center;
+    font-family: 'Lantinghei SC','Microsoft Yahei';
+    font-size: 20px;
+    border-radius: 2px;
+    text-decoration: none;
+    cursor: pointer;
+}
+.float-bar .submit-btn:link {
+    color: #fff;
+}
+
+.float-bar .submit-btn-disabled:link {
+    background: #e5e5e5;
+    color: #9c9c9c;
+    border-left: 1px solid #e7e7e7;
+    width: 119px;
+    cursor: not-allowed;
+    text-decoration: none;
+}
+
+.float-bar .price-sum .price {
+    color: #f40;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 48px;
+    vertical-align: middle;
+}
+
+.float-bar .price-sum .price em {
+    font-weight: 700;
+    font-size: 22px;
+    padding: 0 3px;
+}
+
+.float-clear {
+    clear: both;
+}
+

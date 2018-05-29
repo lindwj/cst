@@ -1,0 +1,188 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<!-- 使用namespace的话sql搜索定位会比较方便 -->
+<mapper namespace="com.cst.service.dao.StockMapper">
+
+	<resultMap id="StockMap" type="com.cst.service.model.Stock">
+        <result property="stockId" column="stock_id"/>
+        <result property="showCapacity" column="show_capacity"/>
+        <result property="shopCapacity" column="shop_capacity"/>
+        <result property="sellCapacity" column="sell_capacity"/>
+        <result property="productUuid" column="product_uuid"/>
+        <result property="shopId" column="shop_id"/>
+        <result property="status" column="status"/>
+        <result property="name" column="name"/>
+        <result property="pic" column="pic"/>
+        <result property="updateByAdm" column="update_by_adm"/>
+        <result property="updateDate" column="update_date"/>
+	</resultMap>
+	
+	
+	<!-- 分页查询接口 -->
+	<select id="getStockListPageDD" parameterType="Stock"
+		resultMap="StockMap">
+		SELECT 
+		stocktemp.stock_id as stock_id,
+		stocktemp.show_capacity as show_capacity,
+		stocktemp.shop_capacity as shop_capacity ,
+		stocktemp.sell_capacity as sell_capacity , 
+		stocktemp.status as status,
+		p.product_uuid as product_uuid,
+		p.name as name ,
+		p.pic as pic 
+				
+		FROM product p  LEFT JOIN
+				
+		(SELECT s.stock_id as stock_id,
+		s.show_capacity as show_capacity,
+		s.shop_capacity as shop_capacity ,
+		s.sell_capacity as sell_capacity , 
+		s.status as status,
+		s.product_uuid AS product_uuid FROM stock s,manager m
+				
+		WHERE s.shop_id = m.shop_id AND m.manager_id =#{shopId}) stocktemp
+				
+		ON p.product_uuid = stocktemp.product_uuid 
+		
+		WHERE p.type_id != 10
+				
+		AND p.status=1 AND p.product_uuid IN 
+		(SELECT apc.product_uuid FROM manager m,agent_cfg a,agent_product_cfg apc 
+		
+		WHERE m.manager_id=#{shopId} AND m.manager_id=a.agent_id AND a.agent_cfg_id=apc.agent_cfg_id GROUP BY apc.product_uuid)
+		
+		<if test=" name != null and name != '' ">
+		and  p.name=#{name}
+		</if>
+		
+		<if test=" typeId != null and typeId != '' ">
+		AND p.type_id=#{typeId}
+		</if>
+		
+		<if test=" status != null and status != '' ">
+		AND stocktemp.status= #{status}
+		</if>
+		
+		order by p.code asc
+	</select>
+	<!-- 分页查询接口 -->
+	<select id="getStockListPage" parameterType="Stock"
+		resultMap="StockMap">
+		SELECT stocktemp.stock_id as stock_id,stocktemp.show_capacity as show_capacity,
+		stocktemp.shop_capacity as shop_capacity ,
+		stocktemp.sell_capacity as sell_capacity , stocktemp.status as status,
+		p.product_uuid as product_uuid,p.name as name ,p.pic as pic 
+		
+		FROM product p  LEFT JOIN
+		
+		(SELECT * FROM stock
+		
+		WHERE shop_id = #{shopId}) stocktemp
+		
+		ON p.product_uuid = stocktemp.product_uuid 
+		
+		WHERE p.status=1
+		
+		<if test=" name != null and name != '' ">
+		and  p.name=#{name}
+		</if>
+		
+		<if test=" typeId != null and typeId != '' ">
+		AND p.type_id=#{typeId}
+		</if>
+		
+		<if test=" status != null and status != '' ">
+		AND stocktemp.status= #{status}
+		</if>
+		
+		order by p.code asc
+	</select>
+	<!-- 按编号查询 -->
+	<select id="getStockById" parameterType="int" resultMap="StockMap">
+		select *
+		from stock where shop_id = #{shopId}
+	</select>
+	
+	
+	<!-- 按店和 商品 查询 -->
+	<select id="getStockByPrd" parameterType="Stock" resultMap="StockMap">
+		select *
+		from stock where shop_id = #{shopId} and product_uuid=#{productUuid}
+	</select>
+	
+	<!-- 添加 -->
+	<insert id="insertStock" parameterType="Stock">
+        INSERT INTO stock (
+        	show_capacity ,
+        	shop_capacity ,
+        	product_uuid ,
+        	shop_id ,
+        	status
+        ) VALUES 
+        <foreach collection="list" item="item" index="index" separator="," > 
+    		(#{item.showCapacity} ,
+        	#{item.shopCapacity} ,
+        	#{item.productUuid} ,
+        	#{item.shopId} ,
+        	#{item.status} 
+        )  
+    </foreach> 
+	</insert>
+	<!-- 修改 -->
+	<update id="updateStock" >
+        UPDATE stock 
+        <trim prefix="SET" suffixOverrides=",">
+	        <if test="showCapacity!=null and showCapacity!=''">
+	        show_capacity =show_capacity + #{showCapacity},
+	        </if>
+	        <if test="shopCapacity!=null and shopCapacity!=''">
+	        shop_capacity =shop_capacity + #{shopCapacity},
+	        </if>
+	        <if test="status!=null and status!=''">
+	        status = #{status},
+	        </if>
+	        <if test="updateByAdm!=null and updateByAdm!=''">
+	        update_by_adm = #{updateByAdm},
+	        </if>
+	        <if test="1==1">
+	        update_date = now(),
+	        </if>
+	      </trim>  
+        WHERE 
+	        stock_id = #{stockId} 
+	</update>
+	
+	<update id="updateSell" >
+        UPDATE stock 
+        set   sell_capacity = sell_capacity + #{sellCapacity}
+        WHERE 
+	        stock_id = #{stockId} 
+	</update>
+	
+	<delete id="updateSellAll">
+		
+		<foreach collection="list" item="item" separator=";">
+		
+		UPDATE stock 
+		<set>
+          sell_capacity = sell_capacity + #{item.sellCapacity}
+          
+          </set>
+        WHERE 
+	        shop_id = #{item.shopId} and product_uuid=#{item.productUuid}
+	        
+         </foreach>
+	</delete>
+	
+	<!-- 删除 -->
+	<delete id="deleteStock" parameterType="int">
+        UPDATE stock set state='X' WHERE
+        stock_id = #{stockId} 
+    </delete>
+	
+</mapper>
+

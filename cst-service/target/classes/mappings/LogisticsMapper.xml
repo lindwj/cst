@@ -1,0 +1,175 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<!-- 使用namespace的话sql搜索定位会比较方便 -->
+<mapper namespace="com.cst.service.dao.LogisticsMapper">
+
+	<resultMap id="LogisticsMap" type="com.cst.service.model.Logistics">
+        <result property="logisticsId" column="logistics_id"/>
+        <result property="logisticsBuiness" column="logistics_buiness"/>
+        <result property="logisticsCode" column="logistics_code"/>
+        <result property="logisticsPhone" column="logistics_phone"/>
+        <result property="logisticsStatus" column="logistics_status"/>
+        <result property="logisticsMan" column="logistics_man"/>
+        <result property="logisticsTime" column="logistics_time"/>
+        <result property="ordergoodsCode" column="ordergoods_code"/>
+        <result property="linkMan" column="link_man"/>
+        <result property="totalPrice" column="total_price"/>
+        <result property="shopMan" column="shop_man"/>
+        <result property="shopTime" column="shop_time"/>
+        <result property="signPic" column="sign_pic"/>
+        <result property="sendMoney" column="send_money"/>
+        <result property="sendStatus" column="send_status"/>
+        <result property="sendDescription" column="send_description"/>
+        <collection property="logisticsProducts" ofType="LogisticsProduct" >
+        	<result property="logisticsId" column="logisticsProduct.logistics_id"/>
+        	<result property="productUuid" column="logisticsProduct.product_uuid"/>
+        	<result property="logisticsNum" column="logisticsProduct.logistics_num"/>
+        	<result property="ordergoodsCode" column="logisticsProduct.ordergoods_code"/>
+        	<result property="unit" column="logisticsProduct.unit"/>
+        	<result property="productName" column="logisticsProduct.product_name"/>
+        	<result property="productPrice" column="logisticsProduct.product_price"/>
+        </collection>
+	</resultMap>
+	<!-- 显示该订单的物流信息 -->
+	<select id="getLogisticsList" parameterType="Logistics" resultMap="LogisticsMap">
+		select 
+		l.send_money as send_money,
+		l.logistics_time as logistics_time,
+		l.logistics_buiness as logistics_buiness,
+		l.logistics_code as logistics_code,
+		l.link_man as link_man,
+		l.logistics_id as logistics_id,
+		l.logistics_status as logistics_status,
+		l.logistics_phone as logistics_phone,
+		l.total_price as total_price,
+		lp.product_uuid as "logisticsProduct.product_uuid",
+		lp.logistics_num as "logisticsProduct.logistics_num",
+		p.name as "logisticsProduct.product_name",
+		p.cost_price as "logisticsProduct.product_price",
+		lp.unit as "logisticsProduct.unit"
+		from logistics l left join logistics_product lp on l.logistics_id=lp.logistics_id 
+		inner join product p on p.product_uuid=lp.product_uuid
+		where l.ordergoods_code=#{ordergoodsCode}
+		order by l.logistics_id desc
+	</select>
+	<!-- 分页查询接口 -->
+	<select id="getLogisticsListPage" parameterType="Logistics"
+		resultMap="LogisticsMap">
+		select * from logistics
+		<!-- <trim prefix="WHERE" prefixOverrides="AND | OR"> -->
+	</select>
+	<!-- 物流信息显示接口 -->
+	<select id="getLogistics" parameterType="Logistics"
+		resultMap="LogisticsMap">
+		select * from logistics
+		<!-- <trim prefix="WHERE" prefixOverrides="AND | OR"> -->
+	</select>
+	<!-- 按编号查询 -->
+	<select id="getLogisticsById" parameterType="int" resultMap="LogisticsMap">
+		select *
+		from logistics where logistics_id = #{logisticsId}
+	</select>
+	<!-- 添加 -->
+	<insert id="insertLogistics" parameterType="Logistics">
+		<selectKey keyProperty='logisticsId' resultType='int' order='AFTER'  >  
+        	select LAST_INSERT_ID();  
+   		</selectKey>  
+        INSERT INTO logistics (
+        	logistics_buiness ,
+        	logistics_code ,
+        	logistics_phone ,
+        	logistics_status ,
+        	logistics_man ,
+        	logistics_time ,
+        	ordergoods_code,
+        	link_man,
+        	total_price,
+        	shop_man,
+        	shop_time,
+        	sign_pic,
+        	send_money,
+        	send_status,
+        	send_description
+        ) VALUES (
+        	#{logisticsBuiness} ,
+        	#{logisticsCode} ,
+        	#{logisticsPhone} ,
+        	#{logisticsStatus} ,
+        	#{logisticsMan} ,
+        	#{logisticsTime} ,
+        	#{ordergoodsCode},
+        	#{linkMan},
+        	#{totalPrice},
+        	#{shopMan},
+        	#{shopTime},
+        	#{signPic},
+        	#{sendMoney},
+        	#{sendStatus},
+        	#{sendDescription}
+        )
+	</insert>
+	<!-- 修改 -->
+	<update id="updateLogistics" >
+        UPDATE logistics 
+        <trim prefix="SET" suffixOverrides=",">
+	        <if test="logisticsBuiness!=null and logisticsBuiness!=''">
+	        logistics_buiness = #{logisticsBuiness},
+	        </if>
+	        <if test="logisticsCode!=null and logisticsCode!=''">
+	        logistics_code = #{logisticsCode},
+	        </if>
+	        <if test="logisticsCode!=null and logisticsCode!=''">
+	        logistics_code = #{logisticsCode},
+	        </if>
+	        <if test="logisticsPhone!=null and logisticsPhone!=''">
+	        logistics_phone = #{logisticsPhone},
+	        </if>
+	        <if test="logisticsStatus!=null and logisticsStatus!=''">
+	        logistics_status = #{logisticsStatus},
+	        </if>
+	        <if test="logisticsMan!=null and logisticsMan!=''">
+	        logistics_man = #{logisticsMan},
+	        </if>
+	        <if test="logisticsTime!=null and logisticsTime!=''">
+	        logistics_time = #{logisticsTime},
+	        </if>
+	         <if test="linkMan!=null and linkMan!=''">
+	        link_man = #{linkMan},
+	        </if> 
+	        <if test="totalPrice!=null and totalPrice!=''">
+	        total_price = #{totalPrice},
+	        </if>
+	        <if test="shopMan!=null and shopMan!=''">
+	        shop_man = #{shopMan},
+	        </if>
+	        <if test="shopTime!=null and shopTime!=''">
+	        shop_time = #{shopTime},
+	        </if>
+	        <if test="sendMoney!=null and sendMoney!=''">
+	        send_money = #{sendMoney},
+	        </if>
+	        <if test="signPic!=null and signPic!=''">
+	        sign_pic = #{signPic},
+	        </if>
+	        <if test="sendStatus!=null and sendStatus!=''">
+	        send_status = #{sendStatus},
+	        </if>
+	        <if test="sendDescription!=null and sendDescription!=''">
+	        send_description = #{sendDescription},
+	        </if>
+	      </trim>  
+        WHERE 
+	        logistics_id = #{logisticsId} 
+	</update>
+	<!-- 删除 -->
+	<delete id="deleteLogistics" parameterType="int">
+        delete from logistics WHERE
+        logistics_id = #{logisticsId} 
+    </delete>
+	
+</mapper>
+

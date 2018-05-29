@@ -1,0 +1,748 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<!-- 使用namespace的话sql搜索定位会比较方便 -->
+<mapper namespace="com.cst.service.dao.OrdersMapper">
+
+	<resultMap id="OrdersMap" type="com.cst.service.model.Orders">
+        <result property="ordersId" column="orders_id"/>
+        <result property="code" column="code"/>
+        <result property="productUuid" column="product_uuid"/>
+        <result property="shopId" column="shop_id"/>
+        <result property="bdhOrderStatus" column="bdh_order_status"/>
+        <result property="alipayOrderNotify" column="alipay_order_notify"/>
+        <result property="alipayOrderReturn" column="alipay_order_return"/>
+        <result property="createByUser" column="create_by_user"/>
+        <result property="createDate" column="create_date"/>
+        <result property="status" column="status"/>
+        <result property="tradeNo" column="trade_no"/>
+        <result property="totalFee" column="total_fee"/>
+        <result property="receiveName" column="receive_name"/>
+        <result property="buyerEmail" column="buyer_email"/>
+        <result property="receiveAddress" column="receive_address"/>
+        <result property="receiveZip" column="receive_zip"/>
+        <result property="receivePhone" column="receive_phone"/>
+        <result property="receiveMobile" column="receive_mobile"/>
+        <result property="totalFromBdh" column="total_from_bdh"/>
+        <result property="sellerEmail" column="seller_email"/>
+        <result property="subject" column="subject"/>
+        <result property="alibody" column="alibody"/>
+        <result property="payTime" column="pay_time"/>
+        <result property="payType" column="pay_type"/>
+        <result property="goodsAddressUuid" column="goods_address_uuid"/>
+        <result property="shopName" column="shop_name"/>
+        <result property="pic" column="pic"/>
+        <result property="price" column="price"/>
+        <result property="capacity" column="capacity"/>
+        <result property="wayType" column="way_type"/>
+        
+        <result property="resultCode" column="result_code"/>
+        <result property="openid" column="openid"/>
+        <result property="transactionId" column="transaction_id"/>
+        <result property="note" column="note"/>
+        <result property="logisticsInfoId" column="logistics_info_id"/>
+        
+        
+        <collection property="ordersDetailList" ofType="OrdersDetail" >
+			<result property="productName" column="ordersDetail.product_name"/>
+			<result property="price" column="ordersDetail.price"/>
+			<result property="pic" column="ordersDetail.pic"/>
+			<result property="productUuid" column="ordersDetail.product_uuid"/>
+			<result property="capacity" column="ordersDetail.capacity"/>
+		</collection>
+	</resultMap>
+	
+	<select id="getOrdersListPageDD" parameterType="Orders"
+		resultMap="OrdersMap">
+		select 
+		o.orders_id as orders_id,
+		o.code as code,
+		o.openid as openid,
+		o.create_by_user as createByUser,
+		o.trade_no as trade_no,
+		o.product_uuid as product_uuid,
+		o.shop_id as shop_id,
+		o.bdh_order_status as bdh_order_status,
+		o.create_date as create_date,
+		o.status as status,
+		o.receive_name as receive_name,
+		o.receive_address as receive_address,
+		o.receive_mobile as receive_mobile,
+		o.total_from_bdh as total_from_bdh,
+		o.subject as subject,
+		o.pay_time as pay_time,
+		o.pay_type as pay_type,
+		o.shop_name as shop_name,
+		o.pic as pic,
+		o.price as price,
+		o.capacity as capacity,
+		o.way_type as way_type, 
+		o.note as note,
+		o.transaction_id as transaction_id,
+		od.product_name as "ordersDetail.product_name",
+		od.price as "ordersDetail.price",
+		od.pic as "ordersDetail.pic",
+		od.product_uuid as "ordersDetail.product_uuid",
+		od.capacity as "ordersDetail.capacity"
+		
+		 from orders o left join orders_detail od on o.code=od.code
+		WHERE o.code IN 
+		(SELECT o.code from orders o,manager m,agent_cfg a,agent_product_cfg apc 
+		WHERE o.shop_id=m.shop_id AND m.manager_id=#{shopId} AND m.manager_id=a.agent_id AND o.product_uuid!='0'
+		AND a.agent_cfg_id=apc.agent_cfg_id AND apc.product_uuid=o.product_uuid AND m.status=1 and o.status in (1,2))
+
+		<if test=" status != null and status != 100 ">
+		 and o.status = #{status}
+		 </if>
+		 <if test=" receiveMobile != null and receiveMobile != '' ">
+		 and o.receive_mobile = #{receiveMobile}
+		 </if>
+		 <if test=" code != null and code != '' ">
+		 and o.code = #{code}
+		 </if>
+
+		UNION ALL
+
+		select 
+		o.orders_id as orders_id,
+		o.code as code,
+		o.openid as openid,
+		o.create_by_user as createByUser,
+		o.trade_no as trade_no,
+		o.product_uuid as product_uuid,
+		o.shop_id as shop_id,
+		o.bdh_order_status as bdh_order_status,
+		o.create_date as create_date,
+		o.status as status,
+		o.receive_name as receive_name,
+		o.receive_address as receive_address,
+		o.receive_mobile as receive_mobile,
+		o.total_from_bdh as total_from_bdh,
+		o.subject as subject,
+		o.pay_time as pay_time,
+		o.pay_type as pay_type,
+		o.shop_name as shop_name,
+		o.pic as pic,
+		o.price as price,
+		o.capacity as capacity,
+		o.way_type as way_type, 
+		o.note as note,
+		o.transaction_id as transaction_id,
+		od.product_name as "ordersDetail.product_name",
+		od.price as "ordersDetail.price",
+		od.pic as "ordersDetail.pic",
+		od.product_uuid as "ordersDetail.product_uuid",
+		od.capacity as "ordersDetail.capacity"
+		
+		 from orders o left join orders_detail od on o.code=od.code
+		WHERE o.code IN 
+		(SELECT 
+		o.code FROM orders o,manager m,agent_cfg a,agent_product_cfg apc 
+		WHERE o.shop_id=m.shop_id AND m.manager_id=#{shopId} 
+		AND m.manager_id=a.agent_id AND o.product_uuid='0'
+		AND a.agent_cfg_id=apc.agent_cfg_id AND m.status=1 
+		AND o.status in (1,2) GROUP BY o.code)
+		
+		<if test=" status != null and status != 100 ">
+		 and o.status = #{status}
+		 </if>
+		 <if test=" receiveMobile != null and receiveMobile != '' ">
+		 and o.receive_mobile = #{receiveMobile}
+		 </if>
+		 <if test=" code != null and code != '' ">
+		 and o.code = #{code}
+		 </if>
+		 
+		 order by orders_id desc
+	</select>
+	
+	<!-- 分页查询接口 -->
+	<select id="getOrdersListPage" parameterType="Orders"
+		resultMap="OrdersMap">
+		select 
+		o.orders_id as orders_id,
+		o.code as code,
+		o.product_uuid as product_uuid,
+		o.shop_id as shop_id,
+		o.bdh_order_status as bdh_order_status,
+		o.create_date as create_date,
+		o.status as status,
+		o.receive_name as receive_name,
+		o.receive_address as receive_address,
+		o.receive_mobile as receive_mobile,
+		o.total_from_bdh as total_from_bdh,
+		o.subject as subject,
+		o.pay_time as pay_time,
+		o.pay_type as pay_type,
+		o.shop_name as shop_name,
+		o.pic as pic,
+		o.price as price,
+		o.capacity as capacity,
+		o.note as note,
+		o.transaction_id as transaction_id,
+		od.product_name as "ordersDetail.product_name",
+		od.price as "ordersDetail.price",
+		od.pic as "ordersDetail.pic",
+		od.product_uuid as "ordersDetail.product_uuid",
+		od.capacity as "ordersDetail.capacity"
+		
+		from orders o left join orders_detail od on o.code=od.code
+		
+		where o.create_by_user=#{createByUser}
+		<if test=" status != null and status != 100 ">
+		 and o.status = #{status}
+		 </if>
+		 
+		 order by o.orders_id desc
+		<!-- <trim prefix="WHERE" prefixOverrides="AND | OR"> -->
+	</select>
+	
+		<!-- 查询总的价格 -->
+	<select id="getPrice" parameterType="Orders" resultMap="OrdersMap">
+		SELECT 
+		
+		SUM(temp.capacity*p.price) AS price
+		
+		FROM 
+		(
+		SELECT SUM(o.capacity) AS capacity , o.product_uuid AS product_uuid
+		FROM user u,agent_product_cfg ag,orders o,agent_cfg a
+		
+		WHERE o.status=2 and u.status=1 and a.type=1 and u.bind_state=1 and u.agent_id=#{createByUser} and u.user_id=o.create_by_user and ag.agent_cfg_id=a.agent_cfg_id and ag.product_uuid=o.product_uuid AND u.bind_date &lt;= o.create_date and o.product_uuid!='0'
+		
+		GROUP BY o.product_uuid  ) AS temp  , agent_product_cfg  p
+		
+		WHERE temp.product_uuid=p.product_uuid
+	</select>
+		<!-- 查询总的价格 -->
+	<select id="getPrices" parameterType="Orders" resultMap="OrdersMap">
+		SELECT 
+		
+		SUM(temp.capacity*p.price) AS price
+		
+		FROM 
+		(
+		SELECT SUM(od.capacity) AS capacity , od.product_uuid AS product_uuid
+		FROM user u,agent_product_cfg ag,orders o,agent_cfg a,orders_detail od
+		
+		WHERE o.status=2 and u.status=1 and a.type=1 and u.bind_state=1 and u.agent_id=#{createByUser} and u.user_id=o.create_by_user and ag.agent_cfg_id=a.agent_cfg_id and ag.product_uuid=od.product_uuid AND u.bind_date &lt;= o.create_date and o.code=od.code and o.product_uuid='0'
+		
+		GROUP BY od.product_uuid  ) AS temp  , agent_product_cfg  p
+		
+		WHERE temp.product_uuid=p.product_uuid
+	</select>
+	
+	<!-- 查询未结算的价格 -->
+	<select id="getPriceNoBuy" parameterType="Orders" resultMap="OrdersMap">
+		SELECT 
+		
+		SUM(temp.capacity*p.price) AS price
+		
+		FROM 
+		(
+		SELECT SUM(o.capacity) AS capacity , o.product_uuid AS product_uuid
+		FROM user u,agent_product_cfg ag,orders o,agent_cfg a
+		
+		WHERE u.status=1 and a.type=1 and u.bind_state=1 and u.agent_id=#{createByUser} and u.user_id=o.create_by_user and ag.agent_cfg_id=a.agent_cfg_id and ag.product_uuid=o.product_uuid AND u.bind_date &lt;= o.create_date and o.product_uuid!='0' and o.status=1
+		
+		GROUP BY o.product_uuid  ) AS temp  , agent_product_cfg  p
+		
+		WHERE temp.product_uuid=p.product_uuid
+	</select>
+	
+	<!-- 查询未结算的价格 -->
+	<select id="getPriceNoBuys" parameterType="Orders" resultMap="OrdersMap">
+		SELECT 
+		
+		SUM(temp.capacity*p.price) AS price
+		
+		FROM 
+		(
+		SELECT SUM(od.capacity) AS capacity , od.product_uuid AS product_uuid
+		FROM user u,agent_product_cfg ag,orders o,agent_cfg a,orders_detail od
+		
+		WHERE u.status=1 and a.type=1 and u.bind_state=1 and u.agent_id=#{createByUser} and u.user_id=o.create_by_user and o.code=od.code and ag.agent_cfg_id=a.agent_cfg_id and ag.product_uuid=od.product_uuid AND u.bind_date &lt;= o.create_date and o.product_uuid='0' and o.status=1
+		
+		GROUP BY od.product_uuid  ) AS temp  , agent_product_cfg  p
+		
+		WHERE temp.product_uuid=p.product_uuid
+	</select>
+	
+	<!-- 查询当日的价格 -->
+	<select id="getPriceDay" parameterType="Orders" resultMap="OrdersMap">
+		SELECT 
+		
+		SUM(temp.capacity*p.price) AS price
+		
+		FROM 
+		(
+		SELECT SUM(o.capacity) AS capacity , o.product_uuid AS product_uuid
+		FROM user u,agent_product_cfg ag,orders o,agent_cfg a
+		
+		WHERE o.status=2 and date(o.sign_time) = curdate()  and u.status=1 and a.type=1 and u.bind_state=1 and u.agent_id=#{createByUser} and u.user_id=o.create_by_user and ag.agent_cfg_id=a.agent_cfg_id and ag.product_uuid=o.product_uuid AND u.bind_date &lt;= o.create_date and o.product_uuid!='0'
+		
+		GROUP BY o.product_uuid  ) AS temp  , agent_product_cfg  p
+		
+		WHERE temp.product_uuid=p.product_uuid
+	</select>
+		<!-- 查询当日的价格 -->
+	<select id="getPriceDays" parameterType="Orders" resultMap="OrdersMap">
+		SELECT 
+		
+		SUM(temp.capacity*p.price) AS price
+		
+		FROM 
+		(
+		SELECT SUM(od.capacity) AS capacity , od.product_uuid AS product_uuid
+		FROM user u,agent_product_cfg ag,orders o,agent_cfg a,orders_detail od
+		
+		WHERE o.status=2 and date(o.sign_time) = curdate() and u.status=1 and a.type=1 and u.bind_state=1 and u.agent_id=#{createByUser} and u.user_id=o.create_by_user and ag.agent_cfg_id=a.agent_cfg_id and ag.product_uuid=od.product_uuid AND u.bind_date &lt;= o.create_date and o.code=od.code and o.product_uuid='0'
+		
+		GROUP BY od.product_uuid  ) AS temp  , agent_product_cfg  p
+		
+		WHERE temp.product_uuid=p.product_uuid
+	</select>
+	
+	<!-- 查询当月的价格 -->
+	<select id="getPriceMonth" parameterType="Orders" resultMap="OrdersMap">
+		SELECT 
+		
+		SUM(temp.capacity*p.price) AS price
+		
+		FROM 
+		(
+		SELECT SUM(o.capacity) AS capacity , o.product_uuid AS product_uuid
+		FROM user u,agent_product_cfg ag,orders o,agent_cfg a
+		
+		WHERE o.status=2 and date_format(o.sign_time,'%Y-%m')=date_format(now(),'%Y-%m') and u.status=1 and a.type=1 and u.bind_state=1 and u.agent_id=#{createByUser} and u.user_id=o.create_by_user and ag.agent_cfg_id=a.agent_cfg_id and ag.product_uuid=o.product_uuid AND u.bind_date &lt;= o.create_date and o.product_uuid!='0'
+		
+		GROUP BY o.product_uuid  ) AS temp  , agent_product_cfg  p
+		
+		WHERE temp.product_uuid=p.product_uuid
+	</select>
+		<!-- 查询当月的价格 -->
+	<select id="getPriceMonths" parameterType="Orders" resultMap="OrdersMap">
+		SELECT 
+		
+		SUM(temp.capacity*p.price) AS price
+		
+		FROM 
+		(
+		SELECT SUM(od.capacity) AS capacity , od.product_uuid AS product_uuid
+		FROM user u,agent_product_cfg ag,orders o,agent_cfg a,orders_detail od
+		
+		WHERE o.status=2 and date_format(o.sign_time,'%Y-%m')=date_format(now(),'%Y-%m') and u.status=1 and a.type=1 and u.bind_state=1 and u.agent_id=#{createByUser} and u.user_id=o.create_by_user and ag.agent_cfg_id=a.agent_cfg_id and ag.product_uuid=od.product_uuid AND u.bind_date &lt;= o.create_date and o.code=od.code and o.product_uuid='0'
+		
+		GROUP BY od.product_uuid  ) AS temp  , agent_product_cfg  p
+		
+		WHERE temp.product_uuid=p.product_uuid
+	</select>
+	
+	<!--  根据客户查订单 -->
+	
+	<!-- 分页查询接口 -->
+	<select id="getOrdersListPageWxOpen" parameterType="Orders"
+		resultMap="OrdersMap">
+		select 
+		o.orders_id as orders_id,
+		o.code as code,
+		o.product_uuid as product_uuid,
+		o.shop_id as shop_id,
+		o.bdh_order_status as bdh_order_status,
+		o.create_date as create_date,
+		o.status as status,
+		o.receive_name as receive_name,
+		o.receive_address as receive_address,
+		o.receive_mobile as receive_mobile,
+		o.total_from_bdh as total_from_bdh,
+		o.subject as subject,
+		o.pay_time as pay_time,
+		o.shop_name as shop_name,
+		o.pic as pic,
+		o.price as price,
+		o.capacity as capacity,
+		od.product_name as "ordersDetail.product_name",
+		od.price as "ordersDetail.price",
+		od.pic as "ordersDetail.pic",
+		od.product_uuid as "ordersDetail.product_uuid",
+		od.capacity as "ordersDetail.capacity"
+		
+		from orders o left join orders_detail od on o.code=od.code
+		
+		where o.openid=#{openid}
+		<if test=" status != null and status != 100 ">
+		 and o.status = #{status}
+		 </if>
+		 
+		 order by o.orders_id desc
+		<!-- <trim prefix="WHERE" prefixOverrides="AND | OR"> -->
+	</select>
+	
+	
+	<select id="getOrdersByCode" parameterType="Orders"
+		resultMap="OrdersMap">
+		select 
+		o.orders_id as orders_id,
+		o.code as code,
+		o.create_date as create_date,
+		o.product_uuid as product_uuid,
+		o.shop_id as shop_id,
+		o.bdh_order_status as bdh_order_status,
+		o.create_date as create_date,
+		o.status as status,
+		o.receive_name as receive_name,
+		o.receive_address as receive_address,
+		o.receive_mobile as receive_mobile,
+		o.total_from_bdh as total_from_bdh,
+		o.subject as subject,
+		o.pay_time as pay_time,
+		o.pay_type as pay_type,
+		o.shop_name as shop_name,
+		o.pic as pic,
+		o.price as price,
+		o.capacity as capacity,
+		o.note as note,
+		o.logistics_info_id as logistics_info_id,
+		o.transaction_id as transaction_id,
+		od.product_name as "ordersDetail.product_name",
+		od.price as "ordersDetail.price",
+		od.pic as "ordersDetail.pic",
+		od.product_uuid as "ordersDetail.product_uuid",
+		od.capacity as "ordersDetail.capacity"
+		
+		 from orders o left join orders_detail od on o.code=od.code
+		
+		  where o.code=#{code}
+		<!-- <trim prefix="WHERE" prefixOverrides="AND | OR"> -->
+	</select>
+	
+	
+	<!--管理端 分页查询接口 -->
+	<select id="getOrdersForAdmListPage" parameterType="Orders"
+		resultMap="OrdersMap">
+		
+		select 
+		o.orders_id as orders_id,
+		o.code as code,
+		o.openid as openid,
+		o.create_by_user as createByUser,
+		o.trade_no as trade_no,
+		o.product_uuid as product_uuid,
+		o.shop_id as shop_id,
+		o.bdh_order_status as bdh_order_status,
+		o.create_date as create_date,
+		o.status as status,
+		o.receive_name as receive_name,
+		o.receive_address as receive_address,
+		o.receive_mobile as receive_mobile,
+		o.total_from_bdh as total_from_bdh,
+		o.subject as subject,
+		o.pay_time as pay_time,
+		o.pay_type as pay_type,
+		o.shop_name as shop_name,
+		o.pic as pic,
+		o.price as price,
+		o.capacity as capacity,
+		o.way_type as way_type, 
+		o.note as note,
+		o.transaction_id as transaction_id,
+		od.product_name as "ordersDetail.product_name",
+		od.price as "ordersDetail.price",
+		od.pic as "ordersDetail.pic",
+		od.product_uuid as "ordersDetail.product_uuid",
+		od.capacity as "ordersDetail.capacity"
+		
+		 from orders o left join orders_detail od on o.code=od.code
+		
+		  where o.shop_id=#{shopId} and o.status in (1,2)
+		<if test=" status != null and status != 100 ">
+		 and o.status = #{status}
+		 </if>
+		 <if test=" receiveMobile != null and receiveMobile != '' ">
+		 and o.receive_mobile = #{receiveMobile}
+		 </if>
+		 <if test=" code != null and code != '' ">
+		 and o.code = #{code}
+		 </if>
+		 
+		 order by o.orders_id desc
+		<!-- <trim prefix="WHERE" prefixOverrides="AND | OR"> -->
+	</select>
+	
+	
+	<!--财务管理端 分页查询接口 -->
+	<select id="getOrdersForBdhListPage" parameterType="Orders"
+		resultMap="OrdersMap">
+		
+		select 
+		o.orders_id as orders_id,
+		o.code as code,
+		o.trade_no as trade_no,
+		o.product_uuid as product_uuid,
+		o.shop_id as shop_id,
+		o.bdh_order_status as bdh_order_status,
+		o.create_date as create_date,
+		o.status as status,
+		o.receive_name as receive_name,
+		o.receive_address as receive_address,
+		o.receive_mobile as receive_mobile,
+		o.total_from_bdh as total_from_bdh,
+		o.subject as subject,
+		o.pay_time as pay_time,
+		o.pay_type as pay_type,
+		o.shop_name as shop_name,
+		o.pic as pic,
+		o.price as price,
+		o.capacity as capacity,
+		o.note as note,
+		o.transaction_id as transaction_id,
+		od.product_name as "ordersDetail.product_name",
+		od.price as "ordersDetail.price",
+		od.pic as "ordersDetail.pic",
+		od.product_uuid as "ordersDetail.product_uuid",
+		od.capacity as "ordersDetail.capacity"
+		
+		 from orders o left join orders_detail od on o.code=od.code
+		
+		  where 1=1
+		  
+		  <if test=" status != null and status != 100 ">
+		 and o.status = #{status}
+		 </if>
+		 
+		 <if test=" receiveMobile != null and receiveMobile != '' ">
+		 and o.receive_mobile = #{receiveMobile}
+		 </if>
+		 
+		 <if test=" shopId != null and shopId != '' ">
+		 and o.shop_id=#{shopId}
+		 </if>
+		 
+		 <if test=" code != null and code != '' ">
+		 and o.code = #{code}
+		 </if>
+		 
+		 order by o.orders_id desc
+		<!-- <trim prefix="WHERE" prefixOverrides="AND | OR"> -->
+	</select>
+	
+	
+	<!-- 按编号查询 -->
+	<select id="getOrdersById" parameterType="String" resultMap="OrdersMap">
+		select *
+		from orders where code = #{code}
+	</select>
+	<!-- 添加 -->
+	<insert id="insertOrders" parameterType="Orders" useGeneratedKeys="true" keyProperty="ordersId">
+        INSERT INTO orders (
+        	orders_id ,
+        	code ,
+        	product_uuid ,
+        	shop_id ,
+        	bdh_order_status ,
+        	alipay_order_notify ,
+        	alipay_order_return ,
+        	create_by_user ,
+        	trade_no ,
+        	total_fee ,
+        	receive_name ,
+        	buyer_email ,
+        	receive_address ,
+        	receive_zip ,
+        	receive_phone ,
+        	receive_mobile ,
+        	total_from_bdh ,
+        	seller_email ,
+        	subject ,
+        	alibody ,
+        	pay_time ,
+        	pay_type ,
+        	goods_address_uuid ,
+        	shop_name ,
+        	pic ,
+        	product_name ,
+        	price ,
+        	capacity ,
+        	way_type,
+        	note,
+        	result_code,
+        	openid,
+        	transaction_id,
+        	logistics_info_id
+        ) VALUES (
+        	#{ordersId} ,
+        	#{code} ,
+        	#{productUuid} ,
+        	#{shopId} ,
+        	#{bdhOrderStatus} ,
+        	#{alipayOrderNotify} ,
+        	#{alipayOrderReturn} ,
+        	#{createByUser} ,
+        	#{tradeNo} ,
+        	#{totalFee} ,
+        	#{receiveName} ,
+        	#{buyerEmail} ,
+        	#{receiveAddress} ,
+        	#{receiveZip} ,
+        	#{receivePhone} ,
+        	#{receiveMobile} ,
+        	#{totalFromBdh} ,
+        	#{sellerEmail} ,
+        	#{subject} ,
+        	#{alibody} ,
+        	#{payTime} ,
+        	#{payType} ,
+        	#{goodsAddressUuid} ,
+        	#{shopName} ,
+        	#{pic} ,
+        	#{productName} ,
+        	#{price} ,
+        	#{capacity} ,
+        	#{wayType},
+        	#{note},
+        	#{resultCode},
+        	#{openid},
+        	#{transactionId},
+        	#{logisticsInfoId}
+        )
+	</insert>
+	<!-- 修改 -->
+	<update id="updateOrders" >
+        UPDATE orders 
+        <trim prefix="SET" suffixOverrides=",">
+	        <if test="bdhOrderStatus!=null and bdhOrderStatus!=''">
+	        bdh_order_status = #{bdhOrderStatus},
+	        </if>
+	        <if test="alipayOrderNotify!=null and alipayOrderNotify!=''">
+	        alipay_order_notify = #{alipayOrderNotify},
+	        </if>
+	        <if test="alipayOrderReturn!=null and alipayOrderReturn!=''">
+	        alipay_order_return = #{alipayOrderReturn},
+	        </if>
+	        <if test="status!=null and status!=''">
+	        status = #{status},
+	        </if>
+	        <if test="tradeNo!=null and tradeNo!=''">
+	        trade_no = #{tradeNo},
+	        </if>
+	        <if test="totalFee!=null and totalFee!=''">
+	        total_fee = #{totalFee},
+	        </if>
+	        <if test="buyerEmail!=null and buyerEmail!=''">
+	        buyer_email = #{buyerEmail},
+	        </if>
+	        <if test="sellerEmail!=null and sellerEmail!=''">
+	        seller_email = #{sellerEmail},
+	        </if>
+	        <if test="1 == 1">
+	        pay_time = now(),
+	        </if>
+	        <if test="1 == 1">
+	        pay_type = 1,
+	        </if>
+	        <if test="wayType!=null and wayType!=''">
+	        way_type = #{wayType},
+	        </if>
+	        <if test="logisticsInfoId!=null and logisticsInfoId!=''">
+	        logistics_info_id = #{logisticsInfoId},
+	        </if>
+	      </trim>  
+        WHERE 
+	        code = #{code}
+	</update>
+	
+	<update id="updateOrdersForwx" >
+        UPDATE orders 
+        <trim prefix="SET" suffixOverrides=",">
+	        <if test="bdhOrderStatus!=null and bdhOrderStatus!=''">
+	        bdh_order_status = #{bdhOrderStatus},
+	        </if>
+	        <if test="resultCode!=null and resultCode!=''">
+	        result_code = #{resultCode},
+	        </if>
+	        <if test="openid!=null and openid!=''">
+	        openid = #{openid},
+	        </if>
+	        <if test="status!=null and status!=''">
+	        status = #{status},
+	        </if>
+	        <if test="transactionId!=null and transactionId!=''">
+	        transaction_id = #{transactionId},
+	        </if>
+	        <if test="totalFee!=null and totalFee!=''">
+	        total_fee = #{totalFee},
+	        </if>
+	        <if test="1 == 1">
+	        pay_time = now(),
+	        </if>
+	        <if test="1 == 1">
+	        pay_type = 2,
+	        </if>
+	        <if test="wayType!=null and wayType!=''">
+	        way_type = #{wayType},
+	        </if>
+	        <if test="logisticsInfoId!=null and logisticsInfoId!=''">
+	        logistics_info_id = #{logisticsInfoId},
+	        </if>
+	      </trim>  
+        WHERE 
+	        code = #{code}
+	</update>
+	
+	<!-- 修改 -->
+	<update id="updateOrdersLog" >
+        UPDATE orders 
+        <trim prefix="SET" suffixOverrides=",">
+	        <if test="bdhOrderStatus!=null and bdhOrderStatus!=''">
+	        bdh_order_status = #{bdhOrderStatus},
+	        </if>
+	        <if test="alipayOrderNotify!=null and alipayOrderNotify!=''">
+	        alipay_order_notify = #{alipayOrderNotify},
+	        </if>
+	        <if test="alipayOrderReturn!=null and alipayOrderReturn!=''">
+	        alipay_order_return = #{alipayOrderReturn},
+	        </if>
+	        <if test="status!=null and status!=''">
+	        status = #{status},
+	        </if>
+	        <if test="tradeNo!=null and tradeNo!=''">
+	        trade_no = #{tradeNo},
+	        </if>
+	        <if test="totalFee!=null and totalFee!=''">
+	        total_fee = #{totalFee},
+	        </if>
+	        <if test="buyerEmail!=null and buyerEmail!=''">
+	        buyer_email = #{buyerEmail},
+	        </if>
+	        <if test="sellerEmail!=null and sellerEmail!=''">
+	        seller_email = #{sellerEmail},
+	        </if>
+	        <if test="wayType!=null and wayType!=''">
+	        way_type = #{wayType},
+	        </if>
+	        <if test="logisticsInfoId!=null and logisticsInfoId!=''">
+	        logistics_info_id = #{logisticsInfoId},
+	        </if>
+	      </trim>  
+        WHERE 
+	        code = #{code}
+	</update>
+	
+	<!-- 删除 -->
+	<delete id="deleteOrders" parameterType="String">
+        UPDATE orders set status=-1 WHERE
+        code = #{code} 
+    </delete>
+    
+    
+	<update id="setStatus" >
+        UPDATE orders 
+         set status = #{status},sign_time=now()
+        WHERE 
+	        code = #{code}
+	</update>
+</mapper>
+

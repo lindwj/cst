@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<!-- 使用namespace的话sql搜索定位会比较方便 -->
+<mapper namespace="com.cst.service.dao.LogisticsInfoMapper">
+
+	<resultMap id="LogisticsInfoMap" type="com.cst.service.model.LogisticsInfo">
+        <result property="logisticsInfoId" column="logistics_info_id"/>
+        <result property="kdnId" column="kdn_id"/>
+        <result property="code" column="code"/>
+        <result property="jsonData" column="json_data"/>
+        <result property="createMan" column="create_man"/>
+        <result property="createDate" column="create_date"/>
+        <result property="pushDate" column="push_date"/>
+        <result property="state" column="state"/>
+	</resultMap>
+	<!-- 分页查询接口 -->
+	<select id="getLogisticsInfoListPage" parameterType="LogisticsInfo"
+		resultMap="LogisticsInfoMap">
+		select * from logistics_info
+		<!-- <trim prefix="WHERE" prefixOverrides="AND | OR"> -->
+	</select>
+	<!-- 按编号查询 -->
+	<select id="getLogisticsInfoById" parameterType="int" resultMap="LogisticsInfoMap">
+		select *
+		from logistics_info where logistics_info_id = #{logisticsInfoId}
+	</select>
+	<!-- 按code和外键快递id查询 -->
+	<select id="getLogisticsInfoBykdnId" parameterType="LogisticsInfo" resultMap="LogisticsInfoMap">
+		select *
+		from logistics_info where code = #{code} and kdn_id = #{kdnId}
+	</select>
+	<!-- 添加 -->
+	<insert id="insertLogisticsInfo" parameterType="LogisticsInfo" useGeneratedKeys="true" keyProperty="logisticsInfoId">
+        INSERT INTO logistics_info (
+        	logistics_info_id ,
+        	kdn_id ,
+        	code ,
+        	json_data ,
+        	create_man ,
+        	create_date ,
+        	push_date ,
+        	state 
+        ) VALUES (
+        	#{logisticsInfoId} ,
+        	#{kdnId} ,
+        	#{code} ,
+        	#{jsonData} ,
+        	#{createMan} ,
+        	#{createDate} ,
+        	#{pushDate} ,
+        	#{state} 
+        )
+	</insert>
+	<!-- 修改 -->
+	<update id="updateLogisticsInfo" >
+        UPDATE logistics_info 
+        <trim prefix="SET" suffixOverrides=",">
+	        <if test="kdnId!=null and kdnId!=''">
+	        kdn_id = #{kdnId},
+	        </if>
+	        <if test="code!=null and code!=''">
+	        code = #{code},
+	        </if>
+	        <if test="jsonData!=null and jsonData!=''">
+	        json_data = #{jsonData},
+	        </if>
+	        <if test="createMan!=null and createMan!=''">
+	        create_man = #{createMan},
+	        </if>
+	        <if test="createDate!=null and createDate!=''">
+	        create_date = #{createDate},
+	        </if>
+	        <if test="pushDate!=null and pushDate!=''">
+	        push_date = #{pushDate},
+	        </if>
+	        <if test="state!=null and state!=''">
+	        state = #{state},
+	        </if>
+	      </trim>  
+        WHERE 
+	        logistics_info_id = #{logisticsInfoId} 
+	</update>
+	<!-- 删除 -->
+	<delete id="deleteLogisticsInfo" parameterType="int">
+        UPDATE logistics_info set state='X' WHERE
+        logistics_info_id = #{logisticsInfoId} 
+    </delete>
+	
+</mapper>
+

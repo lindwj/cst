@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<!-- 使用namespace的话sql搜索定位会比较方便 -->
+<mapper namespace="com.cst.service.dao.AgentProductCfgMapper">
+
+	<resultMap id="AgentProductCfgMap" type="com.cst.service.model.AgentProductCfg">
+        <result property="agentProductCfgId" column="agent_product_cfg_id"/>
+        <result property="agentCfgId" column="agent_cfg_id"/>
+        <result property="productUuid" column="product_uuid"/>
+        <result property="price" column="price"/>
+	</resultMap>
+	<!-- 分页查询接口 -->
+	<select id="getAgentProductCfgListPage" parameterType="AgentProductCfg"
+		resultMap="AgentProductCfgMap">
+		select * from agent_product_cfg where agent_cfg_id = #{agentCfgId}
+		<!-- <trim prefix="WHERE" prefixOverrides="AND | OR"> -->
+	</select>
+	<!-- 按编号查询 -->
+	<select id="getAgentProductCfgById" parameterType="int" resultMap="AgentProductCfgMap">
+		select *
+		from agent_product_cfg where agent_product_cfg_id = #{agentProductCfgId}
+	</select>
+	<!-- 添加 -->
+	<insert id="insertAgentProductCfg" parameterType="AgentProductCfg" useGeneratedKeys="true" keyProperty="agentProductCfgId">
+        INSERT INTO agent_product_cfg (
+        	agent_product_cfg_id ,
+        	agent_cfg_id ,
+        	product_uuid ,
+        	price 
+        ) VALUES (
+        	#{agentProductCfgId} ,
+        	#{agentCfgId} ,
+        	#{productUuid} ,
+        	#{price} 
+        )
+	</insert>
+	<!-- 修改 -->
+	<update id="updateAgentProductCfg" >
+        UPDATE agent_product_cfg 
+        <trim prefix="SET" suffixOverrides=",">
+	        <if test="agentCfgId!=null and agentCfgId!=''">
+	        agent_cfg_id = #{agentCfgId},
+	        </if>
+	        <if test="productUuid!=null and productUuid!=''">
+	        product_uuid = #{productUuid},
+	        </if>
+	        <if test="price!=null and price!=''">
+	        price = #{price},
+	        </if>
+	      </trim>  
+        WHERE 
+	        agent_product_cfg_id = #{agentProductCfgId} 
+	</update>
+	<!-- 删除 -->
+	<delete id="deleteAgentProductCfg" parameterType="int">
+		delete from agent_product_cfg WHERE
+        agent_cfg_id = #{agent_cfg_id} 
+    </delete>
+	
+</mapper>
+

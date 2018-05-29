@@ -1,0 +1,188 @@
+.index_box{
+    width: 100%;
+}
+body{
+    background-color: #f7f7f7;
+}
+
+
+.header{
+/*     width: 100%;
+    background-color: #b4a078;
+    height: 45px;
+    line-height: 45px;
+    position: relative; */
+    background-color: #b4a078;
+    border-bottom:  1px solid #d9d9d9;
+    padding:13px 0 ;
+}
+.header p{
+    font-size: 1.1em;
+    text-align: center;
+    color: #FFFFFF;
+
+}
+.arrow{
+    position: absolute;
+    top:9px;
+    left: 4%;
+} 
+.arrowicon{
+    font-size: 1.3em!important;
+    vertical-align: -5px;
+}
+
+
+
+.login_box{
+    width:90%;
+    margin: 30px auto 0 auto;
+    position: relative;
+    height: 97px;
+}
+.nic, .tel, .password{
+    width: 90%;
+    padding-left: 10%;
+    height: 40px;
+    border: 1px solid #ccc;
+    border-radius: 5px 5px 0 0;
+    position: absolute;
+    background-color: #ffffff;
+    top:0;
+    left: 0;
+    z-index: 1;
+    outline:0 ;
+    font-size:0.85em;
+    line-height: 40px;
+}
+.nic:hover, .tel:hover, .password:hover{
+    border:1px solid #b4a078 ;
+    z-index: 2;
+}
+.tel{
+    border-radius:0;
+    top:43px;
+    left: 0;
+}
+.password{
+    border-radius: 0 0 5px 5px;
+    top:86px;
+    left: 0;
+}
+.nicicon{
+    position: absolute;
+    left: 7px;
+    top: 10px;
+    color: #a0a0a0;
+    font-size: 1.3em!important;
+    z-index: 3;
+}
+.telicon{
+    position: absolute;
+    left: 8px;
+    top: 54px;
+    color: #a0a0a0;
+    font-size: 1.2em!important;
+    z-index: 3;
+}
+.passwordicon{
+    position: absolute;
+    left: 7px;
+    top: 98px;
+    color: #a0a0a0;
+    font-size: 1.1em!important;
+    z-index: 3;
+}
+
+
+
+.verifcode{
+    width: 90%;
+    margin:52px auto 0 auto;
+}
+.code{
+    float: left;
+    width: 45%;
+    height: 40px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    background-color: #ffffff;
+    font-size:0.85em;
+    line-height: 40px;
+    outline:0 ;
+    padding-left: 10px;
+}
+.code:hover{
+    border:1px solid #bfaa80 ;
+}
+.codebtn{
+    width: 45%;
+    float: right;
+    height: 42px;
+    border-radius:3px ;
+    background-color: #b4a078;
+    outline:0 ;
+    font-size:0.9em;
+    text-align: center;
+    color: #ffffff;
+    border: none;
+}
+.codebtn:hover{
+    background-color: #bfaa80;
+}
+
+
+
+.btn_box{
+    width: 90%;
+    margin: 0 auto;
+}
+.btn_box input{
+    width: 100%;
+    font-size: 1em;
+    height: 40px;
+    border-radius: 3px;
+    border: 0;
+    color: #ffffff;
+    outline: 0;
+}
+.loginbtn{
+    background-color:#b4a078;
+    margin: 30px 0 0;
+}
+.loginbtn:hover{
+    background-color:#bfaa80 ;
+}
+
+.agree{
+    color: #999999;
+    font-size: 0.7em;
+    margin-top: 20px;
+    text-align: center;
+}
+.agree span{
+    color: #333;
+    cursor: pointer;
+}
+.agree span:hover{
+    color: #b4a078;
+}
+#errorm, #errorm1, #errorm2, #errorm3, #errorm4{
+    font-size: 15px;
+    color: white;
+    position: absolute;
+    padding: 15px;
+    background-color: rgba(0,0,0,0.6);
+    border-radius: 10px;
+    text-align: center;
+    top: 40%;
+    left: 37%;
+    display: none;
+
+}
+.am-disabled {
+    pointer-events: none;
+    cursor: not-allowed;
+    opacity: .45;
+    box-shadow: none;
+}

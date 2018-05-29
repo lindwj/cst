@@ -1,0 +1,443 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<!-- 使用namespace的话sql搜索定位会比较方便 -->
+<mapper namespace="com.cst.service.dao.OrdergoodsMapper">
+
+	<resultMap id="OrdergoodsMap" type="com.cst.service.model.Ordergoods">
+        <result property="ordergoodsId" column="ordergoods_id"/>
+        <result property="totalPrice" column="total_price"/>
+        <result property="code" column="code"/>
+        <result property="address" column="address"/>
+        <result property="marketRemark" column="market_remark"/>
+        <result property="status" column="status"/>
+        <result property="subDate" column="sub_date"/>
+        <result property="receiveMan" column="receive_man"/>
+        <result property="phone" column="phone"/>
+        <result property="pcenterRemark" column="p_center_remark"/>
+        <result property="storeRemark" column="store_remark"/>
+        <result property="pcenterMan" column="p_center_man"/>
+        <result property="marketMan" column="market_man"/>
+        <result property="accountantMan" column="accountant_man"/>
+        <result property="shopMan" column="shop_man"/>
+        <result property="storeMan" column="store_man"/>
+        <result property="pcenterTime" column="p_center_time"/>
+        <result property="accountantRemark" column="accountant_remark"/>
+        <result property="storeTime" column="store_time"/>
+        <result property="accountantTime" column="accountant_time"/>
+        <result property="marketTime" column="market_time"/>
+        <result property="myStatus" column="my_status"/>
+        <result property="shopId" column="shop_id"/>
+        <result property="shopName" column="shop_name"/>
+        <result property="shopCode" column="shop_code"/>
+        <result property="zipCode" column="zip_code"/>
+        <result property="telPhone" column="tel_phone"/>
+        <collection property="ordergoodsProducts" ofType="OrdergoodsProduct" >
+			<result property="ordergoodsProductId" column="ordergoodsProduct.ordergoods_product_id"/>
+			<result property="productName" column="ordergoodsProduct.product_name"/>
+			<result property="productPrice" column="ordergoodsProduct.product_price"/>
+			<result property="applyNum" column="ordergoodsProduct.apply_num"/>
+			<result property="unit" column="ordergoodsProduct.unit"/>
+			<result property="updateNum" column="ordergoodsProduct.update_num"/>
+			<result property="productUuid" column="ordergoodsProduct.product_uuid"/>
+		</collection>
+	</resultMap>
+	<!-- 专营店分页查询接口 -->
+	<select id="getOrdergoodsListPage" parameterType="Ordergoods"
+		resultMap="OrdergoodsMap">
+		select 
+		o.code as code,
+		o.sub_date as sub_date,
+		o.ordergoods_id as ordergoods_id,
+		o.status as status,
+		o.total_price as total_price,
+		p.name as "ordergoodsProduct.product_name",
+		p.cost_price as "ordergoodsProduct.product_price",
+		od.unit as "ordergoodsProduct.unit",
+		od.apply_num as "ordergoodsProduct.apply_num",
+		od.update_num as "ordergoodsProduct.update_num"
+		
+		from ordergoods o left join ordergoods_product od on o.code=od.ordergoods_code 
+		inner join product p on p.product_uuid=od.product_uuid
+		
+		where o.shop_man=#{shopMan}
+		<if test=" status != null and status!=100">
+		and o.status = #{status}
+		</if>
+		<if test="beginTime!=null and beginTime!=''">
+		and o.sub_date >= #{beginTime}
+		</if>
+		 
+		<if test="endTime!=null and endTime!=''">
+		and o.sub_date &lt;= #{endTime}
+		</if>
+		
+		order by o.ordergoods_id desc
+		<!-- <trim prefix="WHERE" prefixOverrides="AND | OR"> -->
+	</select>
+	<!-- 内部分页查询接口 -->
+	<select id="getListPage" parameterType="Ordergoods"
+		resultMap="OrdergoodsMap">
+		select 
+		o.code as code,
+		o.ordergoods_id as ordergoods_id,
+		o.sub_date as sub_date,
+		o.status as status,
+		o.total_price as total_price,
+		o.my_status as my_status,
+		s.code as shop_code,
+		s.name as shop_name,
+		p.name as "ordergoodsProduct.product_name",
+		p.cost_price as "ordergoodsProduct.product_price",
+		od.unit as "ordergoodsProduct.unit",
+		od.apply_num as "ordergoodsProduct.apply_num",
+		od.update_num as "ordergoodsProduct.update_num"
+		
+		from ordergoods o left join shop s on o.shop_id=s.shop_id
+		left join ordergoods_product od on o.code=od.ordergoods_code 
+		inner join product p on p.product_uuid=od.product_uuid
+		
+		where o.my_status = #{myStatus}
+		
+		<if test="shopName!=null and shopName!=''">
+		and s.name like CONCAT('%',#{shopName},'%')
+		</if>
+		
+		<if test="beginTime!=null and beginTime!=''">
+		and o.sub_date >= #{beginTime}
+		</if>
+		
+		<if test="endTime!=null and endTime!='' and beginTime!=endTime">
+		and o.sub_date &lt;= #{endTime}
+		</if>
+		
+		order by o.sub_date desc
+		
+		<!-- <trim prefix="WHERE" prefixOverrides="AND | OR"> -->
+	</select>
+	<!-- 内部后台搜索接口 -->
+	<select id="searchListPage" parameterType="Ordergoods"
+		resultMap="OrdergoodsMap">
+		select 
+		o.code as code,
+		o.sub_date as sub_date,
+		o.status as status,
+		o.total_price as total_price,
+		o.my_status as my_status,
+		o.ordergoods_id as ordergoods_id,
+		s.code as shop_code,
+		s.name as shop_name,
+		p.name as "ordergoodsProduct.product_name",
+		p.cost_price as "ordergoodsProduct.product_price",
+		od.unit as "ordergoodsProduct.unit",
+		od.apply_num as "ordergoodsProduct.apply_num",
+		od.update_num as "ordergoodsProduct.update_num"
+		
+		from ordergoods o left join shop s on o.shop_id=s.shop_id
+		left join ordergoods_product od on o.code=od.ordergoods_code 
+		inner join product p on p.product_uuid=od.product_uuid
+		
+		where 
+		
+		<if test="myStatus!=null and myStatus!='' and myStatus==100">
+		o.my_status >=-100 and o.my_status!=0
+		</if>
+		<if test="myStatus!=null and myStatus!='' and myStatus!=100 and myStatus!=-1">
+		o.my_status = #{myStatus}
+		</if>
+		<if test="myStatus!=null and myStatus!='' and myStatus==-1">
+		o.my_status &lt;= #{myStatus}
+		</if>
+		
+		<if test="shopName!=null and shopName!=''">
+		and s.name like CONCAT('%',#{shopName},'%')
+		</if>
+		
+		<if test="beginTime!=null and beginTime!=''">
+		and o.sub_date >= #{beginTime}
+		</if>
+		 
+		<if test="endTime!=null and endTime!=''">
+		and o.sub_date &lt;= #{endTime}
+		</if>
+		
+		order by o.sub_date desc
+		
+		<!-- <trim prefix="WHERE" prefixOverrides="AND | OR"> -->
+	</select>
+	<!-- 按编号查询 -->
+	<select id="getOrdergoodsById" parameterType="int" resultMap="OrdergoodsMap">
+		select *
+		from ordergoods where ordergoods_id = #{ordergoodsId}
+	</select>
+	<!-- 按订单号查询部分数据 -->
+	<select id="getOrderByCode" parameterType="String" resultMap="OrdergoodsMap">
+		select 
+		o.receive_man as receive_man,
+		o.phone as phone,
+		o.code as code,
+		o.address as address,
+		o.market_remark as market_remark,
+		o.p_center_remark as p_center_remark,
+		o.accountant_remark as accountant_remark,
+		o.store_remark as store_remark,
+		o.zip_code as zip_code,
+		o.tel_phone as tel_phone,
+		o.market_time as market_time,
+		o.p_center_time as p_center_time,
+		o.accountant_time as accountant_time,
+		o.store_time as store_time,
+		p.name as "ordergoodsProduct.product_name",
+		p.cost_price as "ordergoodsProduct.product_price",
+		od.ordergoods_product_id as "ordergoodsProduct.ordergoods_product_id",
+		od.apply_num as "ordergoodsProduct.apply_num",
+		od.update_num as "ordergoodsProduct.update_num",
+		od.unit as "ordergoodsProduct.unit",
+		od.product_uuid as "ordergoodsProduct.product_uuid"
+		from ordergoods o left join ordergoods_product od on o.code=od.ordergoods_code 
+		inner join product p on p.product_uuid=od.product_uuid
+		where o.code = #{code}
+	</select>
+	<!-- 按订单号查询所有数据 -->
+	<select id="getOrdergoodsByCode" parameterType="String" resultMap="OrdergoodsMap">
+		select *
+		from ordergoods where code = #{code}
+	</select>
+	<!-- 添加 -->
+	<insert id="insertOrdergoods" parameterType="Ordergoods" useGeneratedKeys="true" keyProperty="ordergoodsId">
+        INSERT INTO ordergoods (
+        	ordergoods_id ,
+        	code ,
+        	total_price,
+        	address ,
+        	market_remark ,
+        	status ,
+        	sub_date ,
+        	receive_man ,
+        	phone ,
+        	p_center_remark ,
+        	store_remark ,
+        	p_center_man ,
+        	market_man ,
+        	accountant_man ,
+        	shop_man ,
+        	store_man ,
+        	p_center_time ,
+        	accountant_remark ,
+        	store_time ,
+        	accountant_time ,
+        	market_time ,
+        	my_status ,
+        	shop_id
+        ) VALUES (
+        	#{ordergoodsId} ,
+        	#{code} ,
+        	#{totalPrice},
+        	#{address} ,
+        	#{marketRemark} ,
+        	#{status} ,
+        	#{subDate} ,
+        	#{receiveMan} ,
+        	#{phone} ,
+        	#{pcenterRemark} ,
+        	#{storeRemark} ,
+        	#{pcenterMan} ,
+        	#{marketMan} ,
+        	#{accountantMan} ,
+        	#{shopMan} ,
+        	#{storeMan} ,
+        	#{pcenterTime} ,
+        	#{accountantRemark} ,
+        	#{storeTime} ,
+        	#{accountantTime} ,
+        	#{marketTime} ,
+        	#{myStatus} ,
+        	#{shopId}
+        )
+	</insert>
+	<!-- 修改状态 -->
+	<update id="setStatus" >
+        UPDATE ordergoods 
+        set 
+        <if test="subDate!=null and subDate!=''">
+		sub_date = #{subDate},
+		</if>
+		<if test="shopId!=null and shopId!=''">
+		shop_id = #{shopId},
+		</if>
+		my_status = #{myStatus},
+        status = #{status}
+        WHERE 
+	    code = #{code}
+	</update>
+	<!-- 修改 -->
+	<update id="updateOrdergoods" >
+        UPDATE ordergoods 
+        <trim prefix="SET" suffixOverrides=",">
+	        <if test="code!=null and code!=''">
+	        code = #{code},
+	        </if>
+	        <if test="totalPrice!=null and totalPrice!=''">
+	        total_price = #{totalPrice},
+	        </if>
+	        <if test="address!=null and address!=''">
+	        address = #{address},
+	        </if>
+	        <if test="marketRemark!=null and marketRemark!=''">
+	        market_remark = #{marketRemark},
+	        </if>
+	        <if test="status!=null and status!=''">
+	        status = #{status},
+	        </if>
+	        <if test="subDate!=null and subDate!=''">
+	        sub_date = #{subDate},
+	        </if>
+	        <if test="receiveMan!=null and receiveMan!=''">
+	        receive_man = #{receiveMan},
+	        </if>
+	        <if test="phone!=null and phone!=''">
+	        phone = #{phone},
+	        </if>
+	        <if test="pcenterRemark!=null and pcenterRemark!=''">
+	        p_center_remark = #{pcenterRemark},
+	        </if>
+	        <if test="storeRemark!=null and storeRemark!=''">
+	        store_remark = #{storeRemark},
+	        </if>
+	        <if test="pcenterMan!=null and pcenterMan!=''">
+	        p_center_man = #{pcenterMan},
+	        </if>
+	        <if test="marketMan!=null and marketMan!=''">
+	        market_man = #{marketMan},
+	        </if>
+	        <if test="accountantMan!=null and accountantMan!=''">
+	        accountant_man = #{accountantMan},
+	        </if>
+	        <if test="shopMan!=null and shopMan!=''">
+	        shop_man = #{shopMan},
+	        </if>
+	        <if test="storeMan!=null and storeMan!=''">
+	        store_man = #{storeMan},
+	        </if>
+	        <if test="pcenterTime!=null and pcenterTime!=''">
+	        p_center_time = #{pcenterTime},
+	        </if>
+	        <if test="accountantRemark!=null and accountantRemark!=''">
+	        accountant_remark = #{accountantRemark},
+	        </if>
+	        <if test="storeTime!=null and storeTime!=''">
+	        store_time = #{storeTime},
+	        </if>
+	        <if test="accountantTime!=null and accountantTime!=''">
+	        accountant_time = #{accountantTime},
+	        </if>
+	        <if test="marketTime!=null and marketTime!=''">
+	        market_time = #{marketTime},
+	        </if>
+	        <if test="myStatus!=null and myStatus!=''">
+	        my_status = #{myStatus},
+	        </if>
+	        <if test="shopId!=null and shopId!=''">
+	        shop_id = #{shopId},
+	        </if>
+	        <if test="zipCode!=null and zipCode!=''">
+	        zip_code = #{zipCode},
+	        </if>
+	        <if test="telPhone!=null and telPhone!=''">
+	        tel_phone = #{telPhone},
+	        </if>
+	      </trim>  
+        WHERE 
+	        ordergoods_id = #{ordergoodsId} 
+	</update>
+	<!-- 根据订单号修改 -->
+	<update id="updateOrdergoodsCode" >
+        UPDATE ordergoods 
+        <trim prefix="SET" suffixOverrides=",">
+	        <if test="code!=null and code!=''">
+	        code = #{code},
+	        </if>
+	        <if test="totalPrice!=null and totalPrice!=''">
+	        total_price = #{totalPrice},
+	        </if>
+	        <if test="address!=null and address!=''">
+	        address = #{address},
+	        </if>
+	        <if test="marketRemark!=null and marketRemark!=''">
+	        market_remark = #{marketRemark},
+	        </if>
+	        <if test="status!=null and status!=''">
+	        status = #{status},
+	        </if>
+	        <if test="subDate!=null and subDate!=''">
+	        sub_date = #{subDate},
+	        </if>
+	        <if test="receiveMan!=null and receiveMan!=''">
+	        receive_man = #{receiveMan},
+	        </if>
+	        <if test="phone!=null and phone!=''">
+	        phone = #{phone},
+	        </if>
+	        <if test="pcenterRemark!=null and pcenterRemark!=''">
+	        p_center_remark = #{pcenterRemark},
+	        </if>
+	        <if test="storeRemark!=null and storeRemark!=''">
+	        store_remark = #{storeRemark},
+	        </if>
+	        <if test="pcenterMan!=null and pcenterMan!=''">
+	        p_center_man = #{pcenterMan},
+	        </if>
+	        <if test="marketMan!=null and marketMan!=''">
+	        market_man = #{marketMan},
+	        </if>
+	        <if test="accountantMan!=null and accountantMan!=''">
+	        accountant_man = #{accountantMan},
+	        </if>
+	        <if test="shopMan!=null and shopMan!=''">
+	        shop_man = #{shopMan},
+	        </if>
+	        <if test="storeMan!=null and storeMan!=''">
+	        store_man = #{storeMan},
+	        </if>
+	        <if test="pcenterTime!=null and pcenterTime!=''">
+	        p_center_time = #{pcenterTime},
+	        </if>
+	        <if test="accountantRemark!=null and accountantRemark!=''">
+	        accountant_remark = #{accountantRemark},
+	        </if>
+	        <if test="storeTime!=null and storeTime!=''">
+	        store_time = #{storeTime},
+	        </if>
+	        <if test="accountantTime!=null and accountantTime!=''">
+	        accountant_time = #{accountantTime},
+	        </if>
+	        <if test="marketTime!=null and marketTime!=''">
+	        market_time = #{marketTime},
+	        </if>
+	        <if test="myStatus!=null and myStatus!=''">
+	        my_status = #{myStatus},
+	        </if>
+	        <if test="shopId!=null and shopId!=''">
+	        shop_id = #{shopId},
+	        </if>
+	        <if test="zipCode!=null and zipCode!=''">
+	        zip_code = #{zipCode},
+	        </if>
+	        <if test="telPhone!=null and telPhone!=''">
+	        tel_phone = #{telPhone},
+	        </if>
+	      </trim>  
+        WHERE 
+	        code = #{code} 
+	</update>
+	<!-- 删除 -->
+	<delete id="deleteOrdergoods" parameterType="String">
+        delete from ordergoods WHERE
+        code = #{code} 
+    </delete>
+	
+</mapper>
+

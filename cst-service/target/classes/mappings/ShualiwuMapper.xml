@@ -1,0 +1,112 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<!-- 使用namespace的话sql搜索定位会比较方便 -->
+<mapper namespace="com.cst.service.dao.ShualiwuMapper">
+
+	<resultMap id="ShualiwuMap" type="com.cst.service.model.Shualiwu">
+        <result property="id" column="id"/>
+        <result property="eventid" column="eventid"/>
+        <result property="openid" column="openid"/>
+        <result property="name" column="name"/>
+        <result property="headurl" column="headurl"/>
+        <result property="starId" column="star_id"/>
+        <result property="liwuId" column="liwu_id"/>
+        <result property="liwuName" column="liwu_name"/>
+        <result property="crtTime" column="crt_time"/>
+        <result property="type" column="type"/>
+	</resultMap>
+	<!-- 分页查询接口 -->
+	<select id="getShualiwuListPage" parameterType="Shualiwu"
+		resultMap="ShualiwuMap">
+		select * from shualiwu where star_id = #{starId} and type=2 and status=1  order by id desc
+		<!-- <trim prefix="WHERE" prefixOverrides="AND | OR"> -->
+	</select>
+	<!-- 按编号查询 -->
+	<select id="getShualiwuById" parameterType="int" resultMap="ShualiwuMap">
+		select *
+		from shualiwu where id = #{id}
+	</select>
+	
+	<select id="getShualiwu" parameterType="Shualiwu" resultMap="ShualiwuMap">
+		select id from shualiwu where star_id = #{starId} and openid=#{openid} and crt=curdate() and type=1
+	</select>
+	
+	<select id="getShualiwunum" parameterType="Shualiwu" resultMap="ShualiwuMap">
+		select count(1) as id from shualiwu where  openid=#{openid} and crt=curdate() and type=1
+	</select>
+	
+	<!-- 添加 -->
+	<insert id="insertShualiwu" parameterType="Shualiwu" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO shualiwu (
+        	id ,
+        	eventid ,
+        	openid ,
+        	name ,
+        	headurl ,
+        	star_id ,
+        	liwu_id ,
+        	liwu_name ,
+        	crt_time ,
+        	crt,
+        	type 
+        ) VALUES (
+        	#{id} ,
+        	#{eventid} ,
+        	#{openid} ,
+        	#{name} ,
+        	#{headurl} ,
+        	#{starId} ,
+        	#{liwuId} ,
+        	#{liwuName} ,
+        	now(),
+        	curdate(),
+        	#{type} 
+        )
+	</insert>
+	<!-- 修改 -->
+	<update id="updateShualiwu" >
+        UPDATE shualiwu 
+        <trim prefix="SET" suffixOverrides=",">
+	        <if test="eventid!=null and eventid!=''">
+	        eventid = #{eventid},
+	        </if>
+	        <if test="openid!=null and openid!=''">
+	        openid = #{openid},
+	        </if>
+	        <if test="name!=null and name!=''">
+	        name = #{name},
+	        </if>
+	        <if test="headurl!=null and headurl!=''">
+	        headurl = #{headurl},
+	        </if>
+	        <if test="starId!=null and starId!=''">
+	        star_id = #{starId},
+	        </if>
+	        <if test="liwuId!=null and liwuId!=''">
+	        liwu_id = #{liwuId},
+	        </if>
+	        <if test="liwuName!=null and liwuName!=''">
+	        liwu_name = #{liwuName},
+	        </if>
+	        <if test="crtTime!=null and crtTime!=''">
+	        crt_time = #{crtTime},
+	        </if>
+	        <if test="type!=null and type!=''">
+	        status = #{type},
+	        </if>
+	      </trim>  
+        WHERE 
+	        id = #{id} 
+	</update>
+	<!-- 删除 -->
+	<delete id="deleteShualiwu" parameterType="int">
+        UPDATE shualiwu set state='X' WHERE
+        id = #{id} 
+    </delete>
+	
+</mapper>
+

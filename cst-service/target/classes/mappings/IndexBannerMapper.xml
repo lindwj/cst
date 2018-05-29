@@ -1,0 +1,83 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<!-- 使用namespace的话sql搜索定位会比较方便 -->
+<mapper namespace="com.cst.service.dao.IndexBannerMapper">
+
+	<resultMap id="IndexBannerMap" type="com.cst.service.model.IndexBanner">
+        <result property="indexBannerId" column="index_banner_id"/>
+        <result property="bannerUrl" column="banner_url"/>
+        <result property="state" column="state"/>
+        <result property="type" column="type"/>
+        <result property="sort" column="sort"/>
+        <result property="createByAdm" column="create_by_adm"/>
+        <result property="createDate" column="create_date"/>
+        <result property="productUrl" column="product_url"/>
+	</resultMap>
+	<!-- 分页查询接口 -->
+	<select id="getIndexBannerListPage" parameterType="IndexBanner"
+		resultMap="IndexBannerMap">
+		select i.index_banner_id as index_banner_id,i.banner_url as banner_url,n.province as product_url from index_banner i , nation n where i.sort=n.id
+		
+		<if test="sort!=null and sort!=''">
+	        and i.sort = #{sort}
+	        </if>
+		<!-- <trim prefix="WHERE" prefixOverrides="AND | OR"> -->
+	</select>
+	<!-- 按编号查询 -->
+	<select id="getIndexBannerById" parameterType="int" resultMap="IndexBannerMap">
+		select *
+		from index_banner where index_banner_id = #{indexBannerId}
+	</select>
+	<!-- 添加 -->
+	<insert id="insertIndexBanner" parameterType="IndexBanner">
+        INSERT INTO index_banner (
+        	banner_url ,
+        	state ,
+        	type,
+        	sort ,
+        	product_url 
+        ) VALUES 
+         <foreach collection="list" item="item" index="index" separator="," > 
+    (#{item.bannerUrl} ,
+        	1 ,
+        	#{item.type} ,
+        	#{item.sort} ,
+        	#{item.productUrl} 
+        )  
+    </foreach>  
+	</insert>
+	<!-- 修改 -->
+	<update id="updateIndexBanner" >
+        UPDATE index_banner 
+        <trim prefix="SET" suffixOverrides=",">
+	        <if test="bannerUrl!=null and bannerUrl!=''">
+	        banner_url = #{bannerUrl},
+	        </if>
+	        <if test="state!=null and state!=''">
+	        state = #{state},
+	        </if>
+	        <if test="type!=null and type!=''">
+	        type = #{type},
+	        </if>
+	        <if test="sort!=null and sort!=''">
+	        sort = #{sort},
+	        </if>
+	        <if test="productUrl!=null and productUrl!=''">
+	        product_url = #{productUrl},
+	        </if>
+	      </trim>  
+        WHERE 
+	        index_banner_id = #{indexBannerId} 
+	</update>
+	<!-- 删除 -->
+	<delete id="deleteIndexBanner" parameterType="int">
+        delete from index_banner WHERE
+        index_banner_id = #{indexBannerId} 
+    </delete>
+	
+</mapper>
+

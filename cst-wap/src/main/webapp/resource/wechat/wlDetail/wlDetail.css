@@ -1,0 +1,148 @@
+.index_box{
+    width: 100%;
+}
+body{
+    background-color: #f7f7f7;
+}
+
+
+
+.header{
+    background-color: #ffffff;
+    padding:13px 0 ;
+    border-bottom:  1px solid #d9d9d9;
+    position: fixed;
+    top:0;
+    left: 0;
+    right: 0;
+}
+.header p{
+    font-size: 1em;
+    color: #333333;
+    text-align: center;
+}
+.arrow{
+    position: absolute;
+    top:9px;
+    left: 4%;
+}
+.arrowicon{
+    font-size: 1.3em!important;
+    vertical-align: -5px;
+}
+
+
+
+.order_detail{
+    margin-top: 49px;
+    border-bottom:  1px solid #d9d9d9;
+}
+.order_state{
+    background-color: #ffffff;
+    padding: 10px 0;
+}
+.order_state h1{
+    float: left;
+    color: #666666;
+    margin:10px 0 0 4%;
+}
+.stateicon{
+    font-size: 0.7em!important;
+}
+.order_state p{
+    float: left;
+    font-size: 0.8em;
+    color: #333;
+    margin-left: 15px;
+    width: 80%;
+    line-height: 20px;
+}
+.wllogo{
+    margin-top: 70px;
+    display: none;
+}
+.wllogo p{
+   text-align: center;
+}
+.wllogo h1{
+    font-size: 1em;
+    color: #737373;
+    text-align: center;
+    font-weight: bold;
+    margin-top: 20px;
+}
+.wllogo h2{
+    font-size: 0.9em;
+    color: #999999;
+    text-align: center;
+    margin-top: 8px;
+}
+.wlicon{
+    font-size: 8em!important;
+    color: #999999;
+}
+
+
+.detailm{
+    padding: 20px 4%;
+    background-color: #FFFFFF;
+    border-bottom:  1px solid #d9d9d9;
+    border-top:  1px solid #d9d9d9;
+    margin-top: 15px;
+
+}
+.leftbox{
+    float: left;
+}
+.rightbox{
+    float:right;
+    width: 88%;
+}
+.circle1{
+    width: 23px;
+    height: 23px;
+    background-color:rgba(0,131,63,0.4);
+    border-radius: 50%;
+    position: relative;
+}
+.circle2{
+    width: 15px;
+    height: 15px;
+    background-color: #00833f;
+    border-radius: 50%;
+    position:absolute;
+    top:4px;
+    left:4px;
+}
+.line{
+    width: 1px;
+    height: 50px;
+    background-color: #d9d9d9;
+    margin-left: 11px;
+}
+.circle3{
+    width: 11px;
+    height: 11px;
+    background-color: #d9d9d9;
+    border-radius: 50%;
+    margin-left: 6px;
+}
+.textbox{
+    margin-bottom: 7px;
+}
+.textbox h1{
+    font-size: 0.9em;
+    line-height: 22px;
+}
+.textbox p{
+    font-size: 0.8em;
+    line-height: 22px;
+    border-bottom: 1px solid #d9d9d9;
+    padding-bottom:5px;
+}
+.color{
+    color:#8c8c8c;
+}
+.green{
+    color: #00833f;
+}

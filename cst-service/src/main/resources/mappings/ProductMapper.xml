@@ -1,0 +1,295 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<!-- 使用namespace的话sql搜索定位会比较方便 -->
+<mapper namespace="com.cst.service.dao.ProductMapper">
+	<resultMap id="ProductMap" type="com.cst.service.model.Product">
+        <result property="productId" column="product_id"/>
+        <result property="name" column="name"/>
+        <result property="price" column="price"/>
+        <result property="costPrice" column="cost_price"/>
+        <result property="pic" column="pic"/>
+        <result property="description" column="description"/>
+        <result property="status" column="status"/>
+        <result property="code" column="code"/>
+        <result property="createByAdm" column="create_by_adm"/>
+        <result property="createDate" column="create_date"/>
+        <result property="updateByAdm" column="update_by_adm"/>
+        <result property="updateDate" column="update_date"/>
+        <result property="productUuid" column="product_uuid"/>
+        <result property="typeId" column="type_id"/>
+        <result property="typeIdStr" column="type_id_str"/>
+        <result property="license" column="license"/>
+        <result property="releaseDate" column="release_date"/>
+        <result property="standardNo" column="standard_no"/>
+        <result property="provenance" column="provenance"/>
+        <result property="brand" column="brand"/>
+        <result property="netContent" column="net_content"/>
+        <result property="barcode" column="barcode"/>
+        <result property="series" column="series"/>
+        <result property="storage" column="storage"/>
+        <result property="describes" column="describes"/>
+         <result property="picForAll" column="pic_for_all"/>
+         <result property="keywords" column="keywords"/>
+         <result property="descriptionSeo" column="description_seo"/>
+	</resultMap>
+	
+	
+	<resultMap id="ProductMapForList" type="com.cst.service.model.Product">
+        <result property="productId" column="product_id"/>
+        <result property="name" column="name"/>
+        <result property="price" column="price"/>
+        <result property="costPrice" column="cost_price"/>
+        <result property="pic" column="pic"/>
+        <result property="status" column="status"/>
+        <result property="code" column="code"/>
+        <result property="createByAdm" column="create_by_adm"/>
+        <result property="createDate" column="create_date"/>
+        <result property="updateByAdm" column="update_by_adm"/>
+        <result property="updateDate" column="update_date"/>
+        <result property="productUuid" column="product_uuid"/>
+        <result property="typeId" column="type_id"/>
+        <result property="typeIdStr" column="type_id_str"/>
+        <result property="capacity" column="capacity"/>
+         <result property="describes" column="describes"/>
+         <result property="paName" column="pa_name"/>
+         <result property="paValue" column="pa_value"/>
+         <result property="paUnit" column="pa_unit"/>
+         <result property="showCapacity" column="show_capacity"/>
+         <result property="picForAll" column="pic_for_all"/>
+	</resultMap>
+	<!-- 分页查询接口 -->
+	<select id="getProductListPage" parameterType="Product"
+		resultMap="ProductMapForList">
+		select pr.name as name 
+		,pr.price as price,
+		pr.cost_price as cost_price,
+		pr.pic as pic,
+		pr.status as status,
+		pr.code as code,
+		pr.product_uuid as product_uuid,
+		pr.type_id as type_id,
+		pa.parameter_name as type_id_str
+		
+		 from product pr, parameter pa where pr.create_by_adm = #{createByAdm}
+		and pr.type_id=pa.parameter_id
+		
+		<if test="name!=null and name!=''">
+		 and pr.name like CONCAT('%',#{name},'%' )
+		 </if>
+		 
+		 <if test="typeId!=null and typeId!='' and typeId!=100">
+		 and pr.type_id = #{typeId}
+		 </if>
+		 
+		  <if test="status!=null and status!='' and status!=100">
+		 and pr.status = #{status}
+		 </if>
+	</select>
+	
+	
+	<select id="getCartdbProductListPage" parameterType="Product"
+		resultMap="ProductMapForList">
+		select pr.name as name ,
+		pr.price as price, 
+		pr.cost_price as cost_price, 
+		pr.pic as pic, 
+		pr.status as status, 
+		pr.code as code, 
+		pr.product_uuid as product_uuid, 
+		pr.type_id as type_id, 
+		ca.num as capacity 
+		from product pr,cart ca where ca.create_by_user=#{createByAdm} and pr.status = 1 and pr.product_uuid=ca.product_uuid
+	</select>
+	
+	<select id="getCartcookieProductListPage" parameterType="Product"
+		resultMap="ProductMapForList">
+		select pr.name as name ,
+		pr.price as price,
+		 pr.cost_price as cost_price, 
+		 pr.pic as pic, 
+		 pr.status as status, 
+		 pr.code as code, 
+		 pr.product_uuid as product_uuid, 
+		 pr.type_id as type_id from product pr where pr.product_uuid in (${productUuid}) and pr.status = 1 
+	</select>
+	
+	<select id="getCartcookieProduct" parameterType="String"
+		resultMap="ProductMapForList">
+		select pr.name as name ,
+		pr.price as price,
+		pr.cost_price as cost_price,
+		pr.pic as pic,
+		pr.status as status,
+		pr.code as code,
+		pr.product_uuid as product_uuid,
+		pr.type_id as type_id,
+		pa.name as pa_name,
+		pa.value as pa_value,
+		pa.unit as pa_unit
+		from product pr,product_attribute pa where pr.product_uuid=pa.product_uuid and pr.product_uuid = #{productUuid} and pr.status = 1 and pa.status >-1
+	</select>
+	
+	<!-- 按编号查询 -->
+	<select id="getProductById" parameterType="String" resultMap="ProductMap">
+		select *
+		from product where product_uuid = #{productUuid}
+	</select>
+	
+	<!-- 按编号查询 -->
+	<select id="getProductByUuid" parameterType="String" resultMap="ProductMapForList">
+		select *
+		from product where product_uuid = #{productUuid}
+	</select>
+	
+	<select id="getProductForIndex" parameterType="String" resultMap="ProductMapForList">
+		select *
+		from product where status = 1 order by sort
+	</select>
+	
+	
+	<select id="getProductByType" parameterType="String" resultMap="ProductMapForList">
+		select *
+		from product where status = 1 and type_id=#{typeId}
+	</select>
+	
+	<!-- 添加 -->
+	<insert id="insertProduct" parameterType="Product" useGeneratedKeys="true" keyProperty="productId">
+        INSERT INTO product (
+        	name ,
+        	price ,
+        	cost_price ,
+        	pic ,
+        	description ,
+        	status ,
+        	code ,
+        	create_by_adm ,
+        	product_uuid ,
+        	type_id  ,
+        	license ,
+        	release_date ,
+        	standard_no ,
+        	provenance ,
+        	brand ,
+        	net_content 
+        	,
+        	barcode ,
+        	series ,
+        	sort ,
+        	storage ,
+        	describes,
+        	pic_for_all,
+        	keywords,
+        	description_seo
+        ) VALUES (
+        	#{name} ,
+        	#{price} ,
+        	#{costPrice} ,
+        	#{pic} ,
+        	#{description} ,
+        	#{status} ,
+        	#{code} ,
+        	#{createByAdm} ,
+        	#{productUuid} ,
+        	#{typeId} ,
+        	#{license} ,
+        	#{releaseDate} ,
+        	#{standardNo} ,
+        	#{provenance} ,
+        	#{brand} ,
+        	#{netContent}  ,
+        	#{barcode} ,
+        	#{series} ,
+        	#{sort} ,
+        	#{storage} ,
+        	#{describes},
+        	#{picForAll},
+        	#{keywords},
+        	#{descriptionSeo}
+        )
+	</insert>
+	<!-- 修改 -->
+	<update id="updateProduct" >
+        UPDATE product 
+        <trim prefix="SET" suffixOverrides=",">
+	        <if test="name!=null and name!=''">
+	        name = #{name},
+	        </if>
+	        <if test="picForAll!=null and picForAll!=''">
+	        pic_for_all = #{picForAll},
+	        </if>
+	        <if test="price!=null and price!=''">
+	        price = #{price},
+	        </if>
+	        <if test="costPrice!=null and costPrice!=''">
+	        cost_price = #{costPrice},
+	        </if>
+	        <if test="pic!=null and pic!=''">
+	        pic = #{pic},
+	        </if>
+	        <if test="description!=null and description!=''">
+	        description = #{description},
+	        </if>
+	        <if test="status!=null and status!=''">
+	        status = #{status},
+	        </if>
+	        <if test="code!=null and code!=''">
+	        code = #{code},
+	        </if>
+	        
+	        <if test="sort!=null and sort!=''">
+	        sort = #{sort},
+	        </if>
+	        <if test="createByAdm!=null and createByAdm!=''">
+	        create_by_adm = #{createByAdm},
+	        </if>
+	        <if test="createDate!=null and createDate!=''">
+	        create_date = #{createDate},
+	        </if>
+	        <if test="updateByAdm!=null and updateByAdm!=''">
+	        update_by_adm = #{updateByAdm},
+	        </if>
+	        <if test="1==1">
+	        update_date = now(),
+	        </if>
+	        <if test="productUuid!=null and productUuid!=''">
+	        product_uuid = #{productUuid},
+	        </if>
+	        <if test="typeId!=null and typeId!=''">
+	        type_id = #{typeId},
+	        </if>
+	        
+	        <if test="describes!=null and describes!=''">
+	        describes = #{describes},
+	        </if>
+	        
+	        
+	        <if test="1==1">
+	        license = #{license},
+	        release_date = #{releaseDate},
+	        standard_no = #{standardNo},
+	        provenance = #{provenance},
+	        brand = #{brand},
+	        net_content = #{netContent},
+	        barcode = #{barcode},
+	        series = #{series},
+	        storage = #{storage},
+	        keywords = #{keywords},
+	        description_seo = #{descriptionSeo},
+	        
+	        </if>
+	      </trim>  
+        WHERE 
+	        product_uuid = #{productUuid}
+	</update>
+	<!-- 删除 -->
+	<delete id="deleteProduct" parameterType="String">
+        UPDATE product set status = -1 WHERE
+        product_uuid = #{productUuid} 
+    </delete>
+	
+</mapper>
+

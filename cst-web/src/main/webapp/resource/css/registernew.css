@@ -1,0 +1,102 @@
+.regist_box {
+    margin: 0 auto;
+    overflow: hidden;
+    padding-top: 100px;
+    width: 730px;
+}
+.regist_form {
+    width: 340px;
+margin: 0 auto;
+}
+.regist_form h1 {
+    color: #c81623;
+    font-size: 36px;
+    font-weight: normal;
+    margin-bottom: 40px;
+}
+.regist_form p {
+    color: #999;
+    font-family: 'Microsoft YaHei';
+    font-size: 16px;
+    margin-top: 10px;
+}
+
+.telephone {
+    width: 340px;
+}
+.telephone a{
+    color: #c81623;
+    margin: 0 0 0 10px;
+    text-decoration: underline;
+}
+.password {
+    width: 340px;
+}
+.password a{
+    /*color: #c81623;*/
+    margin: 0 0 0 180px;
+    text-decoration: underline;
+}
+
+.registBtn {
+    background: none repeat scroll 0 0 #c81623;
+    border: 0 none;
+    color: #fff;
+    font-size: 21px;
+    height: 50px;
+    width: 335px;
+    border-radius: 10px;
+    padding-left: 20px;
+    cursor: pointer;
+}
+
+.tel-input,.paswd-input {
+    border: 1px solid #c3c3c3;
+    border-radius: 10px;
+    line-height: 32px;
+    padding: 10px;
+    width: 314px;
+    margin: 0;
+}
+.regist_footer {
+    color: #999999;
+    margin-top: 50px;
+    text-align: center;
+}
+.code-input {
+    border: 1px solid #c3c3c3;
+    border-radius: 10px;
+    line-height: 32px;
+    padding: 10px;
+    width: 150px;
+    margin: 0;
+}
+.code-btns {
+    background: none repeat scroll 0 0 #c81623;
+    border: 0 none;
+    color: #fff;
+    height: 50px;
+    font-size: 14px;
+    width: 150px;
+    border-radius: 10px;
+    line-height: 32px;
+    padding: 10px;
+    margin: 0 0 0 10px;
+    cursor: pointer;
+}
+
+.am-disabled {
+    pointer-events: none;
+    cursor: not-allowed;
+    opacity: .45;
+    box-shadow: none;
+}
+.tel-input  {
+    font-size: 12px;
+}
+.code-input {
+    font-size: 12px;
+}
+.paswd-input {
+    font-size: 12px;
+}

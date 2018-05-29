@@ -1,0 +1,278 @@
+body, a, h1, h2, p, ul, li, dl, dd, img.table,input{
+    -webkit-appearance: none;
+    margin: 0;
+    padding: 0;
+}
+
+a, img, h1, h2, p, ul, li, dl, dd {
+    display: block;
+}
+
+a {
+    text-decoration: none;
+}
+h1, h2 {
+    font-weight: normal;
+}
+img{
+    border:0;
+}
+ul, li{
+    list-style: none;
+}
+
+/*body{ font:"Helvetica Neue","Helvetica","Arial","Microsoft Yahei","Hiragino Sans GB","Heiti SC","WenQuanYi Micro Hei","sans-serif";}
+*/
+body, button, input, select, textarea, code{
+    font-family: Helvetica,"黑体",Arial,Tahoma;
+}
+
+.clear {
+    clear: both;
+}
+body{
+    position: relative;
+}
+
+
+
+
+
+/*头部*/
+.background{
+    width: 1000px;
+    margin: 0 auto;
+}
+.headerbox{
+    width: 85%;
+    margin: 0 auto;
+    height: 97px;
+}
+.headerbox img{
+    width: 98px;
+    float: left;
+}
+.headerbox ul{
+    float: right;
+    margin-top: 37px;
+}
+.headerbox ul>li{
+    float: left;
+}
+.headerbox ul>li>a{
+    padding: 0 30px;
+    line-height: 40px;
+    font-size: 14px;
+    color: #666666;
+}
+.headerbox ul>li>a:hover{
+    background-color:#38761d;
+    color: #FFFFFF;
+}
+/*底部*/
+.footer-all{
+    background-color: #ffffff;
+    padding: 20px 0;
+}
+
+.footerbox {
+    width: 100%;
+}
+
+.footer{
+    width: 1000px;
+    margin: 0 auto;
+    margin-top: 30px;
+
+}
+.footer img{
+    width: 100%;
+}
+
+.hang1{
+    width: 100%;
+}
+.line3 {
+    float: left;
+    width: 2px;
+    height: 27px;
+    background-color: #e7e7e7;
+    /*margin: 0 112px;*/
+}
+
+.hang1 p {
+    float: left;
+    font-size: 18px;
+    color: #4c4c4c;
+    width:28.74%;
+}
+
+.hang1 img {
+    float: left;
+    margin: 2px 10px 0 0;
+}
+
+.line4 {
+    float: left;
+    width: 1000px;
+    height: 1px;
+    background-color: #e7e7e7;
+    margin-top: 30px;
+}
+
+.line5 {
+    float: left;
+    width: 2px;
+    height: 105px;
+    background-color: #e7e7e7;
+}
+
+.contact {
+    float: right;
+}
+
+.contact p {
+    color: #00833f;
+    font-size: 25px;
+}
+
+.contact h2 {
+    color: #4c4c4c;
+    font-size: 13px;
+    text-align: right;
+    line-height: 20px;
+}
+
+.contact a {
+    float: right;
+    color: #00833f;
+    font-size: 13px;
+    border: solid 1px #00833f;
+    padding-right: 10px;
+    margin-top: 5px;
+}
+
+.picon{
+    font-size: 14px!important;
+    margin:0 5px 0 10px;
+}
+
+.footer1box {
+    width: 100%;
+    background: #ffffff;
+    height: 125px;
+    margin-top: 50px;
+}
+
+.footer1 {
+    width: 1000px;
+    margin: 0 auto;
+    margin-top: 30px;
+}
+
+.ficon{
+    font-size: 30px !important;
+    margin-right: 8px;
+    vertical-align: -4px;
+
+}
+.ficon1{
+    font-size: 24px !important;
+    margin-right: 8px;
+    vertical-align: -3px;
+
+}
+.ficon2{
+    font-size: 30px !important;
+    margin-right: 8px;
+    vertical-align: -5px;
+
+}
+
+.flogo {
+    float: left;
+    margin: 28px 90px 0 0;
+}
+
+.lianjie {
+    float: left;
+    width: 690px;
+    margin-top: 18px;
+}
+
+.lianjie li {
+    float: left;
+}
+
+/*.lianjie span {*/
+/*float: left;*/
+/*margin: 0 15px 0 15px;*/
+/*line-height: 36px;*/
+/*color: #666666;*/
+/*}*/
+
+.lianjie a{
+    float: left;
+    font-size: 13px;
+    color: #666666;
+    line-height: 36px;
+}
+
+.xinxi{
+    float: left;
+    font-size: 13px;
+    color: #666666;
+    line-height: 26px;
+    width: 907px;
+    background-image: url("http://bdhec.oss-cn-hangzhou.aliyuncs.com/note/beian.png");
+    background-repeat:no-repeat ;
+    background-position:0 3px;
+}
+
+
+.fmiddle{
+    float: left;
+}
+
+.weixin {
+    float: right;
+}
+
+.weixin h1 {
+    font-size: 12px;
+    color: #666666;
+    line-height: 20px;
+}
+
+.weixin img {
+    width: 100%;
+}
+
+.fwh {
+    float: right;
+    width: 60px;
+    margin: 23px 0 0 0;
+}
+
+.gzh {
+    float: right;
+    width: 60px;
+    margin: 23px 0 0 20px;
+}
+
+
+
+.productContent {
+    width: 1000px;
+    height: 670px;
+}
+
+
+
+.line7 {
+    float: left;
+    width: 100%;
+    height: 1px;
+    background-color: #D1D7DC;
+    margin:30px 0 30px 0;
+}

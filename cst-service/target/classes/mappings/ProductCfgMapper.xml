@@ -1,0 +1,131 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<!-- 使用namespace的话sql搜索定位会比较方便 -->
+<mapper namespace="com.cst.service.dao.ProductCfgMapper">
+
+	<resultMap id="ProductCfgMap" type="com.cst.service.model.ProductCfg">
+        <result property="productCfgId" column="product_cfg_id"/>
+        <result property="productUuid" column="product_uuid"/>
+        <result property="state" column="state"/>
+        <result property="sort" column="sort"/>
+        <result property="createByAdm" column="create_by_adm"/>
+        <result property="createDate" column="create_date"/>
+        <result property="type" column="type"/>
+        <result property="typeStr" column="type_str"/>
+        <result property="name" column="name"/>
+        <result property="pic" column="pic"/>
+        <result property="picUrl" column="pic_url"/>
+        <result property="price" column="price"/>
+        
+	</resultMap>
+	<!-- 分页查询接口 -->
+	<select id="getProductCfgListPage" parameterType="ProductCfg"
+		resultMap="ProductCfgMap">
+		select 
+		pdc.product_cfg_id as product_cfg_id,
+		pdc.sort as sort,
+		pr.name as name ,
+		pdc.pic_url as pic_url,
+		pa.parameter_name as type_str
+		
+		 from product_cfg pdc ,product pr, parameter pa
+		
+		where pdc.create_by_adm = #{createByAdm}
+		and pdc.type=pa.parameter_id
+		and pdc.product_uuid = pr.product_uuid
+		
+		
+	</select>
+	
+	<select id="getProductCfgListByType" parameterType="ProductCfg"
+		resultMap="ProductCfgMap">
+		select 
+		pr.product_uuid as product_uuid,
+		pr.name as name ,
+		pdc.pic_url as pic_url,
+		pr.price as price,
+		pdc.type as type
+		
+		 from product_cfg pdc ,product pr
+		
+		where pdc.state = 1
+		and pdc.product_uuid = pr.product_uuid
+		order by pdc.sort
+	</select>
+	
+	
+	<!-- 按编号查询 -->
+	<select id="getProductCfgById" parameterType="int" resultMap="ProductCfgMap">
+	
+	select 
+		pdc.product_cfg_id as product_cfg_id,
+		pdc.sort as sort,
+		pr.name as name ,
+		pdc.pic_url as pic_url,
+		pa.parameter_name as type_str
+		
+		 from product_cfg pdc ,product pr, parameter pa
+		
+		 where  pdc.product_cfg_id = #{productCfgId}
+		 and pdc.type=pa.parameter_id
+		and pdc.product_uuid = pr.product_uuid
+	</select>
+	<!-- 添加 -->
+	<insert id="insertProductCfg" parameterType="ProductCfg" >
+        INSERT INTO product_cfg (
+        	product_uuid ,
+        	state ,
+        	sort ,
+        	create_by_adm ,
+        	type ,
+        	pic_url
+        ) VALUES (
+        	#{productUuid} ,
+        	#{state} ,
+        	#{sort} ,
+        	#{createByAdm} ,
+        	#{type} ,
+        	#{picUrl}
+        )
+	</insert>
+	<!-- 修改 -->
+	<update id="updateProductCfg" >
+        UPDATE product_cfg 
+        <trim prefix="SET" suffixOverrides=",">
+	        <if test="productUuid!=null and productUuid!=''">
+	        product_uuid = #{productUuid},
+	        </if>
+	        <if test="picUrl!=null and picUrl!=''">
+	        pic_url = #{picUrl},
+	        </if>
+	        <if test="state!=null and state!=''">
+	        state = #{state},
+	        </if>
+	        <if test="sort!=null and sort!=''">
+	        sort = #{sort},
+	        </if>
+	        <if test="createByAdm!=null and createByAdm!=''">
+	        create_by_adm = #{createByAdm},
+	        </if>
+	        <if test="createDate!=null and createDate!=''">
+	        create_date = #{createDate},
+	        </if>
+	        <if test="type!=null and type!=''">
+	        type = #{type},
+	        </if>
+	      </trim>  
+        WHERE 
+	        product_cfg_id = #{productCfgId} 
+	</update>
+	<!-- 删除 -->
+	<delete id="deleteProductCfg" parameterType="int">
+        delete from product_cfg WHERE
+        product_cfg_id = #{productCfgId} 
+    </delete>
+	
+</mapper>
+

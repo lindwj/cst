@@ -1,0 +1,102 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<!-- 使用namespace的话sql搜索定位会比较方便 -->
+<mapper namespace="com.cst.service.dao.WxAgentFinancialMapper">
+
+	<resultMap id="WxAgentFinancialMap" type="com.cst.service.model.WxAgentFinancial">
+        <result property="wxAgentFinancialId" column="wx_agent_financial_id"/>
+        <result property="agentId" column="agent_id"/>
+        <result property="day" column="day"/>
+        <result property="createDate" column="create_date"/>
+        <result property="status" column="status"/>
+        <result property="amount" column="amount"/>
+        <result property="transferDate" column="transfer_date"/>
+        <result property="transferUser" column="transfer_user"/>
+        <result property="payType" column="pay_type"/>
+	</resultMap>
+	<!-- 分页查询接口 -->
+	<select id="getWxAgentFinancialListPage" parameterType="WxAgentFinancial"
+		resultMap="WxAgentFinancialMap">
+		select * from wx_agent_financial
+		<!-- <trim prefix="WHERE" prefixOverrides="AND | OR"> -->
+	</select>
+	<select id="getWxAgentTotal" parameterType="WxAgentFinancial"
+		resultMap="WxAgentFinancialMap">
+		select SUM(amount) as amount from wx_agent_financial 
+		where agent_id=#{agentId} 
+		and day=#{day} 
+		group by day
+	</select>
+	<!-- 按编号查询 -->
+	<select id="getWxAgentFinancialById" parameterType="int" resultMap="WxAgentFinancialMap">
+		select *
+		from wx_agent_financial where wx_agent_financial_id = #{wxAgentFinancialId}
+	</select>
+	<!-- 添加 -->
+	<insert id="insertWxAgentFinancial" parameterType="WxAgentFinancial" useGeneratedKeys="true" keyProperty="wxAgentFinancialId">
+        INSERT INTO wx_agent_financial (
+        	wx_agent_financial_id ,
+        	agent_id ,
+        	day ,
+        	create_date ,
+        	status ,
+        	amount ,
+        	transfer_date ,
+        	transfer_user ,
+        	pay_type 
+        ) VALUES (
+        	#{wxAgentFinancialId} ,
+        	#{agentId} ,
+        	#{day} ,
+        	#{createDate} ,
+        	#{status} ,
+        	#{amount} ,
+        	#{transferDate} ,
+        	#{transferUser} ,
+        	#{payType} 
+        )
+	</insert>
+	<!-- 修改 -->
+	<update id="updateWxAgentFinancial" >
+        UPDATE wx_agent_financial 
+        <trim prefix="SET" suffixOverrides=",">
+	        <if test="agentId!=null and agentId!=''">
+	        agent_id = #{agentId},
+	        </if>
+	        <if test="day!=null and day!=''">
+	        day = #{day},
+	        </if>
+	        <if test="createDate!=null and createDate!=''">
+	        create_date = #{createDate},
+	        </if>
+	        <if test="status!=null and status!=''">
+	        status = #{status},
+	        </if>
+	        <if test="amount!=null and amount!=''">
+	        amount = #{amount},
+	        </if>
+	        <if test="transferDate!=null and transferDate!=''">
+	        transfer_date = #{transferDate},
+	        </if>
+	        <if test="transferUser!=null and transferUser!=''">
+	        transfer_user = #{transferUser},
+	        </if>
+	        <if test="payType!=null and payType!=''">
+	        pay_type = #{payType},
+	        </if>
+	      </trim>  
+        WHERE 
+	        wx_agent_financial_id = #{wxAgentFinancialId} 
+	</update>
+	<!-- 删除 -->
+	<delete id="deleteWxAgentFinancial" parameterType="int">
+        UPDATE wx_agent_financial set state='X' WHERE
+        wx_agent_financial_id = #{wxAgentFinancialId} 
+    </delete>
+	
+</mapper>
+

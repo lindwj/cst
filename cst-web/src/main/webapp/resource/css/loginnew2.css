@@ -1,0 +1,71 @@
+@charset "UTF-8";
+/* CSS Document */
+body,a,h1,li,ul,dl,dd,p,img,input{ padding:0; margin:0;}
+/*body{ background:#F8F8F8; font-family: tahoma, arial, 'Hiragino Sans GB', 宋体, sans-serif; }*/
+a,img{ display:block;}
+a{ text-decoration:none;}
+li,ul,dl,dd{ list-style:none;}
+h1,h2{ font-weight:normal;}
+.clear{ clear:both;}
+
+body, button, input, select, textarea, code{
+    font-family: "Microsoft Yahei","微软雅黑",verdana;
+
+}
+
+
+.headerbox{ width:100%;}
+.header{width:1180px; height:88px; margin-left:auto; margin-right:auto;}
+.header img{
+    float:left;
+    margin-top:9px;
+    height: 74px;
+    width: 74px;
+}
+
+
+.bannerbox{ width:100%; height:600px; background-color:#e4001a;}
+.banner{width:1180px; height:600px; margin-left:auto; margin-right:auto; position:relative; overflow:hidden;}
+.im1{ position:absolute; top:15%;}
+.im2{ position:absolute; top:29%; left:39%;}
+.im3{ position:absolute; top:46%; left:46%;}
+.im4{ position:absolute; top:67%; left:47%;}
+.dlk{ width:350px; height:390px; background:#ffffff; position:absolute; top:20%; left:62%;}
+.zhdd{ font-size:20px; color:#666; font-weight:600; margin-top:30px; margin-left:25px;}
+.dxk{ float:left; margin-top:30px; margin-left:25px;}
+.jzmm{ float:left; font-size:13px; color:#666; margin-top:26px; margin-left:8px;}
+.wjmm{ float:right; font-size:13px; color:#666; margin-top:26px; margin-right:25px;}
+.wjmm:hover{ text-decoration:underline; color:#e4001a;}
+.login{ float:left; width:300px; line-height:40px; background:#e4001a; margin-top:31px; margin-left:25px; color:white; font-size:20px; text-align:center;}
+.login:hover{ background:#f01a33;color:#ffffff;}
+.zhuce{ float:left; font-size:13px; color:#3d3d3d; margin-top:30px; text-align:center; width:350px;}
+.zhuce:hover{ text-decoration:underline; color:#e4001a;}
+
+
+
+
+
+
+.input {
+    margin-top:30px;
+    margin-left:25px;
+}
+.input img{
+    width:40px;
+    height:40px;
+    border:solid 1px #666;
+    display: inline-block;
+    float: left;
+}
+
+.input input{
+    width:248px;
+    height:38px;
+    border:solid 1px #666;
+    padding-left: 10px;
+    font-size:14px;
+    background-repeat:no-repeat;
+    outline:medium;
+    cursor:pointer;
+}
+

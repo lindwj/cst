@@ -1,0 +1,434 @@
+.index_box{
+    width: 100%;
+}
+body{
+    background-color: #f7f7f7;
+}
+
+/*提交订单确认订单页面*/
+.orderup{
+    margin-top: 43px;
+}
+.header{
+    background-color: #ffffff;
+    padding:13px 0 ;
+    border-bottom:  1px solid #d9d9d9;
+    position: fixed;
+    top:0;
+    left: 0;
+    right: 0;
+}
+.header p{
+    font-size: 1em;
+    color: #333333;
+    text-align: center;
+}
+.arrow{
+    position: absolute;
+    top:9px;
+    left: 4%;
+}
+.arrowicon{
+    font-size: 1.3em!important;
+    vertical-align: -5px;
+}
+
+
+
+
+
+.order_confirm{
+    margin-top: 49px;
+}
+.order_state{
+    background-color: #ffffff;
+    padding: 10px 0;
+    margin-bottom: 15px;
+}
+.order_state h1{
+    float: left;
+    color: #333;
+    margin:10px 0 0 4%;
+}
+.stateicon{
+    font-size: 0.7em!important;
+}
+.order_state p{
+    float: left;
+    font-size: 0.8em;
+    color: #333;
+    margin-left: 15px;
+    width: 70%;
+    line-height: 20px;
+}
+.order_state h2{
+    float: right;
+    color: #333;
+    margin:19px 3% 0 0 ;
+}
+.adresicon{
+    font-size: 0.7em!important;
+}
+
+
+
+/*order*/
+.order_box{
+    background-color: #ffffff;
+    padding: 15px 0;
+}
+.img_box{
+    width: 70px;
+    height: 70px;
+    float: left;
+    margin-left: 4%;
+}
+.img_box img{
+    width: 100%;
+    height: 100%;
+}
+.middle{
+    float: left;
+    margin-left: 4%;
+}
+.title{
+    float: left;
+    font-size: 0.7em;
+    width: 125px;
+    color: #333;
+    overflow: hidden;
+    line-height: 16px;
+    height: 20px;
+}
+.escp{
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.parameter{
+    font-size: 0.5em;
+    color:#a6a6a6;
+    margin-top: 5px;
+}
+.right{
+    float: right;
+    margin-right: 4%;
+}
+.price{
+    color:#333;
+    font-size: 0.8em;
+}
+.num{
+    text-align: right;
+    font-size: 0.8em;
+    color:#a6a6a6;
+    margin-top:2px;
+}
+
+
+/*合计以及运费*/
+.selttment_box{
+    background-color: #ffffff;
+    margin-top: 15px;
+}
+.seltm1, .seltm2, .seltm3{
+    width: 92%;
+    margin-left: 4%;
+    padding: 13px 4% 13px 0;
+}
+.seltm1, .seltm2{
+    border-bottom: 1px solid #f2f2f2;
+}
+.p1, .p2{
+    font-size: 0.8em;
+    color: #333333;
+}
+.p1{
+    float: left;
+}
+.p2{
+    float: right;
+}
+.p3{
+	text-align:right;
+	width:60%;
+    float: right;
+    border:0;
+}
+/*留白*/
+.white{
+    height: 60px;
+}
+
+
+/*footer*/
+.footer{
+    background-color:#ffffff;
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    border-top: solid 1px #f2f2f2;
+}
+.selt{
+    float: right;
+    font-size: 0.8em;
+    color:#d7282d ;
+    line-height: 42px;
+    height: 42px;
+}
+.selt_price{
+    float: right;
+    font-size: 1em;
+    color:#d7282d ;
+    line-height: 42px;
+    height: 42px;
+    margin-right: 15px;
+}
+
+.buy{
+    width: 29%;
+    float: right;
+    background-color: #d7282d;
+    font-size: 0.8em;
+    color: #ffffff;
+    line-height: 42px;
+    height: 42px;
+    text-align: center;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*新建地址*/
+/*添加新地址*/
+.newaddress{
+    margin-top: 43px;
+    display: none;
+}
+.add_detail{
+    background-color: #ffffff;
+    border-bottom:1px solid #d9d9d9 ;
+}
+.add_name, .add_tel, .add_address, .add_city{
+    outline: none;
+    border: 0;
+}
+.add_address{
+    width: 96%;
+    margin-left: 4%;
+    padding:1.5em 0;
+    font-size: 0.9em;
+    color: #333;
+}
+.add_style{
+    border-bottom:1px solid #d9d9d9 ;
+    width: 96%;
+    margin-left: 4%;
+    padding:1.5em 0;
+    font-size: 0.9em;
+    color: #333;
+}
+/*设为默认地址*/
+.default_box{
+    width: 100%;
+    background-color: #fafafa;
+    border-bottom:1px solid #d9d9d9 ;
+    position: relative;
+}
+.auto_box{
+    width: 110px;
+    margin: 0 auto;
+}
+.default{
+    float: left;
+    font-size: 0.9em;
+    line-height: 3em;
+    margin-left: 8px;
+    height: 2.8em;
+}
+.defaulticon{
+    float: left;
+    width: 0.8em;
+    height:  0.8em;
+    border-radius: 50%;
+    background-color:#d7282d;
+    border: 1px solid #d7282d ;
+    margin-top: 0.8em;
+}
+.checked{
+    background-color:#ffffff;
+    border: 1px solid #cccccc;
+}
+.deficon{
+    font-size: 0.8em!important;
+    color:#ffffff;
+    vertical-align: 6px;
+    display: block;
+}
+
+/*保存地址*/
+.save_address{
+    left: 0;
+    right: 0;
+    bottom: 0;
+    position: fixed;
+}
+.save_address a{
+    color: #ffffff;
+    text-align: center;
+    padding: 13px 0;
+    font-size: 0.9em;
+    background-color:#d7282d;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*地址列表*/
+/*所有地址*/
+.alladdress{
+    margin-top: 43px;
+    display: none;
+}
+.address_box{
+    background-color: #ffffff;
+    padding: 10px 0;
+    width: 100%;
+    border-bottom: 1px solid #f2f2f2;
+}
+.name, .tele, .address{
+    font-size: 0.8em;
+    color: #666666;
+}
+.name{
+    float: left;
+    margin-left: 4%;
+}
+.tele{
+    float: right;
+    margin-right: 4%;
+}
+.address{
+    float: left;
+    width: 92%;
+    margin:10px 0 0 4% ;
+}
+
+
+
+
+.address_footer{
+    background-color: #ffffff;
+    padding: 10px 0;
+    margin-bottom: 15px;
+}
+/*checkbox*/
+.defaulticon1{
+    float: left;
+    width: 0.8em;
+    height:  0.8em;
+    border-radius: 50%;
+    border: 1px solid #666;
+    margin: 0.2em 5px 0 4%;
+}
+.checked{
+    background-color:#d7282d;
+    border: 1px solid #d7282d ;
+}
+.deficon1{
+    font-size: 0.8em!important;
+    color:#ffffff;
+    vertical-align: 6px;
+    display: none;
+}
+.default1 {
+    font-size: 0.8em;
+    color: #666666;
+    vertical-align: 2px;
+}
+.dele, .edit{
+    float: right;
+    font-size: 0.8em;
+    color: #666666;
+}
+.dele{
+    margin-right: 4%;
+}
+.edit{
+    margin-right: 10px;
+}
+.dicon, .eicon{
+    font-size: 1.5em!important;
+    vertical-align: -3px;
+    padding-right: 3px;
+}
+.eicon{
+    padding-right: 4px;
+}
+
+
+
+.white{
+    height: 80px;
+}
+
+/*添加新地址*/
+.addnew{
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+.addnew a{
+    color: #ffffff;
+    text-align: center;
+    padding: 13px 0;
+    font-size: 0.9em;
+    background-color:#d7282d;
+}
+.order_state1{
+    background-color: #ffffff;
+    padding: 10px 0;
+    margin-bottom: 15px;
+}
+.order_state1 h1{
+    float: left;
+    color: #333;
+    margin:0 0 0 4%;
+}
+.order_state1 p{
+    float: left;
+    font-size: 0.8em;
+    color: #d7282d;
+    margin-left: 77px;
+    line-height: 48px;
+}
+.order_state1 h2{
+    float: right;
+    color: #333;
+    margin:5px 3% 0 0 ;
+}
+.stateicon1{
+    font-size: 0.7em!important;
+}

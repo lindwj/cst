@@ -1,0 +1,48 @@
+body{
+    background-color:#40392b ;
+    position: relative;
+}
+
+
+.index_box{
+    width: 100%;
+}
+.brand_header{
+    width: 100%;
+    background-color: #b4a078;
+    height: 45px;
+    line-height: 45px;
+    position: relative;
+}
+.brand_title{
+    font-size: 1.1em;
+    text-align: center;
+    color: #FFFFFF;
+}
+
+.confirm{
+    margin-top: 50px;
+}
+.confirm p{
+    font-size: 1em;
+    color: #FFFFFF;
+    text-align: center;
+}
+.phoneicon{
+    font-size:6em!important;
+    margin-bottom: 20px;
+}
+#confirm{
+    background-color: #b4a078;
+    width: 80%;
+    color: #FFFFFF;
+    border-radius: 4px;
+    line-height: 35px;
+    height: 35px;
+    text-align: center;
+    margin:20px auto;
+    font-size: 1.2em;
+}
+#confirm:hover{
+    background-color:#bfaa80;
+}

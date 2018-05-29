@@ -1,0 +1,163 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<!-- 使用namespace的话sql搜索定位会比较方便 -->
+<mapper namespace="com.cst.service.dao.OrdersDetailMapper">
+
+	<resultMap id="OrdersDetailMap" type="com.cst.service.model.OrdersDetail">
+        <result property="ordersDetailId" column="orders_detail_id"/>
+        <result property="productUuid" column="product_uuid"/>
+        <result property="subject" column="subject"/>
+        <result property="pic" column="pic"/>
+        <result property="productName" column="product_name"/>
+        <result property="showCapacity" column="show_capacity"/>
+        <result property="sellCapacity" column="sell_capacity"/>
+        <result property="price" column="price"/>
+        <result property="capacity" column="capacity"/>
+        <result property="code" column="code"/>
+	</resultMap>
+	<!-- 分页查询接口 -->
+	<select id="getOrdersDetailListPage" parameterType="OrdersDetail"
+		resultMap="OrdersDetailMap">
+		select * from orders_detail
+		<!-- <trim prefix="WHERE" prefixOverrides="AND | OR"> -->
+	</select>
+	
+	<select id="getOrdersDetailList" parameterType="OrdersDetail"
+		resultMap="OrdersDetailMap">
+	select pr.name as product_name 
+		,pr.price as price,
+		pr.pic as pic,
+		pr.product_uuid as product_uuid,
+		st.show_capacity as show_capacity,
+		st.sell_capacity as sell_capacity
+		
+		from product pr left join stock st on  st.product_uuid=pr.product_uuid and st.shop_id = #{shopId}
+		where pr.product_uuid in (${productUuid}) and pr.status = 1
+	</select>
+	
+	
+	<select id="getOrdersDetailListNoshop" parameterType="OrdersDetail"
+		resultMap="OrdersDetailMap">
+	select pr.name as product_name 
+		,pr.price as price,
+		pr.pic as pic,
+		pr.product_uuid as product_uuid,
+		0 as show_capacity,
+		0 as sell_capacity
+		
+		 from product pr 
+		  where pr.product_uuid in (${productUuid}) and pr.status = 1
+	</select>
+	
+	
+	<select id="getOrdersDetailStockList" parameterType="OrdersDetail"
+		resultMap="OrdersDetailMap">
+	select 
+		pr.product_uuid as product_uuid,
+		st.show_capacity as show_capacity,
+		st.sell_capacity as sell_capacity
+		
+		 from product pr left join stock st on  st.product_uuid=pr.product_uuid and st.shop_id = #{shopId}
+		  where pr.product_uuid in (${productUuid}) and pr.status = 1
+	</select>
+	
+	<select id="getOrdersDetailNoList" parameterType="OrdersDetail"
+		resultMap="OrdersDetailMap">
+	select pr.name as product_name 
+		,pr.price as price,
+		pr.pic as pic,
+		pr.product_uuid as product_uuid,
+		0 as show_capacity
+		
+		 from product pr
+		  where pr.product_uuid in (${productUuid}) and pr.status = 1
+	</select>
+	
+	<!-- 按编号查询 -->
+	<select id="getOrdersDetailById" parameterType="String" resultMap="OrdersDetailMap">
+		select *
+		from orders_detail where code = #{code}
+	</select>
+	<!-- 添加 -->
+	<insert id="insertOrdersDetail" parameterType="OrdersDetail" useGeneratedKeys="true" keyProperty="ordersDetailId">
+        INSERT INTO orders_detail (
+        	orders_detail_id ,
+        	product_uuid ,
+        	subject ,
+        	pic ,
+        	product_name ,
+        	price ,
+        	capacity ,
+        	code 
+        ) VALUES (
+        	#{ordersDetailId} ,
+        	#{productUuid} ,
+        	#{subject} ,
+        	#{pic} ,
+        	#{productName} ,
+        	#{price} ,
+        	#{capacity} ,
+        	#{code} 
+        )
+	</insert>
+	
+	<insert id="insertOrdersDetailAll" parameterType="OrdersDetail" >
+        INSERT INTO orders_detail (
+        	product_uuid ,
+        	pic ,
+        	product_name ,
+        	price ,
+        	capacity ,
+        	code 
+        ) VALUES <foreach collection="list" item="item" index="index" separator="," > 
+    		(#{item.productUuid} ,
+        	#{item.pic} ,
+        	#{item.productName} ,
+        	#{item.price} ,
+        	#{item.capacity},
+        	#{item.code} 
+        )  
+    </foreach> 
+	</insert>
+	
+	<!-- 修改 -->
+	<update id="updateOrdersDetail" >
+        UPDATE orders_detail 
+        <trim prefix="SET" suffixOverrides=",">
+	        <if test="productUuid!=null and productUuid!=''">
+	        product_uuid = #{productUuid},
+	        </if>
+	        <if test="subject!=null and subject!=''">
+	        subject = #{subject},
+	        </if>
+	        <if test="pic!=null and pic!=''">
+	        pic = #{pic},
+	        </if>
+	        <if test="productName!=null and productName!=''">
+	        product_name = #{productName},
+	        </if>
+	        <if test="price!=null and price!=''">
+	        price = #{price},
+	        </if>
+	        <if test="capacity!=null and capacity!=''">
+	        capacity = #{capacity},
+	        </if>
+	        <if test="code!=null and code!=''">
+	        code = #{code},
+	        </if>
+	      </trim>  
+        WHERE 
+	        orders_detail_id = #{ordersDetailId} 
+	</update>
+	<!-- 删除 -->
+	<delete id="deleteOrdersDetail" parameterType="int">
+        UPDATE orders_detail set state='X' WHERE
+        orders_detail_id = #{ordersDetailId} 
+    </delete>
+	
+</mapper>
+

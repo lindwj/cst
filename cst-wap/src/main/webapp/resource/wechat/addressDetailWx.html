@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>添加新地址</title>
+    <link rel="icon" type="images/png" href="images/logo.png" />
+	<meta name="format-detection" content="telephone=no" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+	<meta http-equiv="Pragma" content="no-cache" />
+	<meta http-equiv="Expires" content="0" />
+    
+    <link rel="stylesheet" type="text/css" href="common/iconfont.css">
+    <link rel="stylesheet" type="text/css" href="common/common.css">
+    <link rel="stylesheet" type="text/css" href="common/LArea.css">
+    <link rel="stylesheet" type="text/css" href="addressDetailWx/addressDetailWx.css">
+</head>
+<body>
+
+
+<div class="index_box">
+
+    <div class="header">
+        <p class="arrow"><i class="iconfont arrowicon">&#xe64c;</i></p>
+        <p></p>
+        <div class="clear"></div>
+    </div>
+
+
+    <div class="add_detail">
+        <input class="add_name add_style" type="text" placeholder="姓名">
+        <input class="add_tel add_style" type="text" placeholder="手机号码">
+        <input class="add_city add_style" readonly="true" placeholder="省份、城市、区县">
+        <select class="add_street add_style" type="text" >
+       	</select> 
+        <input class="add_address" type="text" placeholder="详细地址，如楼盘号等">
+		<input class="value" type="hidden" value="">
+		<input class="location" type="hidden" value="">
+    </div>
+
+    <div class="default_box">
+        <div class="auto_box">
+            <p class="defaulticon"><i class="iconfont deficon">&#xe662;</i></p>
+            <p class="default">设为默认地址</p>
+            <div class="clear"></div>
+        </div>
+    </div>
+
+
+</div>
+
+<div class="save_address">
+    <a href="#">保存</a>
+</div>
+<div class="alert"></div>
+
+
+
+<script src="common/jquery-1.7.2.min.js"></script>
+<script src="common/link.js"></script>
+<script src="common/LArea.js"></script>
+<script src="common/LAreaData1.js"></script>
+<script src="common/LAreaData2.js"></script>
+<script src="addressDetailWx/addressDetailWx.js"></script>
+</body>
+</html>

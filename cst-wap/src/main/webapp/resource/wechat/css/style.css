@@ -1,0 +1,541 @@
+@import 'http://at.alicdn.com/t/font_587422_xws09vkv26na5rk9.css';
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 100;
+}
+h1 {
+  font-size: 30px;
+}
+h2 {
+  font-size: 24px;
+}
+h3 {
+  font-size: 16px;
+}
+h4 {
+  font-size: 14px;
+}
+h5 {
+  font-size: 12px;
+}
+h6 {
+  font-size: 10px;
+}
+h3,
+h4,
+h5 {
+  margin-top: 5px;
+  font-weight: 600;
+}
+ul li {
+  list-style: none;
+}
+.clearfix:after,
+.content:after {
+  content: ".";
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden;
+}
+.clearfix,
+.content {
+  zoom: 1;
+}
+.mirco {
+  background: #f1f1f1;
+  max-width: 640px;
+  margin: 0 auto;
+  overflow: hidden;
+  position: relative;
+}
+.mirco .mic_top img {
+  width: 100%;
+}
+.mirco .vote_totle {
+  padding: 16px 0;
+  border-bottom: 1px solid #e1e1e1;
+  display: flex;
+}
+.mirco .vote_totle .vote_list {
+  text-align: center;
+  border-right: 1px solid #ccc;
+  width: 33%;
+}
+.mirco .vote_totle .vote_list:last-child {
+  border: none;
+}
+.mirco .vote_last_time {
+  padding: 16px 0;
+  text-align: center;
+}
+.mirco .vote_last_time p {
+  color: #999;
+}
+.mirco .vote_last_time .mic_time {
+  padding: 12px 0;
+}
+.mirco .vote_last_time .mic_time span {
+  background: #fff;
+  padding: 12px;
+  line-height: 20px;
+  display: inline;
+}
+.mirco .mic_search {
+  margin: 8px 16px;
+}
+.mirco .mic_search .col-sm-12 {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 8px;
+}
+.mirco .mic_search .col-sm-12 input {
+  width: 65%;
+  border: none;
+  background: none;
+}
+.mirco .mic_search .col-sm-12 button {
+  width: 30%;
+  float: right;
+  background: none;
+  border: none;
+  text-align: center;
+  border-left: 1px solid #ccc;
+}
+.mirco .vote_infor {
+  column-count: 2;
+  column-gap: 0;
+}
+.mirco .vote_infor .col-sm-6 {
+  break-inside: avoid;
+  box-sizing: border-box;
+  width: 100%;
+}
+.mirco .vote_infor .col-sm-6 img {
+  width: 100%;
+}
+.mirco .vote_infor .col-sm-6 .vote {
+  position: absolute;
+  left: 16px;
+  top: 0;
+  background: rgba(0, 0, 0, 0.6);
+  color: #fff;
+  padding: 4px;
+}
+.mirco .vote_infor .col-sm-6 p {
+  background: #fff;
+  padding: 8px;
+}
+.mirco .vote_infor .col-sm-6 a.vote_add {
+  position: absolute;
+  bottom: 16px;
+  right: 20px;
+  border: 1px solid #f50;
+  width: 48px;
+  height: 48px;
+  border-radius: 24px;
+  background: #fff;
+  text-align: center;
+  line-height: 48px;
+  text-decoration: none;
+  color: #f50;
+}
+.mirco .vote_infor a.vote_more {
+  text-align: center;
+  display: block;
+}
+.mirco .vote_con {
+  display: inline-block;
+  margin: 16px 0;
+  width: 100%;
+}
+.mirco .vote_con h3 {
+  font-size: 16px;
+  font-weight: 700;
+  text-align: center;
+  border-top: 1px dashed #ccc;
+  border-bottom: 1px dashed #ccc;
+  padding: 16px;
+}
+.mirco .vote_con h4 {
+  font-size: 18px;
+  font-weight: normal;
+  text-align: center;
+  padding: 12px 0;
+}
+.mirco .vote_con .pro_infor {
+  padding: 0 16px;
+  line-height: 26px;
+}
+.mirco .vote_con .pro_infor span.text-red {
+  color: #f50;
+}
+.mirco .vote_img {
+  padding: 16px;
+  margin: 0 0 32px 0;
+}
+.mirco .vote_img dl dd img {
+  width: 100%;
+}
+.mirco .mic_nav {
+  position: fixed;
+  bottom: 0;
+  margin: 0 auto;
+  max-width: 640px;
+  width: 100%;
+  background: #fff;
+  padding: 8px 0;
+}
+.mirco .mic_nav dl {
+  margin: 0;
+  display: flex;
+}
+.mirco .mic_nav dl dd {
+  width: 33%;
+  text-align: center;
+}
+.mirco .mic_nav dl dd a.gif_vote {
+  width: 60px;
+  height: 60px;
+  border-radius: 30px;
+  background: #fff;
+  border: 4px solid #c13bf0;
+  display: inline-block;
+  color: #c13bf0;
+  position: absolute;
+  top: -30px;
+  z-index: 103;
+  left: 50%;
+  margin-left: -30px;
+}
+.mirco .mic_nav dl dd a.gif_vote i.iconfont {
+  width: 100%;
+  display: block;
+  color: #f00;
+  font-size: 18px;
+  padding: 0;
+}
+.mirco .mic_nav dl dd a.gif_vote:link,
+.mirco .mic_nav dl dd a.gif_vote:hover {
+  text-decoration: none;
+}
+.mirco .mic_nav dl dd a {
+  color: #333;
+}
+.mirco .mic_nav dl dd a i.iconfont {
+  width: 100%;
+  display: block;
+  font-size: 20px;
+  color: #333;
+}
+.mirco .mic_nav dl dd a:hover,
+.mirco .mic_nav dl dd a:link {
+  text-decoration: none;
+}
+.mirco .mic_nav dl dd.active a,
+.mirco .mic_nav dl dd:hover a {
+  color: #1267c3;
+}
+.mirco .mic_nav dl dd.active a i.iconfont,
+.mirco .mic_nav dl dd:hover a i.iconfont {
+  color: #1267c3;
+}
+.mirco .mic_tab {
+  padding: 16px 0;
+  display: block;
+  margin: 0 16px;
+}
+.mirco .mic_tab ul {
+  border: 1px solid #ccc;
+  display: flex;
+  background: #fff;
+}
+.mirco .mic_tab ul li {
+  width: 50%;
+  text-align: center;
+  padding: 8px 0;
+  border-right: 1px solid #ccc;
+}
+.mirco .mic_tab ul li a {
+  display: block;
+  width: 100%;
+}
+.mirco .mic_tab ul li a:hover,
+.mirco .mic_tab ul li a:link {
+  text-decoration: none;
+}
+.mirco .mic_tab ul li:last-child {
+  border: none;
+}
+.mirco .mirc_tab_list {
+  padding: 0 16px 16px 16px;
+}
+.mirco .mirc_tab_list dl dd {
+  display: flex;
+  padding: 24px 0 8px 0;
+  width: 100%;
+  border-bottom: 1px solid #ccc;
+  position: relative;
+}
+.mirco .mirc_tab_list dl dd .tab_img {
+  padding: 0 16px 0 0;
+}
+.mirco .mirc_tab_list dl dd .tab_img img {
+  border-radius: 24px;
+  width: 48px;
+  height: 48px;
+}
+.mirco .mirc_tab_list dl dd .tab_img.top_three {
+  position: relative;
+}
+.mirco .mirc_tab_list dl dd .tab_img.top_three .icon-top {
+  font-size: 24px;
+  position: absolute;
+  color: #fe0;
+  top: -24px;
+  left: 12px;
+}
+.mirco .mirc_tab_list dl dd .ranking {
+  position: absolute;
+  right: 16px;
+  top: 16px;
+  font-size: 20px;
+}
+.mirco .mirc_tab_list dl dd .ranking.rankong_red {
+  color: #f50;
+}
+.mirco .detail_infor {
+  text-align: center;
+  border-bottom: 1px solid #ccc;
+}
+.mirco .detail_infor h4 {
+  border-bottom: 1px dashed #ccc;
+  padding: 0 0 16px 0;
+}
+.mirco .detail_infor h4 img {
+  border-radius: 24px;
+  width: 48px;
+  height: 48px;
+}
+.mirco .detail_infor h4.text-left {
+  text-align: left;
+  padding: 16px 0 16px 24px;
+  display: flex;
+}
+.mirco .detail_infor h4.text-left img {
+  margin: 0 16px 0 0;
+}
+.mirco .detail_infor h4.text-left span {
+  line-height: 24px;
+}
+.mirco .detail_infor .detail_list dl {
+  margin: 0;
+  display: flex;
+}
+.mirco .detail_infor .detail_list dl dd {
+  width: 50%;
+}
+.mirco .detail_img {
+  padding: 16px;
+}
+.mirco .detail_img img {
+  border-radius: 6px;
+}
+.mirco .detail_img .detail_btn {
+  width: 100%;
+  padding: 8px 0;
+  display: block;
+  background: #f00;
+  color: #fff;
+  margin: 8px 0;
+  border-radius: 6px;
+  text-align: center;
+  font-size: 16px;
+}
+.mirco .detail_con {
+  padding: 16px;
+  border-top: 1px dashed #ccc;
+}
+.mirco .detail_con .pro_infor {
+  text-align: center;
+  padding: 0 0 64px 0;
+  display: flex;
+  flex-wrap: wrap;
+}
+.mirco .detail_con .pro_infor dl {
+  width: 31%;
+  background: #fff;
+  margin: 0 2% 2% 0;
+  padding: 16px;
+}
+.mirco .detail_con .pro_infor dl dt {
+  padding: 0 0 8px 0;
+}
+.mirco .detail_con .pro_infor dl.checked {
+  border: 1px solid #1267c3;
+}
+.mirco .detail_con .pro_infor .gif_pay {
+  display: block;
+  width: 100%;
+  padding: 12px 0;
+  color: #fff;
+  background: #1267c3;
+  border-radius: 3px;
+}
+.mirco .detail_con .pro_infor .gif_pay:hover {
+  text-decoration: none;
+}
+.mirco .detail_con .pro_infor_list {
+  padding: 0 0 48px 0;
+}
+.mirco .detail_con .pro_infor_list dl {
+  display: flex;
+  padding: 8px 0 0 0;
+}
+.mirco .detail_con .pro_infor_list dl dt {
+  padding: 0 16px 0 0;
+}
+.mirco .detail_con .pro_infor_list dl dd h5 {
+  font-size: 15px;
+  color: #333;
+}
+.mirco .detail_con .pro_infor_list dl dd p {
+  font-size: 12px;
+  color: #999;
+}
+.mirco .prize_list {
+  padding: 16px 0;
+}
+.mirco .prize_list h3 {
+  text-align: center;
+  font-size: 16px;
+  font-weight: normal;
+  line-height: 32px;
+  padding: 0 0 8px 0;
+}
+.mirco .prize_list h3 p {
+  font-size: 14px;
+  color: #666;
+  line-height: 22px;
+}
+.mirco .prize_list img {
+  width: 100%;
+}
+.mirco .login {
+  padding: 64px 16px;
+}
+.mirco .login .login_img {
+  text-align: center;
+}
+.mirco .login .login_img img {
+  width: 100%;
+}
+.mirco .login .login_input {
+  width: 100%;
+  border: 1px solid #ccc;
+  background: #fff;
+  position: relative;
+  border-radius: 3px;
+  padding: 6px 12px;
+  margin: 12px 0;
+}
+.mirco .login .login_input i.iconfont {
+  font-size: 14px;
+  left: 0;
+  top: 5px;
+}
+.mirco .login .login_input input {
+  width: 80%;
+  border: none;
+}
+.mirco .login a.login_btn {
+  width: 100%;
+  background: #1267c3;
+  text-align: center;
+  line-height: 32px;
+  display: block;
+  color: #fff;
+  font-size: 14px;
+  border-radius: 3px;
+  margin: 16px 0;
+}
+.gif-tip-img a img {
+  width: 100%;
+}
+.gif-tip-img a:hover,
+.gif-tip-img a:link {
+  text-decoration: none;
+}
+@media (max-width: 768px) {
+  .vote_infor {
+    column-count: 1;
+  }
+}
+@media (max-width: 768px) {
+  .modal.in {
+    display: flex !important;
+    display: -webkit-flex !important;
+    align-items: center;
+  }
+  .modal-dialog {
+    width: 85%;
+  }
+}
+.modal-content {
+  box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2);
+  border-radius: 0;
+  border: none;
+}
+.modal-content .modal-header {
+  padding: 8px 16px;
+  line-height: 24px;
+  border-bottom: none;
+  border-color: #e0e0e0;
+  margin: 0 16px;
+  padding: 16px 0;
+}
+.modal-content .modal-header .modal-title {
+  font-size: 16px;
+  color: rgba(0, 0, 0, 0.65);
+}
+.modal-content .modal-header .close {
+  color: rgba(0, 0, 0, 0.65);
+  text-shadow: none;
+  opacity: 0.3;
+}
+.modal-content .modal-header .close:hover {
+  opacity: 0.5;
+}
+.modal-content .modal-footer {
+  padding: 8px 16px;
+  border-top-color: #ccc;
+  background-color: #fafafa;
+}
+.modal-confirm {
+  width: 280px;
+}
+.modal-confirm .modal-header {
+  padding: 12px 8px;
+}
+.modal-confirm .modal-body {
+  padding: 24px;
+}
+.modal-confirm .confirm {
+  padding-left: 32px;
+  position: relative;
+}
+.modal-confirm .confirm > .iconfont {
+  position: absolute;
+  font-size: 24px;
+  left: 0;
+  line-height: 1;
+}
+.modal-dialog {
+  top: 15%;
+  margin: 30px auto;
+  border-radius: 3px;
+}

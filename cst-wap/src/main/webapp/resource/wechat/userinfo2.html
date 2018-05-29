@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+</head>
+<body>
+
+<h2>文件上传演练</h2>  
+    <div id="result">   
+      <!-- 这里用来显示读取结果 -->   
+      <div id="inResult">  
+        <div id="inImgs"></div>  
+       <div id="imgInfo"></div>  
+      </div>  
+    </div>  
+      
+    <input type="text" id="txtImgSrc" /><!--显示图片信息-->  
+    <!-- input type="button" id="btnRemove" />  
+    <button id="btnBrowse" onClick="onFile()">Browse...</button> -->
+      
+    
+    
+    <form id="postForm" action="getParamFromFile" method="post" 
+        enctype="multipart/form-data">
+                    上传XML模版文件:<input type="file" name="uploadFile" id="file_input"/>
+                    
+                    <input type="text" name="name"/>
+                    <input type="text" name="txt"/>
+          <input type="button" value="获取Json参数数据" onclick="doUpload()"/>
+    </form>
+    
+    
+    <script src="common/jquery-1.7.2.min.js"></script>
+    <script src="common/jquery.form.min.js"></script>
+    
+<script src="common/link.js"></script>
+    
+    <script type="text/javascript">  
+    var result = document.getElementById("result");  
+    var input = document.getElementById("file_input");  
+    var inResult = document.getElementById('inResult');  
+    
+    var init= window.location.href.split("?")[1];
+	var eventid=init.split("=")[1];
+	
+	var reg=/#/g;
+
+	eventid=eventid.replace(reg,'');
+      
+    if(typeof FileReader === 'undefined'){  
+        result.innerHTML = "抱歉，你的浏览器不支持 FileReader";  
+        input.setAttribute('disabled','disabled');  
+    }else{  
+        input.addEventListener('change',readFile,false);  
+    }  
+   function onFile(){  
+       document.getElementById('file_input').click(); //打开<input type="file" id="file_input" />  
+       }               
+                  
+   function readFile(){  
+        var file = this.files[0];  
+        var fsize = parseInt((file.size)/1024); //计算图片大小，默认是B，转换成KB  
+        if(!/image\/\w+/.test(file.type)){  
+            alert("请确保文件为图像类型");  
+            return false;  
+        }  
+        var reader = new FileReader();  
+        
+        reader.readAsDataURL(file);  
+        
+        reader.onload = function(e){  
+            //alert(this.result);  
+            inImgs.innerHTML = '<img src="'+this.result+'" alt="" width="198px" height="250px" id="img"/>'; //显示图片  
+            var arr = input.value.split('\\'); //分割图片路径  
+            document.getElementById('result').style.display="block";  
+            document.getElementById('txtImgSrc').value = arr[arr.length-1]; //取数组最后部分 - 图片名字.jpg  
+            document.getElementById('imgInfo').innerHTML = arr[arr.length-1]+"<br/>("+fsize+"kb)"; //显示图片名字加图片大小  
+          
+        }
+
+        
+        
+        
+    }
+   
+   
+   
+ //使用jquery.form.js的表单插件来提交表单，这个可以异步上传文件
+   function doUpload(){
+      var options = {
+          url: upload_url,//表单提交的地址。缺省值： 表单的action的值
+          type: 'POST',
+          dataType:'json',
+          data :{
+              picName : 'uploadFile',
+              eventid:eventid
+          },
+          //clearForm: true,//成功提交后，清除所有表单元素的值
+          //timeout: 3000 ,//限制请求的时间，当请求大于3秒后，跳出请求
+          // 从服务传过来的数据显示在这个div内部也就是ajax局部刷新
+          //target: '#output1',
+           
+          // 处理之后的处理
+          success: function(data){
+              //alert(data);
+              //var result = $.parseJSON(data);
+              alert("报名成功！");
+          },
+          error:
+              function(XMLHttpRequest,errorThrown,data,jqXHR, textStatus, errorMsg){
+        	// 状态码
+              alert(XMLHttpRequest.status);
+              // 状态
+              alert(XMLHttpRequest.readyState);
+              // 错误信息   
+        	  alert(data);
+        	  alert(jqXHR);
+        	  alert(textStatus);
+        	  alert(errorMsg);
+              }
+      };
+       
+      //使用jquery的ajax upload插件可以上传文件
+      $('#postForm').ajaxSubmit(options);
+  }
+</script>
+
+</body>
+
+</html>

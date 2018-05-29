@@ -1,0 +1,30 @@
+
+body{
+    background-color: #f7f7f7;
+}
+
+
+.success_box{
+    width: 100%;
+
+}
+.arrow{
+    color:#d7282d;
+    text-align: center;
+    margin-top: 40%;
+}
+.successicon{
+    font-size: 5em!important;
+}
+.success_box h1{
+    font-size: 1em;
+    width:92%;
+    text-align: center;
+    margin: 15px auto 0 auto;
+}
+.back{
+    font-size: 1em;
+    margin-top: 15px;
+    text-align: center;
+    color:#d7282d;
+}

@@ -1,0 +1,262 @@
+body, a, h1, h2, p, ul, li, dl, dd, img, div {
+    margin: 0;
+    padding: 0;
+    appearance: none;
+    -webkit-appearance:none;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+a, img, h1, h2, p, ul, li, dl, dd, div {
+    display: block;
+    appearance: none;
+    -webkit-appearance:none;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+a {
+    text-decoration: none;
+}
+
+ul, li, dd, dl {
+    list-style: none;
+}
+
+h1, h2 {
+    font-weight: normal;
+}
+
+/*body{ font:"Helvetica Neue","Helvetica","Arial","Microsoft Yahei","Hiragino Sans GB","Heiti SC","WenQuanYi Micro Hei","sans-serif";}
+*/
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    appearance: none;
+    margin: 0;
+}
+input{
+    -webkit-appearance:none;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    appearance: none;
+    margin: 0;
+}
+body {
+    font-family: PingFangSC-Light,helvetica,'Heiti SC';
+
+}
+
+.clear {
+    clear: both;
+}
+
+/*alert*/
+.alert{
+    font-size: 15px;
+    color: white;
+    position: fixed;
+    width: 150px;
+    padding: 15px 10px;
+    background-color: rgba(0,0,0,0.6);
+    border-radius: 10px;
+    text-align: center;
+    top: 40%;
+    right: 0;
+    left: 0;
+    margin: 0 auto;
+    display:none;
+    z-index: 999;
+}
+/*header*/
+.index_header{
+    background-color: #fafafa;
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 1;
+    overflow: hidden;
+    padding: 0.5em 1em;
+    border-bottom: 1px solid #cccccc;
+}
+.index_header img{
+    width: 30px;
+    height: 30px;
+    position: fixed;
+    top: 7px;
+    left: 20px;
+}
+.headertitle{
+    color: #333333;
+    font-size:1.3em;
+    line-height: 30px;
+    text-align: center;
+}
+.headericon{
+    position: fixed;
+    top: 0;
+    right: 20px;
+}
+.class_icon{
+    font-size:1.8em!important;
+    color:#333;
+}
+
+
+.headermenu{
+    position: fixed;
+    top:46px;
+    right: 0;
+    left: 0;
+    z-index: 99;
+    background-color: #fafafa;
+    border-bottom: 1px solid #cccccc;
+}
+.listmenu {
+    width: 100%;
+    height: 40px;
+    padding: 0 8px;
+    overflow-x:scroll;
+}
+.listmenu ul {
+    width: 600px;
+    height:40px;
+    
+    /*background: #c60000;*/
+    position: relative;
+    margin: 0 auto;
+}
+.listmenu ul li {
+    float: left;
+}
+.listmenu ul li a {
+    display: block;
+    padding: 0 1em;
+    line-height: 40px;
+    font-size: 1em;
+    color: #333;
+}
+.listmenu .block {
+    height: 2px;
+    background:#d7282d;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: 99;
+}
+
+
+
+
+
+
+
+
+
+.menu{
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #ffffff;
+    z-index: 99;
+    border-top: 1px solid #e0e0e0;
+}
+
+.menu ul>li{
+    width: 25%;
+    float: left;
+    padding-top: 0.2em;
+}
+.menu ul>li>a{
+    color:#808080;
+    text-align: center;
+    font-size: 0.6em;
+}
+.menu ul>li>a>p{
+    line-height: 1em;
+    padding-bottom: 5px;
+}
+.menuicon{
+    font-size: 2.3em!important;
+    margin: 0;
+    padding: 0;
+}
+.copyright{
+    padding-bottom: 55px;
+}
+
+
+
+/*删除弹窗*/
+.black_box{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+    z-index: 999;
+    display: none;
+}
+.hide_box{
+    position: fixed;
+    top:35%;
+    left: 7%;
+    background-color: #ffffff;
+    width: 86%;
+    border-radius: 4px 4px 0 0;
+}
+.delet_title{
+    font-size: 1em;
+    color: #333333;
+    text-align: center;
+    padding: 40px 0;
+    border-bottom: 1px solid #d9d9d9;
+}
+#cancle, #delbtn{
+    float: left;
+    color: #333333;
+    text-align: center;
+    padding: 15px 0;
+}
+#cancle{
+    width: 49%;
+    border-right: 1px solid #d9d9d9;
+    border-radius: 0 0 0 4px;
+}
+#delbtn{
+    width: 50%;
+    color: #d7282d;
+}
+
+/*购物车数量*/
+.market_num{
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    background-color: #d7282d;
+    border-radius: 50%;
+    top:3px;
+    right:14px;
+}
+.market_num p{
+    color: #FFFFFF;
+    font-size: 10px;
+    text-align: center;
+    line-height: 15px;
+}
+/*购物车数量*/
+.market_num{
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    background-color: #d7282d;
+    border-radius: 50%;
+    top:3px;
+    right:8px;
+}
+.market_num p{
+    color: #FFFFFF;
+    font-size: 12px;
+    text-align: center;
+    line-height: 15px;
+    height: 15px;
+}
